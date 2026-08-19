@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第9回　運動方程式① 水平方向【解答版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 1mm;
+    }
+
+    .choices li.correct::after {
+      content: '← 正解';
+      margin-left: 3mm;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .explain {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-right: 2mm;
+    }
+
+    .answer-lines.filled {
+      height: auto;
+      min-height: 22mm;
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">09</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>運動方程式① 水平方向</h1>
+  <p class="subtitle">「力を受けても、思ったほど加速しない――摩擦が“正味の力”を減らしている」</p>
+
+  <div class="meta-row">
+    <span>第9回 / 全16回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>運動方程式 ma ＝ F（合力）を使って、加速度を求められる</li>
+      <li>水平方向にはたらく複数の力から、合力を計算できる</li>
+      <li>「つり合い」は運動方程式でa＝0の特別な場合であることを説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>体育祭の準備で、台車を押す</h2>
+    <p>体育祭の準備で用具係になった翔太。テント用の資材を乗せた台車を押して運ぶことになった。</p>
+    <p class="dialogue">「あれ、思ったより加速しない……同じ力で押してるのに」</p>
+    <p>その理由は、<strong>台車にはたらいているもう一つの力</strong>にあった。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>台車を押す、翔太の体育祭準備</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>翔太は質量20kgの台車を、50Nの力で押した。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>でも台車には、進む向きと反対向きに<strong>摩擦力10N</strong>もはたらいている。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「台車を加速させているのは、押す力そのものじゃなくて、摩擦を差し引いた<strong>"正味の力"（合力）</strong>なんだよ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>物体を加速させるのは、合力（正味の力）。運動方程式 ma ＝ F で表される。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第9回　運動方程式① 水平方向</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>先生がホワイトボードに、台車にはたらく力をすべて描いて説明してくれた。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- ground -->
+      <line x1="30" y1="175" x2="350" y2="175" stroke="#1a1f2e" stroke-width="1.5"/>
+      <!-- cart body -->
+      <rect x="150" y="115" width="90" height="55" rx="3" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+      <circle cx="172" cy="175" r="9" fill="none" stroke="#1a1f2e" stroke-width="1.5"/>
+      <circle cx="218" cy="175" r="9" fill="none" stroke="#1a1f2e" stroke-width="1.5"/>
+
+      <!-- F arrow (push, pointing right into cart) -->
+      <line x1="70" y1="140" x2="146" y2="140" stroke="#2c5282" stroke-width="2.6"/>
+      <polygon points="146,140 136,135 136,145" fill="#2c5282"/>
+      <text x="75" y="104" font-size="13" fill="#2c5282" font-weight="700" font-family="Noto Sans JP">F（押す力）</text>
+
+      <!-- f arrow (friction, pointing left, attached to cart) -->
+      <line x1="244" y1="150" x2="204" y2="150" stroke="#9f7aea" stroke-width="2.2"/>
+      <polygon points="204,150 214,145 214,155" fill="#9f7aea"/>
+      <text x="208" y="104" font-size="12" fill="#9f7aea" font-weight="700" font-family="Noto Sans JP" text-anchor="middle">f（摩擦力）</text>
+
+      <!-- net force row below -->
+      <line x1="70" y1="205" x2="130" y2="205" stroke="#1a1f2e" stroke-width="2.6"/>
+      <polygon points="130,205 120,200 120,210" fill="#1a1f2e"/>
+      <text x="140" y="209" font-size="12" fill="#1a1f2e" font-family="Noto Sans JP">合力＝F－f　→　台車を加速させる力</text>
+    </svg>
+    <p class="illust-caption">押す力Fと摩擦力fの差（合力）が、台車を加速させる正味の力になる</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">運動方程式</p>
+    <p class="law-statement">質量 m の物体に合力 F がはたらくと、加速度 a ＝ F／m が生じる</p>
+    <div class="formula-list">
+      <span class="f-term">運動方程式</span>：m a ＝ F（合力）<br>
+      <span class="f-term">水平方向の合力</span>：F（押す力）－ f（摩擦力）＝ 合力
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      運動方程式を使うときは、まず対象にはたらく力を<strong>すべて洗い出し、合力を求めてから</strong> ma＝F に代入する、という手順を徹底する。摩擦力のように運動を妨げる向きの力は、符号（向き）に注意させたい。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 運動方程式を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第9回　運動方程式① 水平方向</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の中の運動方程式</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🚲 自転車のペダル</p>
+        <p class="ex-body">強く踏むほど加速度は大きくなるが、重い荷物を積んでいると同じ力でも加速度は小さくなる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🛗 エレベーター</p>
+        <p class="ex-body">動き出す瞬間、上向き・下向きの合力が生じて加速度が発生する。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚃 電車の急停車</p>
+        <p class="ex-body">ブレーキ力が合力となり、大きな減速度（負の加速度）を生む。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚀 ロケットの打ち上げ</p>
+        <p class="ex-body">推進力が重力や空気抵抗を上回った分だけ合力が生じ、加速する。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 力を強くすればするほど、加速度はどんどん大きくなる？</p>
+    <p>力だけを見ればその通り。でも<strong>質量が大きいほど、同じ力でも加速度は小さくなる</strong>。a＝F／mは、力に比例し、質量に反比例する。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      運動方程式は、<strong>静止・等速直線運動（つり合い）も含む一般式</strong>。<br>
+      合力が0のときはa＝0（第1回・慣性の法則、第8回・つり合いと同じ状態）。合力があるときだけ、物体の速度が変化する。
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>運動方程式</th>
+        <td>質量m・加速度a・合力Fの関係を表す式。ma＝F</td>
+      </tr>
+      <tr>
+        <th>正味の力</th>
+        <td>実際に物体を加速させる力。合力のこと</td>
+      </tr>
+      <tr>
+        <th>つり合い</th>
+        <td>合力が0で、a＝0となる特別な場合（第8回で学んだ状態）</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      合力が物体を加速させる。<strong>これが、運動方程式 ma ＝ F。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 身のまわりで運動方程式を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第9回　運動方程式① 水平方向</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">運動方程式を正しく表す式はどれ？（mは質量、aは加速度、Fは合力）</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">ma ＝ F</li>
+      <li data-label="B.">m ＝ Fa</li>
+      <li data-label="C.">a ＝ mF</li>
+      <li data-label="D.">F ＝ m／a</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>運動方程式は、質量mの物体に合力Fがはたらくとき、生じる加速度aとの関係を ma＝F と表す。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">物体にはたらく合力が0のとき、その物体はどうなるか？</p>
+    <ul class="choices">
+      <li data-label="A.">必ずその場で静止する</li>
+      <li data-label="B." class="correct">静止し続けるか、等速直線運動を続ける</li>
+      <li data-label="C.">加速度が最大になる</li>
+      <li data-label="D.">摩擦力だけがはたらく</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>合力が0のときa＝0となる。これは第8回で学んだ「つり合い」の状態そのもので、物体は静止または等速直線運動を続ける（第1回・慣性の法則）。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量20kgの台車を50Nの力で押した。摩擦力が10Nはたらくとき、台車の加速度は何m/s²か。</p>
+    <ul class="choices">
+      <li data-label="A.">0.4 m/s²</li>
+      <li data-label="B." class="correct">2 m/s²</li>
+      <li data-label="C.">2.5 m/s²</li>
+      <li data-label="D.">4 m/s²</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>合力＝F－f＝50－10＝40N。a＝合力／m＝40／20＝2 m/s²。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">「同じ大きさの力で押しても、重い物ほど加速度が小さくなる」理由を、<strong>運動方程式</strong>という語を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>運動方程式 ma＝F（合力）より、a＝F／mとなる。合力Fが同じでも、質量mが大きいほど加速度aは小さくなるため。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量5kgの物体に合力10Nがはたらいている。このときの加速度は何m/s²か。</p>
+    <ul class="choices">
+      <li data-label="A.">0.5 m/s²</li>
+      <li data-label="B." class="correct">2 m/s²</li>
+      <li data-label="C.">5 m/s²</li>
+      <li data-label="D.">50 m/s²</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>a＝F／m＝10／5＝2 m/s²。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第10回「運動方程式② 斜面・鉛直方向」</strong> — 斜面や上下方向にも運動方程式を広げていく。第III部の最終回。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第9回　運動方程式① 水平方向</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

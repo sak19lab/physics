@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第10回　運動方程式② 斜面・鉛直方向【解答版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 1mm;
+    }
+
+    .choices li.correct::after {
+      content: '← 正解';
+      margin-left: 3mm;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .explain {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-right: 2mm;
+    }
+
+    .answer-lines.filled {
+      height: auto;
+      min-height: 22mm;
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">10</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>運動方程式② 斜面・鉛直方向</h1>
+  <p class="subtitle">「同じ50Nでも、坂道では上がらない――重力が"斜めに効いてくる"から」</p>
+
+  <div class="meta-row">
+    <span>第10回 / 全16回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>斜面上の物体にはたらく力を分解して、運動方程式を立てられる</li>
+      <li>重力を斜面に平行な向き・垂直な向きに分解できる</li>
+      <li>エレベーターなど鉛直方向の運動方程式も扱える</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>体育祭の後片付けで、台車をスロープに押し上げる</h2>
+    <p>体育祭の後片付け。用具係の翔太は、テント資材を積んだ台車を倉庫のスロープ（斜面）に押し上げることになった。</p>
+    <p class="dialogue">「あれ、全然上がらない……水平のときと同じ50Nのはずなのに」</p>
+    <p>その理由は、<strong>重力が斜面方向にも効いてくる</strong>ことにあった。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>台車を押し上げる、倉庫のスロープ</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>翔太は同じ台車（質量20kg）を、角度30°のスロープの下まで運んできた。水平のときと同じように50Nで押した。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>でも今度はほとんど進まない。実は、<strong>重力mgの一部が、斜面に沿って台車を引き戻している</strong>のだ。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「重力を、斜面に平行な向きと垂直な向きに分解して考えてみよう」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>斜面上では、重力mgのうち斜面方向の成分（mg sinθ）が運動を妨げる。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第10回　運動方程式② 斜面・鉛直方向</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>先生がホワイトボードに、斜面上の台車にはたらく力をすべて描いて説明してくれた。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- ground -->
+      <line x1="20" y1="210" x2="360" y2="210" stroke="#1a1f2e" stroke-width="1.5"/>
+      <!-- incline surface -->
+      <line x1="40" y1="210" x2="260" y2="90" stroke="#1a1f2e" stroke-width="1.5"/>
+      <!-- angle arc + label -->
+      <path d="M 75 210 A 30 30 0 0 0 62 186" stroke="#8b95a5" stroke-width="1" fill="none"/>
+      <text x="76" y="200" font-size="11" fill="#8b95a5" font-family="Noto Serif JP">θ</text>
+
+      <!-- cart on incline -->
+      <g transform="rotate(-29 154 132)">
+        <rect x="131" y="119" width="46" height="26" rx="2" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+      </g>
+
+      <!-- F arrow: push up-slope (offset slightly above the incline line) -->
+      <line x1="98" y1="167" x2="140" y2="143" stroke="#2c5282" stroke-width="2.4"/>
+      <polygon points="140,143 127,144 135,154" fill="#2c5282"/>
+      <text x="36" y="158" font-size="12" fill="#2c5282" font-weight="700" font-family="Noto Sans JP">F（押す力）</text>
+
+      <!-- mg arrow: straight down from cart -->
+      <line x1="154" y1="132" x2="154" y2="200" stroke="#1a1f2e" stroke-width="2.4"/>
+      <polygon points="154,200 149,190 159,190" fill="#1a1f2e"/>
+      <text x="160" y="185" font-size="12" fill="#1a1f2e" font-weight="700" font-family="Noto Sans JP">mg（重力）</text>
+
+      <!-- N arrow: perpendicular out of incline -->
+      <line x1="154" y1="132" x2="128" y2="80" stroke="#c05621" stroke-width="2.2"/>
+      <polygon points="128,80 132,92 121,89" fill="#c05621"/>
+      <text x="88" y="76" font-size="12" fill="#c05621" font-weight="700" font-family="Noto Sans JP">N（垂直抗力）</text>
+
+      <!-- dashed component: mg sinθ (along slope, down-slope direction, offset toward surface) -->
+      <line x1="159" y1="141" x2="123" y2="164" stroke="#9f7aea" stroke-width="1.8" stroke-dasharray="4 3"/>
+      <polygon points="123,164 134,162 131,172" fill="#9f7aea"/>
+      <text x="55" y="188" font-size="11" fill="#9f7aea" font-weight="700" font-family="Noto Sans JP">mg sinθ</text>
+
+      <!-- dashed component: mg cosθ (perpendicular into slope) -->
+      <line x1="154" y1="132" x2="180" y2="184" stroke="#9f7aea" stroke-width="1.8" stroke-dasharray="4 3"/>
+      <polygon points="180,184 171,177 181,173" fill="#9f7aea"/>
+      <text x="184" y="205" font-size="11" fill="#9f7aea" font-weight="700" font-family="Noto Sans JP">mg cosθ</text>
+    </svg>
+    <p class="illust-caption">重力mgを、斜面に平行な成分（mg sinθ）と垂直な成分（mg cosθ）に分解する</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">運動方程式（斜面方向）</p>
+    <p class="law-statement">斜面方向の運動方程式：m a ＝ F － mg sinθ</p>
+    <div class="formula-list">
+      <span class="f-term">重力の分解</span>：斜面方向 mg sinθ　／　斜面に垂直な方向 mg cosθ<br>
+      <span class="f-term">垂直方向のつり合い</span>：垂直抗力 N ＝ mg cosθ（斜面に垂直な方向は加速しない）
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      斜面問題の最初の関門は「重力を分解する」こと。<strong>斜面に平行な軸と垂直な軸を新しく設定し、mgをその軸に投影する図を必ず描かせる</strong>。垂直方向はつり合っている（N＝mg cosθ）ことも合わせて確認したい。摩擦がある場合は、斜面方向の式にさらに－fを加える。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 重力の分解を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第10回　運動方程式② 斜面・鉛直方向</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の中の斜面・鉛直方向</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🚚 引っ越しトラックのスロープ</p>
+        <p class="ex-body">家具を積み込むとき、斜面方向の重力成分と摩擦の両方を考える必要がある。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🛗 エレベーター</p>
+        <p class="ex-body">動き出す瞬間、体が重く・軽く感じるのは「見かけの重さ」が変化しているから。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🎢 ジェットコースターの上り坂</p>
+        <p class="ex-body">斜面を上がるときは、重力の斜面方向の成分が常にブレーキとしてはたらく。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">⛷️ スキーで斜面を滑る</p>
+        <p class="ex-body">斜面方向の重力成分（mg sinθ）が加速させる力になる。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 斜面の角度が急なほど、物体はいつも速く滑り落ちる？</p>
+    <p>摩擦がなければその通り。でも<strong>摩擦がある場合は話が変わる</strong>。角度が急なほどmg sinθ（滑らせる力）は大きくなるが、垂直抗力N＝mg cosθが小さくなるため、摩擦力f＝μNも小さくなる。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      エレベーターで体が重く・軽く感じるのも、<strong>鉛直方向の運動方程式</strong>で説明できる。<br>
+      上向きに加速するとき：N － mg ＝ ma　→　N ＝ mg ＋ ma（重く感じる）<br>
+      下向きに加速するとき：N ＝ mg － ma（軽く感じる）。第5回で学んだ「重さ＝垂直抗力」の応用。
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>重力の分解</th>
+        <td>重力mgを、斜面に平行な成分（mg sinθ）と垂直な成分（mg cosθ）に分ける考え方</td>
+      </tr>
+      <tr>
+        <th>見かけの重さ</th>
+        <td>エレベーターなど加速度運動中に、垂直抗力の変化によって感じる重さ</td>
+      </tr>
+      <tr>
+        <th>第III部の完結</th>
+        <td>力の合成（第8回）→運動方程式・水平（第9回）→斜面・鉛直（第10回）へとつながった</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      斜面でも鉛直方向でも、<strong>重力を正しく分解すれば、運動方程式は同じように使える。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 身のまわりの斜面・鉛直方向の運動を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第10回　運動方程式② 斜面・鉛直方向</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">角度θの斜面上にある物体にはたらく重力mgを分解したとき、斜面に平行な成分はどれか。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">mg sinθ</li>
+      <li data-label="B.">mg cosθ</li>
+      <li data-label="C.">mg tanθ</li>
+      <li data-label="D.">mg</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>重力mgを斜面に平行な向きと垂直な向きに分解すると、斜面に平行な成分はmg sinθ、垂直な成分はmg cosθになる。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">エレベーターが静止しているとき、垂直抗力Nと重力mgの関係として正しいものはどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">N ＞ mg</li>
+      <li data-label="B." class="correct">N ＝ mg</li>
+      <li data-label="C.">N ＜ mg</li>
+      <li data-label="D.">N ＝ 0</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>静止している（合力が0でつり合っている）ときは、鉛直方向の運動方程式 ma＝N－mg で a＝0 だから N＝mg。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量10kgの物体を、摩擦のない角度30°の斜面に置いて静かに手を離した。滑り落ちる加速度は何m/s²か。重力加速度は9.8m/s²とする（sin30°＝0.5）。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">4.9 m/s²</li>
+      <li data-label="B.">9.8 m/s²</li>
+      <li data-label="C.">0.5 m/s²</li>
+      <li data-label="D.">19.6 m/s²</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>摩擦がないので、斜面方向の運動方程式は ma＝mg sinθ。質量mが両辺から消えて a＝g sinθ＝9.8×0.5＝4.9 m/s²。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">エレベーターが上向きに加速しているとき、体重計の示す値が実際の体重より大きくなる理由を、<strong>運動方程式</strong>という語を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>鉛直方向の運動方程式 ma＝N－mg より、N＝mg＋maとなる。上向きに加速しているのでa＞0となり、垂直抗力（体重計が示す力）Nが重力mgより大きくなるため。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量50kgの人が乗ったエレベーターが、上向きに2m/s²で加速している。このとき体重計（垂直抗力N）が示す値は何Nか。重力加速度は9.8m/s²とする。</p>
+    <ul class="choices">
+      <li data-label="A.">390 N</li>
+      <li data-label="B." class="correct">590 N</li>
+      <li data-label="C.">490 N</li>
+      <li data-label="D.">690 N</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>N＝mg＋ma＝50×9.8＋50×2＝490＋100＝590 N。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第11回「仕事と仕事率」</strong> — 力と移動距離から「仕事」という新しい量を考える。第IV部・仕事とエネルギーの始まり。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第10回　運動方程式② 斜面・鉛直方向</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

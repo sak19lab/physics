@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第16回　力学総まとめ【解答版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .formula-list .f-part {
+      display: block;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin: 4mm 0 1mm;
+    }
+
+    .formula-list .f-part:first-child { margin-top: 0; }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 1mm;
+    }
+
+    .choices li.correct::after {
+      content: '← 正解';
+      margin-left: 3mm;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .explain {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-right: 2mm;
+    }
+
+    .answer-lines.filled {
+      height: auto;
+      min-height: 22mm;
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .complete-banner {
+      text-align: center;
+      padding: 8mm 6mm;
+      margin-top: 8mm;
+      border: 1pt solid var(--accent);
+      border-radius: 2mm;
+      background: linear-gradient(135deg, var(--accent-soft), #fff);
+    }
+
+    .complete-banner .cb-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .complete-banner .cb-body {
+      font-size: 9.5pt;
+      color: var(--ink-light);
+      line-height: 1.8;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">16</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>力学総まとめ</h1>
+  <p class="subtitle">「全16回、ぜんぶ ma＝F でつながっていた」</p>
+
+  <div class="meta-row">
+    <span>第16回 / 全16回（最終回）</span>
+    <span>解答版 · インプット約20分 ＋ 総合確認テスト約15分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>運動方程式 ma＝F を中心に、全16回の内容のつながりを整理できる</li>
+      <li>各分野（力・運動・仕事とエネルギー・運動量・円運動）の代表的な公式を確認できる</li>
+      <li>総合問題を通して、公式を使い分けながら計算できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>学年末、後輩からの相談</h2>
+    <p>学年末が近づき、物理部にも1年生が入ってきた。「力学、テスト範囲全部だけど、正直よくわからないんです……」と相談された翔太。</p>
+    <p class="dialogue">「最初は僕もそうだったよ。でも今なら、全部がひとつにつながって見える。じゃあ、1年間のポイントをまとめて教えてあげるよ」</p>
+    <p>1年前、慣性の法則につまずいていた翔太が、今度は<strong>教える側</strong>に回る番だった。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>力学ロードマップ — 6つのパート</h2>
+    <p>翔太は後輩に、力学シリーズを6つのパートに分けて説明していった。</p>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">第Ⅰ部｜ニュートン三法則（第1〜4回）</p>
+        <p class="ex-body">力がなければ等速直線運動を続ける（慣性）。ma＝F（運動方程式）。作用と反作用は常に対になる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">第Ⅱ部｜身のまわりの力（第5〜7回）</p>
+        <p class="ex-body">重力 W＝mg、摩擦力 f＝μN、弾性力 F＝kx。身近な力を数式で表せるようになった。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">第Ⅲ部｜力の合成と運動方程式（第8〜10回）</p>
+        <p class="ex-body">力の合成・分解とつり合い、水平・斜面・鉛直方向のma＝Fを立式できるようになった。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">第Ⅳ部｜仕事とエネルギー（第11〜12回）</p>
+        <p class="ex-body">仕事 W＝Fx cosθ、力学的エネルギー保存則 K＋U＝一定。運動を「量」で捉える視点を得た。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">第Ⅴ部｜運動量と力積（第13〜14回）</p>
+        <p class="ex-body">運動量 p＝mv、力積 I＝FΔt＝Δp、運動量保存則。衝突現象を扱えるようになった。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">第Ⅵ部｜円運動と総仕上げ（第15〜16回）</p>
+        <p class="ex-body">向心力 F＝mv²／r＝mrω²。直線運動から円運動へと視野を広げ、力学を完成させた。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <div class="callout-body">
+      <strong>力学の全てはニュートンの運動方程式 ma＝F につながっている。仕事とエネルギー、運動量と力積は、この運動方程式を「距離」や「時間」で捉え直した見方にすぎない。</strong>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第16回　力学総まとめ</span>
+    <span>1 / 5</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE</span>
+    <p>翔太はホワイトボードに、ma＝Fを中心にした「力学の地図」を描いて見せた。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 380 320" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- Center hub: ma=F -->
+      <circle cx="190" cy="160" r="52" fill="#ebf4ff" stroke="#2c5282" stroke-width="2"/>
+      <text x="190" y="155" text-anchor="middle" font-size="18" font-weight="700" fill="#2c5282" font-family="Noto Serif JP">ma＝F</text>
+      <text x="190" y="174" text-anchor="middle" font-size="10" fill="#2c5282" font-family="Noto Sans JP">運動方程式</text>
+
+      <!-- Spoke 1: top-left -> 運動の記述 -->
+      <line x1="152" y1="128" x2="90" y2="70" stroke="#8b95a5" stroke-width="1.3"/>
+      <circle cx="70" cy="55" r="38" fill="#fffbeb" stroke="#c05621" stroke-width="1.5"/>
+      <text x="70" y="51" text-anchor="middle" font-size="10.5" font-weight="700" fill="#c05621" font-family="Noto Sans JP">運動の記述</text>
+      <text x="70" y="65" text-anchor="middle" font-size="9" fill="#c05621" font-family="Noto Sans JP">第1〜4回</text>
+
+      <!-- Spoke 2: top-right -> 身近な力 -->
+      <line x1="228" y1="128" x2="290" y2="70" stroke="#8b95a5" stroke-width="1.3"/>
+      <circle cx="310" cy="55" r="38" fill="#fffbeb" stroke="#c05621" stroke-width="1.5"/>
+      <text x="310" y="51" text-anchor="middle" font-size="10.5" font-weight="700" fill="#c05621" font-family="Noto Sans JP">身近な力</text>
+      <text x="310" y="65" text-anchor="middle" font-size="9" fill="#c05621" font-family="Noto Sans JP">第5〜10回</text>
+
+      <!-- Spoke 3: left -> 仕事とエネルギー -->
+      <line x1="140" y1="175" x2="70" y2="220" stroke="#8b95a5" stroke-width="1.3"/>
+      <circle cx="55" cy="245" r="38" fill="#faf5ff" stroke="#553c9a" stroke-width="1.5"/>
+      <text x="55" y="241" text-anchor="middle" font-size="10.5" font-weight="700" fill="#553c9a" font-family="Noto Sans JP">仕事と</text>
+      <text x="55" y="255" text-anchor="middle" font-size="10.5" font-weight="700" fill="#553c9a" font-family="Noto Sans JP">エネルギー</text>
+      <text x="55" y="269" text-anchor="middle" font-size="9" fill="#553c9a" font-family="Noto Sans JP">第11〜12回</text>
+
+      <!-- Spoke 4: right -> 運動量と力積 -->
+      <line x1="240" y1="175" x2="310" y2="220" stroke="#8b95a5" stroke-width="1.3"/>
+      <circle cx="325" cy="245" r="38" fill="#faf5ff" stroke="#553c9a" stroke-width="1.5"/>
+      <text x="325" y="241" text-anchor="middle" font-size="10.5" font-weight="700" fill="#553c9a" font-family="Noto Sans JP">運動量と</text>
+      <text x="325" y="255" text-anchor="middle" font-size="10.5" font-weight="700" fill="#553c9a" font-family="Noto Sans JP">力積</text>
+      <text x="325" y="269" text-anchor="middle" font-size="9" fill="#553c9a" font-family="Noto Sans JP">第13〜14回</text>
+
+      <!-- Spoke 5: bottom -> 円運動 -->
+      <line x1="190" y1="212" x2="190" y2="270" stroke="#8b95a5" stroke-width="1.3"/>
+      <circle cx="190" cy="295" r="38" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+      <text x="190" y="291" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2c5282" font-family="Noto Sans JP">円運動</text>
+      <text x="190" y="305" text-anchor="middle" font-size="9" fill="#2c5282" font-family="Noto Sans JP">第15回</text>
+    </svg>
+    <p class="illust-caption">仕事とエネルギー・運動量と力積は、ma＝Fを「距離」「時間」で見直したもの</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">全16回・公式総まとめ</p>
+    <div class="formula-list">
+      <span class="f-part">第Ⅰ部｜ニュートン三法則</span>
+      <span class="f-term">運動方程式</span>：ma ＝ F　　<span class="f-term">作用反作用</span>：F<sub>AB</sub> ＝ －F<sub>BA</sub><br>
+      <span class="f-part">第Ⅱ部｜身のまわりの力</span>
+      <span class="f-term">重力</span>：W ＝ mg　　<span class="f-term">摩擦力</span>：f ＝ μN　　<span class="f-term">弾性力</span>：F ＝ kx<br>
+      <span class="f-part">第Ⅳ部｜仕事とエネルギー</span>
+      <span class="f-term">仕事</span>：W ＝ Fx cosθ　　<span class="f-term">運動エネルギー</span>：K ＝ (1/2)mv²　　<span class="f-term">位置エネルギー</span>：U ＝ mgh<br>
+      <span class="f-part">第Ⅴ部｜運動量と力積</span>
+      <span class="f-term">運動量</span>：p ＝ mv　　<span class="f-term">力積</span>：I ＝ FΔt ＝ Δp　　<span class="f-term">反発係数</span>：e ＝ －(v₁'－v₂')／(v₁－v₂)<br>
+      <span class="f-part">第Ⅵ部｜円運動</span>
+      <span class="f-term">向心力</span>：F ＝ mv²／r ＝ mrω²
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      試験前の総復習では、<strong>公式を丸暗記させるのではなく、「これはma＝Fの何を見た式か」を必ず問い返す</strong>ことが効果的。仕事とエネルギーはma＝Fを距離で積分した見方、力積と運動量はma＝Fを時間で積分した見方であることに触れると、生徒の頭の中で16回分がひとつにつながる。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第16回　力学総まとめ</span>
+    <span>2 / 5</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>1年間の力学、翔太が得たもの</h2>
+    <p>後輩に説明し終えた翔太は、ふと1年前の自分を思い出していた。第1回、慣性の法則の実験で台車が止まらずに戸惑っていたあの日から、文化祭の模擬店で力積を実感し、物理部の実験室でひもを振り回して向心力を体で覚えるまで。</p>
+    <p class="dialogue">「最初はバラバラの公式にしか見えなかったけど、教えてみて分かった。全部、ma＝Fっていう同じ場所から出発してたんだ」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>公式の使い分け、どう判断する？</h2>
+    <p><strong>Q.</strong> 運動方程式 ma＝F と、エネルギー保存則・運動量保存則。同じ現象でも、どちらを使えばいいか迷わない？</p>
+    <p>判断のコツは、<strong>知りたいものと、与えられている情報</strong>を見ること。時間や力の詳しい変化が分かるなら運動方程式、速さと高さ・距離の関係を知りたいならエネルギー保存則、衝突など短時間で力が複雑に変わる場面なら運動量保存則、というように使い分けるとよい。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      力学的エネルギー保存則も運動量保存則も、実は<strong>特別な法則ではなく、運動方程式 ma＝F から導かれる結果</strong>。ma＝Fを移動距離で積分すると仕事とエネルギーの関係になり、時間で積分すると力積と運動量の関係になる。見方を変えているだけで、根っこは同じひとつの法則。
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>力学シリーズ・全16回タイトル一覧</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>第Ⅰ部（1〜4回）</th>
+        <td>慣性の法則／力と加速度の法則／運動の記述／作用・反作用の法則</td>
+      </tr>
+      <tr>
+        <th>第Ⅱ部（5〜7回）</th>
+        <td>重力と「重さ」のちがい／摩擦力／弾性力（ばねの法則）</td>
+      </tr>
+      <tr>
+        <th>第Ⅲ部（8〜10回）</th>
+        <td>力の合成・分解とつり合い／運動方程式①水平方向／運動方程式②斜面・鉛直方向</td>
+      </tr>
+      <tr>
+        <th>第Ⅳ部（11〜12回）</th>
+        <td>仕事と仕事率／運動エネルギー・位置エネルギーと保存則</td>
+      </tr>
+      <tr>
+        <th>第Ⅴ部（13〜14回）</th>
+        <td>運動量と力積／衝突（反発・非弾性）</td>
+      </tr>
+      <tr>
+        <th>第Ⅵ部（15〜16回）</th>
+        <td>等速円運動／力学総まとめ（本回）</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      公式はバラバラじゃない。<strong>ma＝Fという同じ場所から、全部が生まれている。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 1年間の力学を振り返って</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第16回　力学総まとめ</span>
+    <span>3 / 5</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>総合確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約15分 · 全16回の内容から出題 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎（第9回）</span></p>
+    <p class="quiz-q">質量2kgの物体に加速度3m/s²が生じているとき、はたらいている力の大きさは何Nか。</p>
+    <ul class="choices">
+      <li data-label="A.">1.5 N</li>
+      <li data-label="B." class="correct">6 N</li>
+      <li data-label="C.">5 N</li>
+      <li data-label="D.">0.67 N</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>運動方程式 ma＝F より、F＝2×3＝6 N。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎（第6回）</span></p>
+    <p class="quiz-q">摩擦力fを正しく表す式はどれか。（μは摩擦係数、Nは垂直抗力）</p>
+    <ul class="choices">
+      <li data-label="A.">f ＝ μ／N</li>
+      <li data-label="B." class="correct">f ＝ μN</li>
+      <li data-label="C.">f ＝ N／μ</li>
+      <li data-label="D.">f ＝ μ＋N</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>摩擦力は f＝μN で表される。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用（第11回）</span></p>
+    <p class="quiz-q">10Nの力で物体を力の向きに5m動かした。このときの仕事は何Jか。</p>
+    <ul class="choices">
+      <li data-label="A.">2 J</li>
+      <li data-label="B.">15 J</li>
+      <li data-label="C." class="correct">50 J</li>
+      <li data-label="D.">0.5 J</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>W＝Fx cosθ で、力の向きと移動方向が同じ（θ＝0°）なので W＝10×5＝50 J。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">基礎（第12回）</span></p>
+    <p class="quiz-q">力学的エネルギー保存則を正しく表す式はどれか。（Kは運動エネルギー、Uは位置エネルギー）</p>
+    <ul class="choices">
+      <li data-label="A.">K － U ＝ 0</li>
+      <li data-label="B." class="correct">K ＋ U ＝ 一定</li>
+      <li data-label="C.">K ＝ U</li>
+      <li data-label="D.">K × U ＝ 一定</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>力学的エネルギー保存則は、運動エネルギーKと位置エネルギーUの和が常に一定に保たれることを表す。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用（第13回）</span></p>
+    <p class="quiz-q">質量1kgの物体が静止状態から0.5秒間で5m/sまで加速した。このときはたらいた力の大きさは何Nか。</p>
+    <ul class="choices">
+      <li data-label="A.">2.5 N</li>
+      <li data-label="B." class="correct">10 N</li>
+      <li data-label="C.">5 N</li>
+      <li data-label="D.">0.5 N</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>運動量の変化 Δp＝mv－0＝1×5＝5 kg・m/s。F＝Δp／Δt＝5／0.5＝10 N。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">06 <span class="quiz-level">応用（第15回）</span></p>
+    <p class="quiz-q">半径3mの円周上を角速度4rad/sで等速円運動する物体の速さは何m/sか。</p>
+    <ul class="choices">
+      <li data-label="A.">7 m/s</li>
+      <li data-label="B.">1.33 m/s</li>
+      <li data-label="C." class="correct">12 m/s</li>
+      <li data-label="D.">24 m/s</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>v＝rω＝3×4＝12 m/s。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">07 <span class="quiz-level">総合・記述</span></p>
+    <p class="quiz-q">運動方程式 ma＝F が力学の基礎になっている理由を、仕事とエネルギー・運動量と力積のどちらか（または両方）と関連づけて、2〜3文で説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>仕事とエネルギーの関係は、運動方程式ma＝Fを移動距離で捉え直したものであり、力積と運動量の関係は、ma＝Fを時間の経過で捉え直したものである。どちらも運動方程式という同じ出発点から導かれているため、ma＝Fが力学全体の基礎になっている。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第16回　力学総まとめ</span>
+    <span>4 / 5</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 5 — COMPLETE ═══ -->
+<div class="page">
+
+  <div class="complete-banner">
+    <p class="cb-title">力学シリーズ 全16回、完了です</p>
+    <div class="cb-body">
+      慣性の法則から始まり、力と運動、仕事とエネルギー、運動量と力積、そして円運動まで――高校物理基礎「力学」の全範囲を学び終えました。<br><br>
+      ここで学んだ ma＝F という運動方程式は、この先の物理（電磁気・熱・波動）でも、そして大学以降でも、ずっと使い続ける考え方です。公式を覚えることより、「なぜその公式が成り立つのか」を考える習慣を、これからも大切にしてください。<br><br>
+      1年間、おつかれさまでした。
+    </div>
+  </div>
+
+  <div class="memo-area" style="margin-top:12mm; min-height:40mm;">
+    <p class="memo-label">MEMO — 力学シリーズを振り返って、一番印象に残った回とその理由</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第16回　力学総まとめ</span>
+    <span>5 / 5</span>
+  </div>
+</div>
+
+</body>
+</html>

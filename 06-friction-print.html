@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第6回　摩擦力【解答版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 1mm;
+    }
+
+    .choices li.correct::after {
+      content: '← 正解';
+      margin-left: 3mm;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .explain {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-right: 2mm;
+    }
+
+    .answer-lines.filled {
+      height: auto;
+      min-height: 22mm;
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">06</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>摩擦力</h1>
+  <p class="subtitle">「重い机、最初はなかなか動かないのに、途中から急に軽くなる」</p>
+
+  <div class="meta-row">
+    <span>第6回 / 全16回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>静止摩擦力と動摩擦力の違いを、自分の言葉で説明できる</li>
+      <li>摩擦力の式 f = μN を使って計算できる</li>
+      <li>「動き出す瞬間が一番重い」理由を説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>模様替えの日</h2>
+    <p>部屋の模様替えで、翔太は大きな机を押している。</p>
+    <p class="dialogue">「思ったより重い……あ、急に動いた！」</p>
+    <p>最初はびくともしなかったのに、途中から<strong>急に軽く</strong>なる。この不思議な感覚も、法則で説明できます。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>翔太の模様替え</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>翔太が机を押す。力を入れても、机はまったく動かない。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>だんだん力を強くしていくと、ある瞬間、机が<strong>ズルッ</strong>と動き出す。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>動き出した後は、さっきより<strong>弱い力</strong>でも机は動き続ける。</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>動き出す瞬間が、一番重い。動き出したら、ちょっとだけ軽くなる。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　摩擦力</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>先生が教えてくれた。「机が動く前と後では、はたらいている摩擦力の種類が違うんだ」。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 340 160" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- axes -->
+      <line x1="40" y1="130" x2="320" y2="130" stroke="#1a1f2e" stroke-width="1.5"/>
+      <line x1="40" y1="130" x2="40" y2="20" stroke="#1a1f2e" stroke-width="1.5"/>
+      <text x="330" y="134" font-size="9" fill="#4a5568" font-family="Noto Sans JP">押す力</text>
+      <text x="20" y="18" font-size="9" fill="#4a5568" font-family="Noto Sans JP">摩擦力</text>
+      <!-- static friction rising line -->
+      <path d="M40 130 L140 62" stroke="#2c5282" stroke-width="2.2" fill="none"/>
+      <!-- breakaway point -->
+      <circle cx="140" cy="62" r="3" fill="#2c5282"/>
+      <!-- drop to kinetic level -->
+      <path d="M140 62 L145 85" stroke="#8b95a5" stroke-width="1.2" stroke-dasharray="3,2" fill="none"/>
+      <!-- kinetic friction constant line -->
+      <path d="M145 85 L300 85" stroke="#553c9a" stroke-width="2.2" fill="none"/>
+      <text x="90" y="55" text-anchor="middle" font-size="8.5" fill="#2c5282" font-family="Noto Sans JP" font-weight="700">静止摩擦力（増加）</text>
+      <text x="230" y="78" text-anchor="middle" font-size="8.5" fill="#553c9a" font-family="Noto Sans JP" font-weight="700">動摩擦力（一定）</text>
+      <text x="145" y="45" text-anchor="middle" font-size="8" fill="#4a5568" font-family="Noto Sans JP">最大摩擦力</text>
+    </svg>
+    <p class="illust-caption">押す力を増やすと摩擦力も増えるが、最大摩擦力を超えると動き出し、動摩擦力（やや小さい一定値）に切り替わる</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">摩擦力の公式</p>
+    <p class="law-statement">静止摩擦力 f ≦ 最大摩擦力（＝μ₀N）　／　動摩擦力 f' ＝ μN</p>
+    <div class="formula-list">
+      <span class="f-term">静止摩擦力</span>— 動く直前まで、外力に応じて大きさが変化する（0〜最大摩擦力）<br>
+      <span class="f-term">動摩擦力</span>— 物体が動いている間はたらく、ほぼ一定の摩擦力（最大摩擦力より小さい）
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      多くの生徒が「摩擦力は常に一定」と誤解しがち。実際には<strong>静止摩擦力は外力に応じて0から最大摩擦力まで変化</strong>し、最大摩擦力を超えた瞬間に物体が動き出す。動き出した後の<strong>動摩擦力は最大摩擦力より小さい</strong>ため、動き出した後は少し軽く感じる。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 静止摩擦力と動摩擦力のちがいを自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　摩擦力</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の摩擦力ツアー</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">⛸️ 氷の上を歩く</p>
+        <p class="ex-body">摩擦係数が小さいため、最大摩擦力も小さく、滑りやすい。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🌧️ 雨の日の道路</p>
+        <p class="ex-body">タイヤと路面の間の摩擦係数が下がり、ブレーキが効きにくくなる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚗 タイヤのグリップ</p>
+        <p class="ex-body">タイヤの溝や素材で摩擦係数を大きくし、スリップを防いでいる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">📦 荷物を引きずる vs 持ち上げる</p>
+        <p class="ex-body">引きずると摩擦力がはたらくが、持ち上げれば摩擦力はゼロになる。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 同じ机を、ゆっくり押しても、勢いよく押しても、動き出す瞬間の力は同じ？</p>
+    <p>実は<strong>同じ</strong>。動き出すかどうかは、力の加え方の速さではなく、<strong>最大摩擦力を超えたかどうか</strong>で決まる。最大摩擦力は、物体の重さ（垂直抗力）と摩擦係数だけで決まる。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      摩擦力の大きさは、<strong>垂直抗力に比例</strong>する（f = μN）。<br>
+      同じ床の上でも、重い物体ほど垂直抗力が大きく、最大摩擦力・動摩擦力ともに大きくなる。
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>静止摩擦力</th>
+        <td>静止している物体にはたらく摩擦力。外力に応じて0〜最大摩擦力の間で変化する</td>
+      </tr>
+      <tr>
+        <th>動摩擦力</th>
+        <td>動いている物体にはたらく摩擦力。ほぼ一定で、最大摩擦力より小さい</td>
+      </tr>
+      <tr>
+        <th>摩擦係数</th>
+        <td>摩擦力の大きさを決める、面の性質を表す数値。μ（ミュー）で表す</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      動き出す瞬間が、一番重い。<strong>動き出したら、ちょっとだけ軽くなる。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:26mm;">
+    <p class="memo-label">MEMO — 身のまわりで摩擦力を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　摩擦力</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">机を押しても動かないとき、机にはたらいている摩擦力の名称は？</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">静止摩擦力</li>
+      <li data-label="B.">動摩擦力</li>
+      <li data-label="C.">垂直抗力</li>
+      <li data-label="D.">重力</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>物体が静止している間にはたらく摩擦力を静止摩擦力という。外力に応じて大きさが変わる。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">机が動き出した後にはたらく摩擦力の名称は？</p>
+    <ul class="choices">
+      <li data-label="A.">静止摩擦力</li>
+      <li data-label="B." class="correct">動摩擦力</li>
+      <li data-label="C.">最大摩擦力</li>
+      <li data-label="D.">垂直抗力</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>物体が動いている間にはたらく、ほぼ一定の摩擦力を動摩擦力という。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量10 kgの物体を、動摩擦係数0.2の床の上で水平に引く。物体にはたらく動摩擦力の大きさは何Nか（重力加速度9.8 m/s²とする）。</p>
+    <ul class="choices">
+      <li data-label="A.">2 N</li>
+      <li data-label="B.">9.8 N</li>
+      <li data-label="C." class="correct">19.6 N</li>
+      <li data-label="D.">98 N</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>垂直抗力 N = mg = 10 × 9.8 = 98 N。動摩擦力 f = μN = 0.2 × 98 = 19.6 N。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">物を押し始めるときは重く感じ、動き出すと軽く感じる理由を、<strong>静止摩擦力・動摩擦力</strong>という語を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>動き出す直前まではたらく静止摩擦力（最大摩擦力）が最も大きく、動き出した後にはたらく動摩擦力はそれより小さいため、動き出すと必要な力が減り、軽く感じる。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">摩擦力を大きくする要因として正しいものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">垂直抗力が大きい、または摩擦係数が大きい</li>
+      <li data-label="B.">物体の速さが速い</li>
+      <li data-label="C.">物体の色や形</li>
+      <li data-label="D.">押す力の向き</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>摩擦力 f = μN より、垂直抗力Nと摩擦係数μが大きいほど摩擦力は大きくなる。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第7回「弾性力（ばねの法則）」</strong> — 身のまわりの力を扱う第II部、最後のテーマ。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　摩擦力</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

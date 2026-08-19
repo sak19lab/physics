@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第8回　力の合成・分解とつり合い【解答版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 1mm;
+    }
+
+    .choices li.correct::after {
+      content: '← 正解';
+      margin-left: 3mm;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .explain {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-right: 2mm;
+    }
+
+    .answer-lines.filled {
+      height: auto;
+      min-height: 22mm;
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">08</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>力の合成・分解とつり合い</h1>
+  <p class="subtitle">「二人で同じ場所を押しているのに、なぜか本棚は斜めに動いてしまう――力にも“向き”があるから」</p>
+
+  <div class="meta-row">
+    <span>第8回 / 全16回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>力の合成（平行四辺形の法則）を使って、合力を求められる</li>
+      <li>力の分解の考え方を説明できる</li>
+      <li>「力のつり合い」が何を意味するか説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>模様替え、最後の大物家具</h2>
+    <p>模様替えもいよいよ最終日。翔太は友人の陸と二人で、大きな本棚を部屋の隅まで動かすことになった。</p>
+    <p class="dialogue">「せーの！」　二人で押したのに、本棚は思っていた方向とは違う、斜め前に動いていった。</p>
+    <p>なぜ、押した方向の通りに進まなかったのだろう？</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>二人の力が生み出す、もう一つの力</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>翔太は本棚を真横に押し、陸は本棚を斜め前方向に押した。二人の力の向きはバラバラだった。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>でも本棚が実際に動いたのは、その"中間"のような、斜めの方向だった。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「それは、2つの力が合わさって、新しい1つの力になっているからだよ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>複数の力は、平行四辺形の法則を使って1つの力（合力）にまとめることができる。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第8回　力の合成・分解とつり合い</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>先生がホワイトボードに図を描いて説明してくれた。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- construction: parallelogram dashed sides -->
+      <line x1="200" y1="160" x2="280" y2="60" stroke="#8b95a5" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="140" y1="60" x2="280" y2="60" stroke="#8b95a5" stroke-width="1" stroke-dasharray="3,3"/>
+
+      <!-- F1: O -> A -->
+      <line x1="60" y1="160" x2="200" y2="160" stroke="#4a5568" stroke-width="2"/>
+      <polygon points="200,160 190,156 190,164" fill="#4a5568"/>
+
+      <!-- F2: O -> B -->
+      <line x1="60" y1="160" x2="140" y2="60" stroke="#4a5568" stroke-width="2"/>
+      <polygon points="140,60 130.6,65.3 136.9,70.3" fill="#4a5568"/>
+
+      <!-- R: O -> C (resultant, bold accent) -->
+      <line x1="60" y1="160" x2="280" y2="60" stroke="#2c5282" stroke-width="2.6"/>
+      <polygon points="280,60 267.4,61.3 270.7,68.6" fill="#2c5282"/>
+
+      <!-- origin -->
+      <circle cx="60" cy="160" r="2.5" fill="#1a1f2e"/>
+      <text x="46" y="176" font-size="8" fill="#8b95a5" font-family="Noto Sans JP">O</text>
+
+      <!-- labels -->
+      <text x="120" y="178" font-size="10" fill="#4a5568" font-family="Noto Sans JP" font-weight="700">F1</text>
+      <text x="26" y="118" font-size="10" fill="#4a5568" font-family="Noto Sans JP" font-weight="700">F2</text>
+      <text x="185" y="80" font-size="11" fill="#2c5282" font-family="Noto Sans JP" font-weight="700">R</text>
+    </svg>
+    <p class="illust-caption">力F1とF2を2辺とする平行四辺形をつくると、対角線が合力Rになる（平行四辺形の法則）</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">力の合成の法則</p>
+    <p class="law-statement">合力 R は、2つの力を2辺とする平行四辺形の対角線</p>
+    <div class="formula-list">
+      <span class="f-term">同一直線上・同じ向き</span>：R ＝ F1 ＋ F2<br>
+      <span class="f-term">同一直線上・逆向き</span>：R ＝ |F1 − F2|<br>
+      <span class="f-term">直角に交わるとき</span>：R ＝ √(F1² ＋ F2²)　（三平方の定理）
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      力は大きさだけでなく<strong>向きも持つ量（ベクトル）</strong>。だから単純な足し算にならないことがある、という点をまず強調する。ただし同一直線上にある力どうしなら、向きが同じか逆かに応じた普通の足し算・引き算で求まることも合わせて触れておくと分かりやすい。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 力の合成を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第8回　力の合成・分解とつり合い</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>力を分けて考える：分解</h2>
+    <p>本棚にひもをかけて斜め上に引っ張ったとき、その力は「水平方向に引く力」と「垂直方向に持ち上げる力」の2つに分けて考えることができる。これを<strong>力の分解</strong>といい、合成とちょうど逆の操作。</p>
+  </div>
+
+  <div class="section">
+    <h2>日常の中の合成・分解</h2>
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🪢 綱引き</p>
+        <p class="ex-body">チーム全員が引く力が合わさって、一つの大きな合力になる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🪁 凧あげ</p>
+        <p class="ex-body">風から受ける力と糸を引く力がつり合うことで、凧が空中に静止して見える。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">👕 物干し竿</p>
+        <p class="ex-body">洗濯物の重さが、竿を支える両端のひもの張力に分解されて支えられる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🧳 スーツケース</p>
+        <p class="ex-body">斜めに引くハンドルの力は、水平に進む力と地面から浮かせる力に分解できる。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 力を合わせると、必ず大きな力になる？</p>
+    <p>実は<strong>違う</strong>。向きが逆なら、合わせた力（合力）は小さくなったり、0になったりする。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      <strong>つり合い</strong>とは、合力が0になっている特別な状態。力が働いていないのではなく、複数の力が互いに打ち消し合っている。<br>
+      合力が0のとき、物体は静止し続けるか、等速直線運動を続ける（第1回・慣性の法則とつながっている）。
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>合力</th>
+        <td>複数の力を、平行四辺形の法則で1つにまとめた力</td>
+      </tr>
+      <tr>
+        <th>分力</th>
+        <td>1つの力を、目的の方向に分けたときの各成分の力</td>
+      </tr>
+      <tr>
+        <th>つり合い</th>
+        <td>物体にはたらく力の合力が0になり、静止または等速直線運動を続ける状態</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      力は向きを持つ量。合わせれば合力、分ければ分力。<strong>合力が0なら、つり合い。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 身のまわりで力のつり合いを感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第8回　力の合成・分解とつり合い</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">「力の合成」の説明として正しいものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">複数の力を、平行四辺形の法則を使って1つの力にまとめること</li>
+      <li data-label="B.">1つの力を2つの方向に分けること</li>
+      <li data-label="C.">力の向きを反対にすること</li>
+      <li data-label="D.">力の大きさをちょうど2倍にすること</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>力の合成は、複数の力を平行四辺形の法則で1つの合力にまとめる操作。1つの力を2つの方向に分けるのは「力の分解」で、合成とは逆の操作。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">「力のつり合い」の説明として正しいものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">力がまったく働いていない状態</li>
+      <li data-label="B." class="correct">物体にはたらく力の合力が0になっている状態</li>
+      <li data-label="C.">2つの力が同じ向きにはたらいている状態</li>
+      <li data-label="D.">摩擦力だけが働いている状態</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>つり合いは、物体にはたらく複数の力の合力が0になっている状態。力そのものが無いわけではなく、互いに打ち消し合っている。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">直角に交わる3Nの力と4Nの力がある。この2力の合力の大きさは何Nか。</p>
+    <ul class="choices">
+      <li data-label="A.">1 N</li>
+      <li data-label="B.">7 N</li>
+      <li data-label="C." class="correct">5 N</li>
+      <li data-label="D.">12 N</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>直角に交わる2力の合力の大きさは三平方の定理で求められる。R = √(3² + 4²) = √25 = 5 N。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">天井から1本のひもでつるされたペンダントライトが、静止し続けている理由を、<strong>つり合い</strong>という語を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>ひもの張力と、照明にはたらく重力とがつり合い、合力が0になっているため。合力が0なので、照明は静止し続ける。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">重さ50Nの物体を1本のひもで天井からつるし、静止させた。このときのひもの張力は何Nか。</p>
+    <ul class="choices">
+      <li data-label="A.">0 N</li>
+      <li data-label="B.">25 N</li>
+      <li data-label="C." class="correct">50 N</li>
+      <li data-label="D.">100 N</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>物体は静止しているのでつり合いの状態。ひもの張力と重力（50N）とが等しくなるため、張力は50N。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第9回「運動方程式① 水平方向」</strong> — 力と加速度の関係を、具体的な運動方程式として扱っていく。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第8回　力の合成・分解とつり合い</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

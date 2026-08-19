@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第1回　慣性の法則【解答版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 140mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    /* ── Answer key (解答版のみ) ── */
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 1mm;
+    }
+
+    .choices li.correct::after {
+      content: '← 正解';
+      margin-left: 3mm;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .explain {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-right: 2mm;
+    }
+
+    .answer-lines.filled {
+      height: auto;
+      min-height: 22mm;
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">01</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>慣性の法則</h1>
+  <p class="subtitle">ニュートン第1法則 — 「止まらない世界のルール」</p>
+
+  <div class="meta-row">
+    <span>第1回 / 全16回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>ニュートン第1法則（慣性の法則）を、自分の言葉で説明できる</li>
+      <li>「慣性」という言葉の意味がわかる</li>
+      <li>身のまわりの現象を「慣性のせいだ」と読み解ける</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>あなたも経験してる、あの感覚</h2>
+    <p>バスに乗っていて、信号が青になった瞬間——</p>
+    <p class="dialogue">「うわっ、前に倒れた！」</p>
+    <p>……あ、逆でした。急に<strong>動き出した</strong>とき、体が<strong>後ろに引っ張られる</strong>感じ。</p>
+    <p>そして急ブレーキのときは——</p>
+    <p class="dialogue">「今度は前に飛び出しそう！」</p>
+    <p>体が勝手に動こうとする。この感覚、実は物理が解明した「世界のルール」の入口です。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>翔太の通学バス</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>高校1年生の<strong>翔太</strong>。毎朝、通学バスに乗っている。</p>
+      <p>バスは信号前で完全に停止。翔太は座ってスマホを見ている。</p>
+      <p>このとき翔太の体に働く力は、重力（下向き）と座席からの支持力（上向き）。横方向の力はゼロ——だから<strong>動かない</strong>。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>信号が青に。ドライバーがアクセルを踏む。</p>
+      <p class="dialogue">ぐいっ——！</p>
+      <p>翔太の体は、座席より<strong>遅れて</strong>後ろに倒れそうになる。</p>
+      <p>なぜ？　座席はバスと一緒に前へ進み始めた。でも翔太の体は、<strong>そのまま止まっていたい</strong>のです。</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>動いていたものは動き続けようとする。</strong><br>
+        <strong>止まっていたものは止まっていたい。</strong><br><br>
+        この性質を <strong>慣性（かんせい）</strong> という。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　慣性の法則</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>逆の場面。バスが急ブレーキ。</p>
+    <p>座席はバスと一緒に急減速する。でも翔太の体は、<strong>まだ前に進もうとする</strong>。だから前に倒れる。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 420 100" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- Bus body -->
+      <rect x="30" y="35" width="200" height="45" rx="4" stroke="#2c5282" stroke-width="1.2" fill="#ebf4ff"/>
+      <rect x="50" y="42" width="40" height="28" rx="2" stroke="#2c5282" stroke-width="0.8" fill="white"/>
+      <rect x="100" y="42" width="40" height="28" rx="2" stroke="#2c5282" stroke-width="0.8" fill="white"/>
+      <circle cx="70" cy="82" r="10" stroke="#1a1f2e" stroke-width="1.2" fill="white"/>
+      <circle cx="190" cy="82" r="10" stroke="#1a1f2e" stroke-width="1.2" fill="white"/>
+      <!-- Arrow: bus decelerating -->
+      <path d="M250 55 L290 55" stroke="#8b95a5" stroke-width="1" marker-end="url(#arrow)"/>
+      <text x="270" y="48" text-anchor="middle" font-size="8" fill="#8b95a5" font-family="Noto Sans JP">減速</text>
+      <!-- Person leaning forward -->
+      <circle cx="120" cy="30" r="8" stroke="#1a1f2e" stroke-width="1" fill="white"/>
+      <line x1="120" y1="38" x2="135" y2="55" stroke="#1a1f2e" stroke-width="1"/>
+      <line x1="135" y1="55" x2="125" y2="70" stroke="#1a1f2e" stroke-width="1"/>
+      <line x1="135" y1="55" x2="148" y2="68" stroke="#1a1f2e" stroke-width="1"/>
+      <!-- Inertia arrow -->
+      <path d="M155 40 L195 40" stroke="#2c5282" stroke-width="1.2" marker-end="url(#arrowBlue)"/>
+      <text x="175" y="33" text-anchor="middle" font-size="7.5" fill="#2c5282" font-family="Noto Sans JP">慣性（前へ）</text>
+      <defs>
+        <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6" fill="#8b95a5"/>
+        </marker>
+        <marker id="arrowBlue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6" fill="#2c5282"/>
+        </marker>
+      </defs>
+    </svg>
+    <p class="illust-caption">急ブレーキ — 体は「前に進もうとする」（慣性）</p>
+  </div>
+
+  <ul style="list-style:none; font-size:9.5pt; margin-bottom:8mm; padding-left:4mm;">
+    <li style="margin-bottom:2mm;">▸ 急発進 → 体は<strong>後ろ</strong>に残ろうとする</li>
+    <li>▸ 急ブレーキ → 体は<strong>前</strong>に進もうとする</li>
+  </ul>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>17世紀、イギリスの科学者<strong>アイザック・ニュートン</strong>は、こう書きました。</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">NEWTON'S FIRST LAW</p>
+    <p class="law-statement">物体は、外力が働かない限り、<br>静止したままか、等速直線運動を続ける。</p>
+  </div>
+
+  <p style="font-size:9.5pt; color:var(--ink-light); margin-top:5mm;">
+    これが<strong>ニュートン第1法則</strong>、通称<strong>慣性の法則</strong>。<br>
+    「等速直線運動」＝ 速さも向きも一定のまま、まっすぐ進む運動。
+  </p>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      第1法則は「力が<strong>ない</strong>とき」の話。力が働いたら動き方は変わる——それが第2法則（次回）のテーマです。今日は「力がなければ変わらない」をしっかり押さえましょう。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 第1法則を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　慣性の法則</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の慣性ツアー</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🚃 電車のつり革</p>
+        <p class="ex-body">発車で吊る方向が後ろに傾く。体が「残ろうとする」から。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🏀 バスケのドリブル</p>
+        <p class="ex-body">手を離してもボールは前に進む。力がなくなっても動き続ける。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🍵 テーブルクロスごと</p>
+        <p class="ex-body">素早く引くと上のコップが残る。コップは静止しようとする（慣性）。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚗 シートベルト</p>
+        <p class="ex-body">急ブレーキで体が前に出る。ベルトが慣性による動きを止める。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 動くものは、いつか必ず止まるのでは？</p>
+    <p>机の上でコップを滑らせると、確かに止まります。でもそれは<strong>摩擦</strong>という力が働いているから。</p>
+    <p>摩擦がなければ（氷の上、宇宙空間など）、物体は<strong>ずっと動き続ける</strong>。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      「動くものは止まる」は法則ではない。<br>
+      <strong>摩擦があるから起きる現象</strong>なのです。
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>慣性</th>
+        <td>物体が今の運動状態（止まる／動く）を保とうとする性質</td>
+      </tr>
+      <tr>
+        <th>外力</th>
+        <td>物体に外から働く力（押す、引く、摩擦など）</td>
+      </tr>
+      <tr>
+        <th>等速直線運動</th>
+        <td>速さ・向きが一定の直線運動</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      物体は、力に従う前に——<strong>慣性に従う。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:28mm;">
+    <p class="memo-label">MEMO — 身のまわりで慣性を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　慣性の法則</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">ニュートン第1法則（慣性の法則）が表しているのは、次のうちどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">物体は常に静止している</li>
+      <li data-label="B." class="correct">物体は外力が働かないとき、静止または等速直線運動を続ける</li>
+      <li data-label="C.">物体は力が働くと必ず加速する</li>
+      <li data-label="D.">動いている物体は必ずやがて止まる</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>第1法則の定義そのもの。Cは第2法則の内容、Dは摩擦がある場合に起きる現象で法則ではない。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">バスが急ブレーキしたとき、乗客の体が前に倒れそうになる主な理由は？</p>
+    <ul class="choices">
+      <li data-label="A.">重力が大きくなったから</li>
+      <li data-label="B.">バスが体を前に引っ張ったから</li>
+      <li data-label="C." class="correct">体の慣性により、体が前に進もうとするから</li>
+      <li data-label="D.">座席が前に押したから</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>座席（＝バス）は減速するが、体はそれまでの速度で進み続けようとする。これが慣性。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">宇宙空間（ほぼ摩擦ゼロ）で、一定の速さで飛んでいる宇宙船。エンジンを切ったあと、宇宙船はどうなる？</p>
+    <ul class="choices">
+      <li data-label="A.">すぐに停止する</li>
+      <li data-label="B.">だんだん遅くなって停止する</li>
+      <li data-label="C." class="correct">同じ速さ・同じ向きで進み続ける</li>
+      <li data-label="D.">速さがどんどん大きくなる</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>外力（推力・摩擦など）がなければ、物体は等速直線運動を続ける。エンジンを切っても宇宙船は減速しない。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">次の現象を、<strong>慣性の法則</strong>を使って1〜2文で説明しなさい。</p>
+    <p style="font-size:9.5pt; color:var(--ink-light); padding:3mm 5mm; border-left:1.5pt solid var(--line); margin-bottom:2mm;">
+      静止していた電車が急に発車したとき、つり革が乗客の後ろ方向に傾く。
+    </p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>乗客の体は静止した状態を保とうとする（慣性）。電車だけが先に前へ進むため、つり革は乗客に対して相対的に後ろ向きに傾いて見える。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">机の上のコップを、テーブルクロスごと素早く引くと、コップは倒れずに残ることがある。この説明として最も適切なのは？</p>
+    <ul class="choices">
+      <li data-label="A.">コップに特別な磁力が働く</li>
+      <li data-label="B." class="correct">クロスを引く力がコップにほとんど伝わらない時間のうち、コップは慣性により静止しようとする</li>
+      <li data-label="C.">コップがクロスより重いから</li>
+      <li data-label="D.">重力が一時的に消えるから</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>引く時間が短いほど、摩擦によってコップに伝わる力積（＝加速の効果）は小さくなる。その短い間、コップは慣性でその場に留まろうとする。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第2回「力と加速度の法則」</strong> — 力が働いたら、物体はどう変わる？　F = ma の世界へ。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　慣性の法則</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

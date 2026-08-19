@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第7回　弾性力（ばねの法則）【解答版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 1mm;
+    }
+
+    .choices li.correct::after {
+      content: '← 正解';
+      margin-left: 3mm;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .explain {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-right: 2mm;
+    }
+
+    .answer-lines.filled {
+      height: auto;
+      min-height: 22mm;
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">07</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>弾性力（ばねの法則）</h1>
+  <p class="subtitle">「引っ張れば引っ張るほど、ばねは伸びる。その伸び方には、きれいな規則がある」</p>
+
+  <div class="meta-row">
+    <span>第7回 / 全16回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>フックの法則を、自分の言葉で説明できる</li>
+      <li>弾性力の式 F = kx を使って計算できる</li>
+      <li>ばね定数が表す意味を説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>物置で見つけた、古いばねばかり</h2>
+    <p>部屋の片付け中、翔太は物置で古いばねばかりを見つけた。</p>
+    <p class="dialogue">「荷物をつるすと、ばねが伸びる……もっと重い荷物だと、もっと伸びる！」</p>
+    <p>この伸び方には、実は<strong>きれいな規則</strong>が隠れています。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>翔太のばねばかり実験</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>軽い荷物をつるすと、ばねが少しだけ伸びる。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>2倍の重さの荷物をつるすと、ばねの伸びも<strong>ちょうど2倍</strong>になった。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「それがフックの法則だよ。ばねの伸びは、加えた力に比例するんだ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>ばねの伸びは、加えた力に比例する。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第7回　弾性力（ばねの法則）</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>この規則性は、17世紀の科学者ロバート・フックが発見し、法則としてまとめました。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- axes -->
+      <line x1="40" y1="140" x2="300" y2="140" stroke="#1a1f2e" stroke-width="1.5"/>
+      <line x1="40" y1="140" x2="40" y2="20" stroke="#1a1f2e" stroke-width="1.5"/>
+      <text x="306" y="144" font-size="9" fill="#4a5568" font-family="Noto Sans JP">伸び x</text>
+      <text x="14" y="18" font-size="9" fill="#4a5568" font-family="Noto Sans JP">弾性力 F</text>
+      <!-- proportional line through origin -->
+      <path d="M40 140 L270 40" stroke="#2c5282" stroke-width="2.4" fill="none"/>
+      <circle cx="135" cy="99" r="3" fill="#2c5282"/>
+      <circle cx="270" cy="40" r="3" fill="#2c5282"/>
+      <line x1="135" y1="99" x2="135" y2="140" stroke="#8b95a5" stroke-width="1" stroke-dasharray="2,2"/>
+      <line x1="270" y1="40" x2="270" y2="140" stroke="#8b95a5" stroke-width="1" stroke-dasharray="2,2"/>
+      <text x="135" y="152" text-anchor="middle" font-size="8" fill="#4a5568" font-family="Noto Sans JP">x</text>
+      <text x="270" y="152" text-anchor="middle" font-size="8" fill="#4a5568" font-family="Noto Sans JP">2x</text>
+      <text x="105" y="90" text-anchor="end" font-size="8" fill="#4a5568" font-family="Noto Sans JP">F</text>
+      <text x="280" y="35" text-anchor="start" font-size="8" fill="#4a5568" font-family="Noto Sans JP">2F</text>
+      <text x="55" y="45" font-size="10" fill="#2c5282" font-family="Noto Sans JP" font-weight="700">F = kx</text>
+    </svg>
+    <p class="illust-caption">弾性力Fと伸びxは比例関係。グラフは原点を通る直線になり、傾きがばね定数k</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">フックの法則</p>
+    <p class="law-statement">弾性力 F ＝ ばね定数 k ×伸び x</p>
+    <div class="formula-list">
+      <span class="f-term">ばね定数 k</span>（N/m）— ばねの硬さを表す。値が大きいほど硬く、伸びにくい<br>
+      <span class="f-term">伸び x</span>（m）— 自然長（力がはたらいていないときの長さ）からの伸び
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      フックの法則はあくまで<strong>比例関係が成り立つ範囲（弾性限界内）</strong>での法則。ばねを伸ばしすぎると、力を加えるのをやめても元の長さに戻らなくなる（弾性限界を超える）。グラフの直線が崩れる領域があることにも触れておくとよい。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — フックの法則を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第7回　弾性力（ばねの法則）</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の弾性力ツアー</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">⚖️ ばねばかり</p>
+        <p class="ex-body">ばねの伸びから、つるした物の重さ（弾性力とのつり合い）を読み取る道具。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🤸 トランポリン</p>
+        <p class="ex-body">飛び込むとばね（スプリング）が縮み、その反発力で体を押し上げる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🎯 ゴムひも</p>
+        <p class="ex-body">伸ばすほど引き戻す力が強くなる、身近な弾性体の代表例。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚗 車のサスペンション</p>
+        <p class="ex-body">路面の凸凹をばねで吸収し、車体への衝撃をやわらげている。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 同じばねを2倍の力で引っ張ったら、伸びも2倍になる？</p>
+    <p>実は<strong>その通り</strong>。ただし、それは<strong>弾性限界の範囲内</strong>での話。力を強くしすぎると比例関係が崩れ、ばねは伸びきって元に戻らなくなる。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      弾性力の本質は「<strong>元に戻ろうとする力</strong>」。<br>
+      力を加えるのをやめれば、ばねは自然長に戻ろうとする。ただし伸ばしすぎる（弾性限界を超える）と、この性質は失われる。
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>弾性力</th>
+        <td>変形した物体が、元の形に戻ろうとして生じる力</td>
+      </tr>
+      <tr>
+        <th>ばね定数</th>
+        <td>ばねの伸びにくさ（硬さ）を表す数値。F=kxのk。単位はN/m</td>
+      </tr>
+      <tr>
+        <th>自然長</th>
+        <td>力がはたらいていないときの、ばね本来の長さ</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      ばねの伸びは、加えた力に比例する。<strong>これが、フックの法則。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:26mm;">
+    <p class="memo-label">MEMO — 身のまわりで弾性力を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第7回　弾性力（ばねの法則）</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">フックの法則を正しく表す式はどれ？（Fは弾性力、kはばね定数、xは伸び）</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">F = kx</li>
+      <li data-label="B.">F = k / x</li>
+      <li data-label="C.">F = k + x</li>
+      <li data-label="D.">F = x / k</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>フックの法則では、弾性力Fはばね定数kと伸びxの積で表される（F=kx）。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">「自然長」の説明として正しいものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">ばねが伸びきって壊れる直前の長さ</li>
+      <li data-label="B." class="correct">力がはたらいていないときの、ばね本来の長さ</li>
+      <li data-label="C.">ばねが最も縮んだときの長さ</li>
+      <li data-label="D.">ばね定数と同じ意味の言葉</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>自然長は、外から力が加わっていないときのばねの長さのこと。伸びxはこの自然長からの変化量を指す。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">ばね定数20 N/mのばねを0.15 m伸ばした。このときの弾性力は何Nか。</p>
+    <ul class="choices">
+      <li data-label="A.">0.75 N</li>
+      <li data-label="B.">1.5 N</li>
+      <li data-label="C." class="correct">3 N</li>
+      <li data-label="D.">133 N</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>F = kx = 20 N/m × 0.15 m = 3 N。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">同じばねに、1倍の重さと2倍の重さの荷物をそれぞれつるした。伸びの関係を、<strong>フックの法則</strong>という語を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>フックの法則より、弾性力（＝つるした荷物の重さ）と伸びは比例する。したがって2倍の重さの荷物をつるすと、伸びも1倍のときのちょうど2倍になる。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">ばねを伸ばしすぎて、力を加えるのをやめても元の長さに戻らなくなった。この状態を説明するものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">ばね定数が0になった</li>
+      <li data-label="B." class="correct">弾性限界を超えた</li>
+      <li data-label="C.">自然長が変化しただけで、まだフックの法則が成り立つ</li>
+      <li data-label="D.">弾性力が最大になった状態が続いている</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>弾性限界を超えると、ばねは元の形に戻る性質（弾性）を失い、フックの法則の比例関係も成り立たなくなる。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第8回「力の合成・分解とつり合い」</strong> — 複数の力を扱う第III部のスタート。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第7回　弾性力（ばねの法則）</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

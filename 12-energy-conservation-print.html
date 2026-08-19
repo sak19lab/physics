@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第12回　運動エネルギー・位置エネルギーと保存則【解答版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 1mm;
+    }
+
+    .choices li.correct::after {
+      content: '← 正解';
+      margin-left: 3mm;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .explain {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-right: 2mm;
+    }
+
+    .answer-lines.filled {
+      height: auto;
+      min-height: 22mm;
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">12</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>運動エネルギー・位置エネルギーと保存則</h1>
+  <p class="subtitle">「高いところに置いただけなのに、なんでこんなに勢いよく落ちてくるの？」</p>
+
+  <div class="meta-row">
+    <span>第12回 / 全16回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>運動エネルギー K＝(1/2)mv² を理解し、計算できる</li>
+      <li>位置エネルギー U＝mgh を理解し、計算できる</li>
+      <li>力学的エネルギー保存則（K＋U＝一定）を使って、高さや速さを求められる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>文化祭準備で、お化け屋敷の仕掛けを作る</h2>
+    <p>文化祭でクラスはお化け屋敷を出し物にすることになった。翔太たちは、天井近くに吊るしたバケツを落として驚かす仕掛けを作っている。</p>
+    <p class="dialogue">「ただ置いてあるだけなのに、落ちたらすごい勢い……なんで？」</p>
+    <p>その理由は、<strong>高い位置に持っていた「位置エネルギー」</strong>にあった。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>お化け屋敷を作る、文化祭準備の翔太</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>翔太たちは、質量2kgのバケツを天井近く（高さ10m）に固定して、落とす仕掛けを準備した。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>バケツは静止しているときは動いていない（速さ0）。でも<strong>高い位置にあることで、エネルギーを蓄えている</strong>。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「それが位置エネルギー。落ちる間に、その位置エネルギーが少しずつ運動エネルギーに変わっていくんだよ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>位置エネルギーと運動エネルギーの和（力学的エネルギー）は、摩擦や空気抵抗がなければ常に一定に保たれる。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第12回　運動エネルギー・位置エネルギーと保存則</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>先生がホワイトボードに、バケツが落ちる前と後のエネルギーの変化を図で説明してくれた。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 380 250" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- ground -->
+      <line x1="40" y1="215" x2="340" y2="215" stroke="#1a1f2e" stroke-width="1.5"/>
+
+      <!-- height bracket -->
+      <line x1="60" y1="45" x2="60" y2="215" stroke="#8b95a5" stroke-width="1"/>
+      <line x1="54" y1="45" x2="66" y2="45" stroke="#8b95a5" stroke-width="1"/>
+      <line x1="54" y1="215" x2="66" y2="215" stroke="#8b95a5" stroke-width="1"/>
+      <text x="40" y="134" font-size="13" fill="#8b95a5" font-family="Noto Serif JP">h</text>
+
+      <!-- top bucket -->
+      <rect x="90" y="40" width="50" height="35" rx="2" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+      <text x="115" y="62" text-anchor="middle" font-size="11" fill="#2c5282" font-family="Noto Sans JP" font-weight="700">バケツ</text>
+      <text x="152" y="55" font-size="12" fill="#2c5282" font-weight="700" font-family="Noto Sans JP">U ＝ mgh</text>
+      <text x="152" y="72" font-size="11" fill="#8b95a5" font-family="Noto Sans JP">K ＝ 0（静止）</text>
+
+      <!-- falling dashed arrow -->
+      <line x1="115" y1="80" x2="115" y2="170" stroke="#9f7aea" stroke-width="2" stroke-dasharray="4 3"/>
+      <polygon points="115,170 109,158 121,158" fill="#9f7aea"/>
+      <text x="122" y="128" font-size="11" fill="#9f7aea" font-weight="700" font-family="Noto Sans JP">落下</text>
+
+      <!-- bottom bucket -->
+      <rect x="90" y="180" width="50" height="35" rx="2" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+      <text x="115" y="202" text-anchor="middle" font-size="11" fill="#2c5282" font-family="Noto Sans JP" font-weight="700">バケツ</text>
+      <text x="152" y="195" font-size="12" fill="#2c5282" font-weight="700" font-family="Noto Sans JP">U ＝ 0</text>
+      <text x="152" y="212" font-size="11" fill="#c05621" font-family="Noto Sans JP" font-weight="700">K ＝ (1/2)mv²（最大）</text>
+
+      <text x="190" y="240" text-anchor="middle" font-size="12" fill="#1a1f2e" font-family="Noto Sans JP" font-weight="700">mgh ＝ (1/2)mv²（力学的エネルギー保存則）</text>
+    </svg>
+    <p class="illust-caption">高さhで持っていた位置エネルギーmghは、落下するにつれて運動エネルギー(1/2)mv²に変わる</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">エネルギーの公式</p>
+    <p class="law-statement">力学的エネルギー保存則：K ＋ U ＝ 一定（摩擦・空気抵抗がないとき）</p>
+    <div class="formula-list">
+      <span class="f-term">運動エネルギー</span>：K ＝ (1/2)mv²（単位：J）<br>
+      <span class="f-term">位置エネルギー</span>：U ＝ mgh（単位：J、hは基準面からの高さ）
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      「エネルギーが消えたり生まれたりするのではなく、<strong>形が変わって移り変わっているだけ</strong>」という感覚を強調する。落下の前後だけでなく、途中の高さでもK＋Uが一定であることを図で確認させると理解が深まる。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — エネルギー保存則を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第12回　運動エネルギー・位置エネルギーと保存則</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の中のエネルギー保存則</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🎢 ジェットコースターの落下</p>
+        <p class="ex-body">頂上で位置エネルギーが最大、最下点で運動エネルギー（速さ）が最大になる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🔔 振り子</p>
+        <p class="ex-body">端で位置エネルギーが最大（速さ0）、最下点で運動エネルギーが最大になる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">⚽ ボールを投げ上げる</p>
+        <p class="ex-body">上がるほど運動エネルギーが位置エネルギーに変わり、最高点で速さは0になる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">⛷️ スキーのジャンプ</p>
+        <p class="ex-body">斜面を滑り降りるほど位置エネルギーが運動エネルギーに変わり、スピードが増す。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 落ちている途中（中間の高さ）では、エネルギーはどうなっている？</p>
+    <p>「位置エネルギーが減った分、消えてしまう」と思うかもしれない。でも<strong>消えたエネルギーは運動エネルギーに変わっている</strong>だけ。K＋Uの合計は、落下開始から着地まで、ずっと同じ値のまま。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      力学的エネルギー保存則は、<strong>「エネルギーは形を変えるだけで、総量は変わらない」</strong>という自然界の大原則の一つ。<br>
+      ただし摩擦や空気抵抗があると、一部のエネルギーが熱として逃げていくため、K＋Uは厳密には一定ではなくなる。
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>運動エネルギー</th>
+        <td>物体が運動していることによるエネルギー。K＝(1/2)mv²</td>
+      </tr>
+      <tr>
+        <th>位置エネルギー</th>
+        <td>物体が高い位置にあることによるエネルギー。U＝mgh</td>
+      </tr>
+      <tr>
+        <th>力学的エネルギー保存則</th>
+        <td>摩擦・空気抵抗がなければ、K＋Uは常に一定に保たれる</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      エネルギーは消えない。<strong>位置エネルギーと運動エネルギーの間で、形を変えているだけ。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 身のまわりでエネルギー保存則を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第12回　運動エネルギー・位置エネルギーと保存則</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">運動エネルギーKを正しく表す式はどれか。（mは質量、vは速さ）</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">K ＝ (1/2)mv²</li>
+      <li data-label="B.">K ＝ mv</li>
+      <li data-label="C.">K ＝ mv²</li>
+      <li data-label="D.">K ＝ (1/2)mv</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>運動エネルギーは K＝(1/2)mv² で表される。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">位置エネルギーUを正しく表す式はどれか。（mは質量、gは重力加速度、hは高さ）</p>
+    <ul class="choices">
+      <li data-label="A.">U ＝ mg／h</li>
+      <li data-label="B." class="correct">U ＝ mgh</li>
+      <li data-label="C.">U ＝ m／gh</li>
+      <li data-label="D.">U ＝ gh／m</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>位置エネルギーは U＝mgh で表される（hは基準面からの高さ）。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">高さ10mの位置から物体を静かに落とした。摩擦や空気抵抗を無視すると、地面に着く直前の速さは何m/sか。重力加速度は9.8m/s²とする。</p>
+    <ul class="choices">
+      <li data-label="A.">9.8 m/s</li>
+      <li data-label="B." class="correct">14 m/s</li>
+      <li data-label="C.">19.6 m/s</li>
+      <li data-label="D.">98 m/s</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>エネルギー保存則より mgh＝(1/2)mv²。質量mが消えて v＝√(2gh)＝√(2×9.8×10)＝√196＝14 m/s。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">振り子が最下点で最も速くなる理由を、<strong>力学的エネルギー保存則</strong>という語を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>力学的エネルギー保存則より、K＋Uは常に一定である。最下点は基準面からの高さhが最も低く位置エネルギーUが最小になるため、その分運動エネルギーKが最大になり、速さが最も大きくなるから。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量3kg、速さ4m/sで運動している物体の運動エネルギーは何Jか。</p>
+    <ul class="choices">
+      <li data-label="A.">12 J</li>
+      <li data-label="B." class="correct">24 J</li>
+      <li data-label="C.">48 J</li>
+      <li data-label="D.">6 J</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>K＝(1/2)mv²＝(1/2)×3×4²＝(1/2)×3×16＝24 J。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第13回「運動量と力積」</strong> — 衝突や力のやり取りを、新しい量「運動量」で考える。第V部の始まり。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第12回　運動エネルギー・位置エネルギーと保存則</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>
