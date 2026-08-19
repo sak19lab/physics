@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第5回　重力と「重さ」のちがい【穴埋め版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks (widened per feedback) ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">05</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>重力と「重さ」のちがい</h1>
+  <p class="subtitle">「体重計の数字は、月に行ったら変わる？」</p>
+
+  <div class="meta-row">
+    <span>第5回 / 全16回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>質量と重さの違いを、自分の言葉で説明できる</li>
+      <li>重さの式 W = mg を使って計算できる</li>
+      <li>場所によって重さが変わる理由を説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>体重計の数字、信じていい？</h2>
+    <p>朝、体重計に乗る翔太。</p>
+    <p class="dialogue">「60kg……先週から増えた気がする」</p>
+    <p>でも、その「60kg」という数字が、場所によって<span class="blank short"></span>としたら？</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>理科室での問いかけ</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>理科の授業。先生が「もし月に行ったら、この体重計は何kgと表示すると思う？」と問いかける。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>翔太は少し考える。「軽くなる……気がする。でも、なんでだろう？」</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「実は、体重計が測っているのは<span class="blank short"></span>であって、<span class="blank short"></span>じゃないんだ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong><span class="blank short"></span>は変わらない。<span class="blank short"></span>は、場所によって変わる。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　重力と「重さ」のちがい</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>地球が物体を引く力——それが<span class="blank short"></span>。この力の大きさが、体重計が示す「重さ」の正体です。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 340 150" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <text x="80" y="16" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP" font-weight="700">地球</text>
+      <circle cx="80" cy="45" r="12" stroke="#1a1f2e" stroke-width="1.5" fill="white"/>
+      <line x1="80" y1="57" x2="80" y2="82" stroke="#1a1f2e" stroke-width="1.5"/>
+      <line x1="80" y1="82" x2="67" y2="102" stroke="#1a1f2e" stroke-width="1.5"/>
+      <line x1="80" y1="82" x2="93" y2="102" stroke="#1a1f2e" stroke-width="1.5"/>
+      <rect x="45" y="104" width="70" height="14" rx="2" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+      <text x="80" y="114" text-anchor="middle" font-size="9" fill="#2c5282" font-family="Noto Sans JP" font-weight="700">60 kg</text>
+      <path d="M80 118 L80 138" stroke="#2c5282" stroke-width="2.2" marker-end="url(#arrowE)"/>
+      <text x="80" y="148" text-anchor="middle" font-size="7.5" fill="#4a5568" font-family="Noto Sans JP">g = 9.8 m/s²</text>
+
+      <line x1="170" y1="10" x2="170" y2="140" stroke="#e2e8f0" stroke-width="1"/>
+
+      <text x="260" y="16" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP" font-weight="700">月</text>
+      <circle cx="260" cy="45" r="12" stroke="#1a1f2e" stroke-width="1.5" fill="white"/>
+      <line x1="260" y1="57" x2="260" y2="82" stroke="#1a1f2e" stroke-width="1.5"/>
+      <line x1="260" y1="82" x2="247" y2="102" stroke="#1a1f2e" stroke-width="1.5"/>
+      <line x1="260" y1="82" x2="273" y2="102" stroke="#1a1f2e" stroke-width="1.5"/>
+      <rect x="225" y="104" width="70" height="14" rx="2" fill="#faf5ff" stroke="#553c9a" stroke-width="1.5"/>
+      <text x="260" y="114" text-anchor="middle" font-size="9" fill="#553c9a" font-family="Noto Sans JP" font-weight="700">約 10 kg 相当</text>
+      <path d="M260 118 L260 128" stroke="#553c9a" stroke-width="2.2" marker-end="url(#arrowM)"/>
+      <text x="260" y="148" text-anchor="middle" font-size="7.5" fill="#4a5568" font-family="Noto Sans JP">g = 1.6 m/s²</text>
+
+      <defs>
+        <marker id="arrowE" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7" fill="#2c5282"/>
+        </marker>
+        <marker id="arrowM" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7" fill="#553c9a"/>
+        </marker>
+      </defs>
+    </svg>
+    <p class="illust-caption">同じ質量60kgの翔太。重力加速度が違うと、体重計が示す「重さ」も変わる</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">重さの公式</p>
+    <p class="law-statement"><span class="blank short"></span> W ＝ <span class="blank short"></span> m ×重力加速度 g　（単位：N）</p>
+    <div class="formula-list">
+      <span class="f-term">質量 m</span>（kg）— 物体そのものの量。場所によらず<span class="blank short"></span><br>
+      <span class="f-term">重力加速度 g</span>（m/s²）— 天体によって<span class="blank short"></span>（地球 9.8 / 月 1.6）
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      家庭にある体重計は、本当は「<span class="blank short"></span>」（力）を測定している。しかし地球上の重力加速度で換算し、「kg」という質量の単位で表示しているだけ。だから同じ体重計を月に持って行くと、質量は変わらないのに表示される数字は<span class="blank short"></span>。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 質量と重さのちがいを自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　重力と「重さ」のちがい</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>質量と重さの日常ツアー</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🌕 月面着陸した宇宙飛行士</p>
+        <p class="ex-body"><span class="blank short"></span>は変わらないが、重さは地球の約1/6になり、体が軽く感じる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🛰️ 無重力の宇宙ステーション</p>
+        <p class="ex-body">重さはほぼ0だが、<span class="blank short"></span>は地上と同じ。物を動かしにくさは変わらない。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🪐 惑星ごとの重力加速度</p>
+        <p class="ex-body">木星は地球の約2.5倍、火星は約0.4倍。同じ質量でも<span class="blank short"></span>は変わる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">⚖️ ばねばかりと上皿てんびん</p>
+        <p class="ex-body">ばねばかりは「重さ」を、上皿てんびんは「<span class="blank short"></span>」を比較する道具。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 無重力の宇宙ステーションにいる宇宙飛行士は、質量60kgの物体を簡単に動かせる？</p>
+    <p>実は<span class="blank short"></span>。重さは0でも、質量（動かしにくさ＝<span class="blank short"></span>の大きさ）は変わらない。動かす（加速させる）には、第1回で学んだ<span class="blank short"></span>のぶんだけ、やはり力が必要になる。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      重さ0でも、質量は0じゃない。<br>
+      質量は「動かしにくさ」＝<span class="blank short"></span>の大きさを表す量で、重力の有無とは無関係。無重力でも、物を止めたり動かしたりするには力が要る。
+    </div>
+  </div>
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">質量　／　重さ　／　重力　／　変わる　／　一定　／　異なる　／　慣性　／　いいえ　／　加速度</p>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>質量</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>重さ</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>重力加速度</th>
+        <td class="write-line"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      体重計が測っているのは、あなたの<span class="blank short"></span>。<br>あなたそのものの量――<span class="blank short"></span>――は、宇宙のどこでも変わらない。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:24mm;">
+    <p class="memo-label">MEMO — 質量と重さを混同しそうになった場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　重力と「重さ」のちがい</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">質量の単位として正しいものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">N（ニュートン）</li>
+      <li data-label="B.">kg（キログラム）</li>
+      <li data-label="C.">m/s²（メートル毎秒毎秒）</li>
+      <li data-label="D.">J（ジュール）</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">重さ W・質量 m・重力加速度 g の関係を正しく表す式はどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">W = m / g</li>
+      <li data-label="B.">W = mg</li>
+      <li data-label="C.">W = m + g</li>
+      <li data-label="D.">W = g / m</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量60 kgの翔太が月面（重力加速度 1.6 m/s²）に立つと、重さは何Nになる？</p>
+    <ul class="choices">
+      <li data-label="A.">37.5 N</li>
+      <li data-label="B.">96 N</li>
+      <li data-label="C.">588 N</li>
+      <li data-label="D.">600 N</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">無重力の宇宙ステーションで質量60kgの物体を押して動かすとき、力は必要か。<strong>質量・重さ・慣性</strong>という語を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">家庭用の体重計についての説明として正しいものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">体重計は質量そのものを直接測定している</li>
+      <li data-label="B.">体重計は重さ（力）を測定し、地球の重力加速度で質量相当に換算して表示している</li>
+      <li data-label="C.">体重計は月面でもまったく同じ数値を示す</li>
+      <li data-label="D.">体重計は慣性の大きさを測定している</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第6回「摩擦力」</strong> — 身のまわりの力を扱う第II部、第2回目のテーマ。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　重力と「重さ」のちがい</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

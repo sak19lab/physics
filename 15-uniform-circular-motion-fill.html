@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第15回　等速円運動【穴埋め版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">15</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>等速円運動</h1>
+  <p class="subtitle">「速さは変わらないのに、加速度がある？」</p>
+
+  <div class="meta-row">
+    <span>第15回 / 全16回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>角速度ω、周期T、振動数fの関係（T＝1/f、ω＝2π/T）を理解できる</li>
+      <li>等速円運動では速さが一定でも向心加速度が生じることを理解できる</li>
+      <li>向心力の式 F＝mv²/r＝mrω² を使って計算できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>物理部の実験室、ひもを振り回すと</h2>
+    <p>文化祭が終わり、物理部の活動もいつもの実験室に戻った。今日は顧問の先生が「回転運動」の実験をしようと言い出した。ひもの先にボールをつけて、頭上でぐるぐる振り回す実験だ。</p>
+    <p class="dialogue">「速さは変わらないのに、ひもがずっとピンと張ってる……これって、力がかかり続けてるってこと？」</p>
+    <p>その感覚の正体が、<strong>向心力</strong>という考え方だった。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>物理部のひも振り回し実験</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>翔太がひもの先にボールをつけて、頭上で一定の速さでぐるぐる振り回す。手には、ひもがボールに引っ張られる感覚がずっと続いていた。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>先生「これが等速円運動だよ。速さは一定でも、運動の向きがずっと変わり続けているから、実は<span class="blank short"></span>が生じているんだ」</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「ひもがボールを中心に向かって引っ張り続ける力、これが<span class="blank short"></span>。<span class="blank short"></span>があるからこそ、ボールは円軌道を保っていられるんだよ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>等速円運動では、速さは一定でも運動の向きが常に変化しているため、中心方向に<span class="blank short"></span>が生じる。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第15回　等速円運動</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>先生がホワイトボードに、円運動の速度と向心力の向きを図で説明してくれた。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <circle cx="190" cy="150" r="90" stroke="#8b95a5" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <circle cx="190" cy="150" r="2.5" fill="#1a1f2e"/>
+      <text x="197" y="147" font-size="11" fill="#1a1f2e" font-family="Noto Sans JP">O</text>
+      <line x1="190" y1="150" x2="190" y2="60" stroke="#c9d3e0" stroke-width="1"/>
+      <text x="196" y="105" font-size="10" fill="#8b95a5" font-family="Noto Sans JP">r</text>
+
+      <!-- Point P1: top of circle -->
+      <circle cx="190" cy="60" r="3" fill="#2c5282"/>
+      <line x1="190" y1="60" x2="255" y2="60" stroke="#2c5282" stroke-width="2"/>
+      <polygon points="255,60 245,55 245,65" fill="#2c5282"/>
+      <text x="258" y="56" font-size="12" fill="#2c5282" font-weight="700" font-family="Noto Sans JP">v</text>
+      <line x1="190" y1="60" x2="190" y2="95" stroke="#c05621" stroke-width="2"/>
+      <polygon points="190,95 185,85 195,85" fill="#c05621"/>
+      <text x="196" y="80" font-size="12" fill="#c05621" font-weight="700" font-family="Noto Sans JP">F（向心力）</text>
+
+      <!-- Point P2: right of circle -->
+      <circle cx="280" cy="150" r="3" fill="#2c5282"/>
+      <line x1="280" y1="150" x2="280" y2="215" stroke="#2c5282" stroke-width="2"/>
+      <polygon points="280,215 275,205 285,205" fill="#2c5282"/>
+      <text x="286" y="220" font-size="12" fill="#2c5282" font-weight="700" font-family="Noto Sans JP">v</text>
+      <line x1="280" y1="150" x2="245" y2="150" stroke="#c05621" stroke-width="2"/>
+      <polygon points="245,150 255,145 255,155" fill="#c05621"/>
+      <text x="215" y="140" font-size="12" fill="#c05621" font-weight="700" font-family="Noto Sans JP">F</text>
+
+      <text x="190" y="280" text-anchor="middle" font-size="12" fill="#1a1f2e" font-weight="700" font-family="Noto Sans JP">向きは変わるが、大きさ（速さv・向心力F）は一定</text>
+    </svg>
+    <p class="illust-caption">速度vは常に円の接線方向、向心力Fは常に中心Oを向く</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">等速円運動の公式</p>
+    <p class="law-statement">向心力 F ＝ ma ＝ mv²／r ＝ mrω²</p>
+    <div class="formula-list">
+      <span class="f-term">周期T</span>と<span class="f-term">振動数f</span>：T ＝ <span class="blank short"></span>（単位：T は秒 s、f は Hz）<br>
+      <span class="f-term">角速度</span>：ω ＝ <span class="blank short"></span>／T（単位：rad/s）<br>
+      <span class="f-term">速さ</span>：v ＝ <span class="blank short"></span>（単位：m/s）<br>
+      <span class="f-term">向心加速度</span>：a ＝ v²／r ＝ <span class="blank short"></span>（単位：m/s²）
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      「速さが一定なのに加速度がある」という点が最大のつまずきポイント。<strong>速度は向きを持つ<span class="blank short"></span>であり、向きが変われば速さが同じでも加速度が生じる</strong>ことを、図を指しながら丁寧に確認させたい。向心力は常に中心Oを向くため、ひもの張力・摩擦力・万有引力など、状況によって「何が向心力の役割をしているか」が変わることにも触れるとよい。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 等速円運動の公式を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第15回　等速円運動</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の中の等速円運動</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🌀 洗濯機の脱水槽</p>
+        <p class="ex-body">高速回転する槽の壁が、衣類を中心方向に押す力＝向心力を生む。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🔨 ハンマー投げ</p>
+        <p class="ex-body">選手がワイヤーを引く力が向心力となり、ハンマーを円軌道上に保つ。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🎠 メリーゴーランド</p>
+        <p class="ex-body">座席を支える構造が中心向きの力を生み、乗客を円軌道に沿わせる。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🛰️ 人工衛星の軌道</p>
+        <p class="ex-body">地球の万有引力が向心力の役割をし、衛星を軌道上にとどめる。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 速さが一定（等速）なのに、加速度があるのはおかしくない？</p>
+    <p>そう思うかもしれないが、<strong>違う</strong>。速度は大きさ（速さ）だけでなく<strong>向き</strong>も持つ<span class="blank short"></span>。円運動では速さは変わらなくても、運動の向きが絶えず変化しているため、その変化の割合である加速度（向心加速度）が生じている。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      車がカーブを曲がるときも、実は向心力が必要。<strong>タイヤと路面の間の<span class="blank short"></span>が向心力の役割</strong>を果たし、車を曲線の内側に引き寄せている。スピードを出しすぎたり路面が凍結して<span class="blank short"></span>が足りなくなると、車は円軌道を保てずにスリップしてしまう。
+    </div>
+  </div>
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">加速度　／　向心力　／　ベクトル　／　摩擦力　／　1／f　／　2π　／　rω　／　rω²</p>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>角速度</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>周期・振動数</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>向心力</th>
+        <td class="write-line"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      速さが一定でも、<strong>向きが変わり続けるから、円運動には加速度がある。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:20mm;">
+    <p class="memo-label">MEMO — 身のまわりで円運動を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第15回　等速円運動</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">周期Tと振動数fの関係を正しく表す式はどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">f ＝ 1／T</li>
+      <li data-label="B.">f ＝ T</li>
+      <li data-label="C.">f ＝ 2T</li>
+      <li data-label="D.">T ＝ 2f</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">向心力Fを正しく表す式はどれか。（mは質量、vは速さ、rは半径）</p>
+    <ul class="choices">
+      <li data-label="A.">F ＝ mv／r</li>
+      <li data-label="B.">F ＝ mv²／r</li>
+      <li data-label="C.">F ＝ mr／v</li>
+      <li data-label="D.">F ＝ m／rv²</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">半径0.5m、質量0.2kgの物体が2m/sで等速円運動している。物体にはたらく向心力の大きさは何Nか。</p>
+    <ul class="choices">
+      <li data-label="A.">0.8 N</li>
+      <li data-label="B.">1.6 N</li>
+      <li data-label="C.">3.2 N</li>
+      <li data-label="D.">0.4 N</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">等速円運動では「速さ」は一定なのに、なぜ「加速度」が生じるのか。<strong>ベクトル</strong>という語を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">半径4mの円周上を角速度2rad/sで等速円運動する物体の速さは何m/sか。</p>
+    <ul class="choices">
+      <li data-label="A.">2 m/s</li>
+      <li data-label="B.">4 m/s</li>
+      <li data-label="C.">6 m/s</li>
+      <li data-label="D.">8 m/s</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第16回「力学総まとめ」</strong> — これまで学んだ力学の全16回を振り返り、力・運動・エネルギー・運動量のつながりを総復習する、力学シリーズ最終回。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第15回　等速円運動</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

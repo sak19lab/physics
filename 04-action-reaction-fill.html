@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第4回　作用・反作用の法則【穴埋め版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks (widened per feedback) ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">04</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>作用・反作用の法則</h1>
+  <p class="subtitle">ニュートン第3法則 — 「力は、ひとりでは生まれない」</p>
+
+  <div class="meta-row">
+    <span>第4回 / 全16回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>作用・反作用の法則を、自分の言葉で説明できる</li>
+      <li>「作用・反作用」と「力のつり合い」の違いを説明できる</li>
+      <li>身のまわりの現象を、力のペアとして読み解ける</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>プールの壁、蹴ったことある？</h2>
+    <p>プールの授業で、壁を蹴って泳ぎ出すとき——</p>
+    <p class="dialogue">「壁、思ったより強く押し返してくる……！」</p>
+    <p>壁は動いていないのに、たしかに押し返された感覚がある。実はこれも、<strong>法則</strong>で説明できます。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>翔太のプール授業</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>翔太はプールの壁際に立ち、これから泳ぎ出す。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>壁を思いきり蹴る。翔太は壁を「後ろ向き」に押した——これが<span class="blank short"></span>。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>それと同時に、壁は翔太を「前向き」に押し返す——これが<span class="blank short"></span>。</p>
+      <p>だから翔太は、勢いよく前に進む。</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>力は必ず<span class="blank short"></span>で生まれる。相手を押せば、相手も自分を<span class="blank short"></span>。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　作用・反作用の法則</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>アイザック・ニュートンは、この関係も法則としてまとめました。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 340 140" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <circle cx="70" cy="55" r="14" stroke="#1a1f2e" stroke-width="1.5" fill="white"/>
+      <line x1="70" y1="69" x2="70" y2="100" stroke="#1a1f2e" stroke-width="1.5"/>
+      <line x1="70" y1="100" x2="55" y2="122" stroke="#1a1f2e" stroke-width="1.5"/>
+      <line x1="70" y1="100" x2="85" y2="122" stroke="#1a1f2e" stroke-width="1.5"/>
+      <rect x="270" y="20" width="18" height="105" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+      <path d="M110 60 L240 60" stroke="#2c5282" stroke-width="2.2" marker-end="url(#arrowA)"/>
+      <text x="175" y="52" text-anchor="middle" font-size="10" fill="#2c5282" font-family="Noto Sans JP" font-weight="700">作用（翔太→壁）</text>
+      <path d="M240 90 L110 90" stroke="#553c9a" stroke-width="2.2" marker-end="url(#arrowR)"/>
+      <text x="175" y="108" text-anchor="middle" font-size="10" fill="#553c9a" font-family="Noto Sans JP" font-weight="700">反作用（壁→翔太）</text>
+      <defs>
+        <marker id="arrowA" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7" fill="#2c5282"/>
+        </marker>
+        <marker id="arrowR" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7" fill="#553c9a"/>
+        </marker>
+      </defs>
+    </svg>
+    <p class="illust-caption">作用と反作用 — 大きさは等しく、向きは反対、はたらく相手はちがう</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">NEWTON'S THIRD LAW</p>
+    <p class="law-statement">物体Aが物体Bに力を加えると（<span class="blank short"></span>）、<br>物体Bは物体Aに、大きさが<span class="blank short"></span>向きが<span class="blank short"></span>の力を返す（<span class="blank short"></span>）。</p>
+  </div>
+
+  <p style="font-size:9.5pt; color:var(--ink-light); margin-top:5mm;">
+    これがニュートン第3法則、通称<span class="blank short"></span>の法則。<br>
+    作用と反作用は、<span class="blank short"></span>に、<span class="blank"></span>にはたらく。
+  </p>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      作用・反作用は「<strong>力のつり合い</strong>」と混同されやすい。作用・反作用は<strong>異なる2つの物体</strong>にはたらく力のペア。力のつり合いは、<strong>同じ1つの物体</strong>にはたらく2つの力が打ち消し合う関係。「どの物体にはたらく力か」を、常に確認させましょう。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 作用・反作用を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　作用・反作用の法則</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の作用・反作用ツアー</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🚣 ボートで岸を押す</p>
+        <p class="ex-body">オールで岸を押すと、ボートは<span class="blank short"></span>方向に進む。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚀 ロケットの推進</p>
+        <p class="ex-body">ガスを後方に噴射（作用）し、ロケットは前方へ進む（<span class="blank short"></span>）。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">⚾ キャッチボール</p>
+        <p class="ex-body">投げる力と、受け止めたときに感じる力は、<span class="blank short"></span>の関係。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚶 歩くときの一歩</p>
+        <p class="ex-body">地面を後ろに蹴る（作用）と、地面が前に<span class="blank short"></span>（反作用）。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 体重の重い人が軽い人を同じ力で押したら、押す力は重い方が大きいの？</p>
+    <p>実は<span class="blank short"></span>。作用・反作用の力の大きさは常に等しい。ただしF = maより、質量が小さい方が同じ力でも<span class="blank short"></span>が大きくなるため、軽い人の方が勢いよく吹き飛ばされて見える。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      「作用・反作用」と「力のつり合い」は別物。<br>
+      作用・反作用は<span class="blank"></span>にはたらく。力のつり合いは、<span class="blank"></span>にはたらく2つの力が釣り合っている状態。
+    </div>
+  </div>
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">作用　／　反作用　／　ペア　／　押し返す　／　同時　／　異なる2つの物体　／　同じ1つの物体　／　等しく　／　反対　／　加速度　／　同じ</p>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>作用</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>反作用</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>力のつり合い</th>
+        <td class="write-line"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      力は、ひとりでは生まれない。<strong>必ず相手と<span class="blank short"></span>で生まれる。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:24mm;">
+    <p class="memo-label">MEMO — 身のまわりで作用・反作用を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　作用・反作用の法則</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">作用・反作用の法則の説明として正しいものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">同じ物体にはたらく2つの力が打ち消し合う関係</li>
+      <li data-label="B.">2つの力は異なる2つの物体に同時にはたらき、大きさが等しく向きが反対</li>
+      <li data-label="C.">反作用の方が作用より必ず小さい</li>
+      <li data-label="D.">動いている物体にしかはたらかない</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">壁を押しても壁がへこまない場合、壁は自分を押し返しているか？</p>
+    <ul class="choices">
+      <li data-label="A.">壁が動かないので反作用は生じていない</li>
+      <li data-label="B.">壁は自分を押し返している</li>
+      <li data-label="C.">摩擦があるので反作用は弱くなる</li>
+      <li data-label="D.">壁の重さによって反作用の有無が変わる</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">体重60 kgの人が体重40 kgの人を同じ力で押した。作用・反作用の法則から、押す力と押し返される力の大きさの関係として正しいのは？</p>
+    <ul class="choices">
+      <li data-label="A.">60 kgの人が及ぼす力の方が大きい</li>
+      <li data-label="B.">40 kgの人が及ぼす力の方が大きい</li>
+      <li data-label="C.">両者は等しい</li>
+      <li data-label="D.">力は比較できない</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">「体重の軽い人の方が勢いよく吹き飛ばされる」ことを、<strong>作用・反作用の法則とF = ma</strong>を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">「作用・反作用」と「力のつり合い」の違いとして正しいものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">作用・反作用は同じ物体、力のつり合いは異なる2物体にはたらく</li>
+      <li data-label="B.">作用・反作用は異なる2物体、力のつり合いは同じ1つの物体にはたらく</li>
+      <li data-label="C.">両者はまったく同じ概念である</li>
+      <li data-label="D.">力のつり合いは動いている物体にのみ成立する</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第5回「重力と『重さ』のちがい」</strong> — 身のまわりの力を扱う第II部のスタート。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　作用・反作用の法則</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

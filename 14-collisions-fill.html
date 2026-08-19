@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第14回　衝突（反発・非弾性）【穴埋め版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula-list {
+      font-size: 9.5pt;
+      line-height: 2;
+      margin: 3mm 0;
+    }
+
+    .formula-list .f-term {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">14</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>衝突（反発・非弾性）</h1>
+  <p class="subtitle">「跳ね返る台車と、くっつく台車。何が違うの？」</p>
+
+  <div class="meta-row">
+    <span>第14回 / 全16回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>衝突の前後で運動量保存則 m₁v₁＋m₂v₂＝m₁v₁'＋m₂v₂' が成り立つことを理解できる</li>
+      <li>反発係数eの意味（e＝1：完全弾性衝突、e＝0：完全非弾性衝突）を理解できる</li>
+      <li>運動量保存則と反発係数を使って、衝突後の速度を求められる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>文化祭の後片付け、台車がぶつかった</h2>
+    <p>文化祭も無事終わり、後片付けの時間。翔太たちは荷物を積んだ台車を運んでいたが、通路の角で二台の台車がぶつかってしまった。</p>
+    <p class="dialogue">「あれ？　こっちの台車は跳ね返ったのに、あっちはそのままくっついて一緒に進んでる……同じ『ぶつかる』なのに、何が違うの？」</p>
+    <p>その違いを説明するカギが、<strong>反発係数</strong>という考え方だった。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>片付けの台車衝突、翔太の疑問</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>硬い長机を積んだ台車Aが、静止していた台車Bに衝突。ゴンッという音とともに、二台とも互いに逆向きへ跳ね返った。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>別の場所では、クッション材の箱を積んだ台車が、静止していた台車にぶつかった。今度は跳ね返らず、そのままくっついて一緒に進んでいった。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「どちらの衝突でも、運動量の合計は衝突の前後で変わらない。でも、跳ね返るかくっつくかは<span class="blank short"></span>という値で決まるんだよ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>運動量保存則 m₁v₁＋m₂v₂＝m₁v₁'＋m₂v₂' は、衝突の種類（跳ね返るか・くっつくか）によらず、<span class="blank short"></span>成り立つ。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第14回　衝突（反発・非弾性）</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>先生がホワイトボードに、衝突前と衝突後の台車の様子を図で説明してくれた。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 380 270" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- Row 1: 衝突前 -->
+      <text x="20" y="20" font-size="11" font-weight="700" fill="#1a1f2e" font-family="Noto Sans JP">衝突前</text>
+      <line x1="20" y1="70" x2="360" y2="70" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="40" y="45" width="50" height="25" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+      <text x="65" y="62" text-anchor="middle" font-size="11" fill="#2c5282" font-weight="700" font-family="Noto Sans JP">A</text>
+      <line x1="95" y1="57" x2="140" y2="57" stroke="#2c5282" stroke-width="2"/>
+      <polygon points="140,57 130,52 130,62" fill="#2c5282"/>
+      <text x="98" y="45" font-size="10" fill="#2c5282" font-family="Noto Sans JP">v₁</text>
+      <rect x="230" y="45" width="50" height="25" fill="#fffbeb" stroke="#c05621" stroke-width="1.5"/>
+      <text x="255" y="62" text-anchor="middle" font-size="11" fill="#c05621" font-weight="700" font-family="Noto Sans JP">B</text>
+      <text x="232" y="40" font-size="10" fill="#c05621" font-family="Noto Sans JP">v₂＝0（静止）</text>
+
+      <!-- Row 2: 弾性衝突後 -->
+      <text x="20" y="112" font-size="11" font-weight="700" fill="#2c5282" font-family="Noto Sans JP">衝突後 — 完全弾性衝突（e＝1）</text>
+      <line x1="20" y1="160" x2="360" y2="160" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="60" y="135" width="50" height="25" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+      <text x="85" y="152" text-anchor="middle" font-size="11" fill="#2c5282" font-weight="700" font-family="Noto Sans JP">A</text>
+      <text x="52" y="130" font-size="10" fill="#2c5282" font-family="Noto Sans JP">v₁'＝0（静止）</text>
+      <rect x="230" y="135" width="50" height="25" fill="#fffbeb" stroke="#c05621" stroke-width="1.5"/>
+      <text x="255" y="152" text-anchor="middle" font-size="11" fill="#c05621" font-weight="700" font-family="Noto Sans JP">B</text>
+      <line x1="285" y1="147" x2="330" y2="147" stroke="#c05621" stroke-width="2"/>
+      <polygon points="330,147 320,142 320,152" fill="#c05621"/>
+      <text x="285" y="130" font-size="10" fill="#c05621" font-family="Noto Sans JP">v₂'（Aの元の速さ）</text>
+
+      <!-- Row 3: 非弾性衝突後 -->
+      <text x="20" y="202" font-size="11" font-weight="700" fill="#553c9a" font-family="Noto Sans JP">衝突後 — 完全非弾性衝突（e＝0）</text>
+      <line x1="20" y1="250" x2="360" y2="250" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="115" y="225" width="90" height="25" fill="#faf5ff" stroke="#553c9a" stroke-width="1.5"/>
+      <text x="160" y="242" text-anchor="middle" font-size="11" fill="#553c9a" font-weight="700" font-family="Noto Sans JP">A＋B（合体）</text>
+      <line x1="210" y1="237" x2="255" y2="237" stroke="#553c9a" stroke-width="2"/>
+      <polygon points="255,237 245,232 245,242" fill="#553c9a"/>
+      <text x="210" y="220" font-size="10" fill="#553c9a" font-family="Noto Sans JP">v'（共通の速度）</text>
+    </svg>
+    <p class="illust-caption">同じ運動量保存則が成り立つが、反発係数eによって衝突後の動き方が変わる</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">運動量保存則と反発係数の公式</p>
+    <p class="law-statement">運動量保存則　m₁v₁＋m₂v₂＝<span class="blank"></span></p>
+    <div class="formula-list">
+      <span class="f-term">反発係数</span>：e ＝ －(v₁'－v₂')／(v₁－v₂)　（0 ≤ e ≤ <span class="blank short"></span>）<br>
+      <span class="f-term">e＝<span class="blank short"></span></span>：完全弾性衝突（力学的エネルギーも保存）<br>
+      <span class="f-term">e＝<span class="blank short"></span></span>：完全非弾性衝突（合体して一体になる）<br>
+      <span class="f-term">0＜e＜1</span>：一般の非弾性衝突（運動エネルギーの一部が失われる）
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      反発係数eは、ぶつかる物体の材質によって決まる実験値であることを強調したい。<strong><span class="blank short"></span>同士はeが1に近く、粘土のかたまりはeが0に近い</strong>。運動量保存則はどんな衝突でも常に成り立つが、力学的エネルギーが保存されるのはe＝1（完全弾性衝突）のときだけであることを整理させる。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 運動量保存則と反発係数を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第14回　衝突（反発・非弾性）</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の中の衝突現象</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🎱 ビリヤードの球</p>
+        <p class="ex-body">硬い球同士がぶつかり、eがほぼ1（弾性に近い衝突）。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">⚽ スーパーボール</p>
+        <p class="ex-body">床に落とすとよく跳ね返る。eが1に近い材質。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🧱 粘土のかたまり</p>
+        <p class="ex-body">ぶつかるとくっついて離れない。e＝0の完全非弾性衝突。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚗 車の衝突安全設計</p>
+        <p class="ex-body">クラッシャブルゾーンで、あえてeを小さくして衝撃を吸収する。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 衝突でエネルギーが失われることがあるなら、運動量も失われるの？</p>
+    <p>そう思うかもしれないが、<strong>違う</strong>。運動量保存則は、衝突の種類（弾性・非弾性）によらず<strong>常に成り立つ</strong>。失われることがあるのは<span class="blank short"></span>の方で、それはe＝1（完全弾性衝突）以外の衝突で起こる。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      第13回で学んだ「衝突時間を延ばして力を減らす」クラッシャブルゾーンは、実は<strong>反発係数をあえて<span class="blank short"></span>する工夫</strong>でもある。車体を潰れやすくすることで、衝突時間を延ばすと同時にeを0に近づけ、乗員に伝わる衝撃を最小限にしている。力積の考え方と反発係数の考え方は、どちらも安全設計を支えている。
+    </div>
+  </div>
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">反発係数　／　常に　／　1　／　0　／　スーパーボール　／　運動エネルギー　／　小さく</p>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>運動量保存則</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>反発係数</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>完全弾性衝突</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>完全非弾性衝突</th>
+        <td class="write-line"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      衝突の前後で<strong>運動量は必ず保存される。</strong>エネルギーが保存されるかどうかは、反発係数で決まる。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:20mm;">
+    <p class="memo-label">MEMO — 身のまわりで衝突現象を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第14回　衝突（反発・非弾性）</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">運動量保存則を正しく表す式はどれか。（m₁, m₂は質量、v₁, v₂は衝突前の速度、v₁', v₂'は衝突後の速度）</p>
+    <ul class="choices">
+      <li data-label="A.">m₁v₁＋m₂v₂ ＝ m₁v₁'＋m₂v₂'</li>
+      <li data-label="B.">m₁v₁ ＝ m₂v₂'</li>
+      <li data-label="C.">v₁＋v₂ ＝ v₁'＋v₂'</li>
+      <li data-label="D.">m₁v₁'－m₂v₂' ＝ 0</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">反発係数e＝0の衝突を何というか。</p>
+    <ul class="choices">
+      <li data-label="A.">完全弾性衝突</li>
+      <li data-label="B.">完全非弾性衝突</li>
+      <li data-label="C.">等速衝突</li>
+      <li data-label="D.">静止衝突</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量2kgの台車Aが4m/sで、静止していた質量2kgの台車Bに完全非弾性衝突（合体）した。衝突後の速さは何m/sか。</p>
+    <ul class="choices">
+      <li data-label="A.">1 m/s</li>
+      <li data-label="B.">2 m/s</li>
+      <li data-label="C.">3 m/s</li>
+      <li data-label="D.">4 m/s</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">反発係数e＝0のとき、衝突後の2物体はどうなるか。「<strong>合体</strong>」という語を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量1kgの台車Aが6m/sで、静止していた質量1kgの台車Bに完全弾性衝突（e＝1）した。衝突後の台車Bの速さは何m/sか。</p>
+    <ul class="choices">
+      <li data-label="A.">0 m/s</li>
+      <li data-label="B.">3 m/s</li>
+      <li data-label="C.">6 m/s</li>
+      <li data-label="D.">12 m/s</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第15回「等速円運動」</strong> — 直線運動から離れ、円を描いて回り続ける運動という新しい形を学んでいく。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第14回　衝突（反発・非弾性）</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第2回　力と加速度の法則【穴埋め版】｜高校物理基礎・力学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    .formula {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 20pt;
+      font-weight: 600;
+      text-align: center;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin: 3mm 0;
+    }
+
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 140mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks (widened per feedback) ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">02</div>
+  <p class="series-label">高校物理基礎 · 力学シリーズ</p>
+  <h1>力と加速度の法則</h1>
+  <p class="subtitle">ニュートン第2法則 — 「重ければ重いほど、動きは鈍くなる」</p>
+
+  <div class="meta-row">
+    <span>第2回 / 全16回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>ニュートン第2法則（F = ma）を、自分の言葉で説明できる</li>
+      <li>「質量」と「加速度」の関係がわかる</li>
+      <li>力・質量・加速度の関係を、日常の場面で説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>スーパーのカート、押したことある？</h2>
+    <p>買い物カゴが空っぽのとき、カートって驚くほど軽く進みますよね。</p>
+    <p class="dialogue">「お、スイスイ進む」</p>
+    <p>でも、食品でいっぱいになった帰り道——同じ力で押しているはずなのに。</p>
+    <p class="dialogue">「あれ？　全然進まない……！」</p>
+    <p>力は同じ。なのに動き方がまるで違う。この違いを解き明かすのが、今日の法則です。</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>翔太のスーパー手伝い</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>週末、翔太は母とスーパーへ。まだ何も入っていない<strong>空のカート</strong>を押す。</p>
+      <p>軽い力でも、カートはぐんぐん加速していく。</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>買い物が進み、カートには食品がどんどん積まれていく。</p>
+      <p>翔太は最初と<strong>同じ力</strong>でカートを押す。でも——</p>
+      <p class="dialogue">「重っ……全然スピードが出ない」</p>
+      <p>同じ力なのに、加速の仕方がまったく違う。原因は<span class="blank short"></span>にある。</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>同じ力を加えても、<span class="blank"></span>が大きいほど、<span class="blank"></span>は小さくなる。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　力と加速度の法則</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>翔太は考えた。「最初と同じスピードで進めたい」。</p>
+    <p>そこで、<strong>もっと強い力</strong>でカートを押してみる。すると——ちゃんと加速するようになった。</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 420 110" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M110 40 L230 40 L220 85 L120 85 Z" stroke="#2c5282" stroke-width="1.2" fill="#ebf4ff"/>
+      <rect x="130" y="20" width="22" height="22" rx="2" stroke="#2c5282" stroke-width="0.8" fill="white"/>
+      <rect x="158" y="16" width="22" height="26" rx="2" stroke="#2c5282" stroke-width="0.8" fill="white"/>
+      <circle cx="200" cy="28" r="11" stroke="#2c5282" stroke-width="0.8" fill="white"/>
+      <circle cx="130" cy="95" r="9" stroke="#1a1f2e" stroke-width="1.2" fill="white"/>
+      <circle cx="205" cy="95" r="9" stroke="#1a1f2e" stroke-width="1.2" fill="white"/>
+      <line x1="230" y1="40" x2="255" y2="15" stroke="#2c5282" stroke-width="1.5"/>
+      <path d="M310 45 L262 45" stroke="#2c5282" stroke-width="2" marker-end="url(#arrowBlue2)"/>
+      <text x="330" y="40" text-anchor="middle" font-size="9" fill="#2c5282" font-family="Noto Sans JP" font-weight="700">力（大）</text>
+      <path d="M60 63 L100 63" stroke="#8b95a5" stroke-width="1" marker-end="url(#arrowGray2)"/>
+      <text x="55" y="58" text-anchor="end" font-size="8" fill="#8b95a5" font-family="Noto Sans JP">加速度</text>
+      <defs>
+        <marker id="arrowBlue2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7" fill="#2c5282"/>
+        </marker>
+        <marker id="arrowGray2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6" fill="#8b95a5"/>
+        </marker>
+      </defs>
+    </svg>
+    <p class="illust-caption">満載のカート — 力を大きくすれば、加速度も大きくなる</p>
+  </div>
+
+  <ul style="list-style:none; font-size:9.5pt; margin-bottom:8mm; padding-left:4mm;">
+    <li style="margin-bottom:2mm;">▸ 質量が大きい → 同じ力なら加速度は<span class="blank short"></span></li>
+    <li>▸ 力を大きくする → 加速度も<span class="blank short"></span></li>
+  </ul>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>ニュートンは、この関係をさらに数式でまとめました。</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">NEWTON'S SECOND LAW</p>
+    <p class="law-statement">物体に力を加えると、力の向きに<span class="blank"></span>が生じる。<br>加速度の大きさは、<span class="blank"></span>に比例し、<span class="blank"></span>に反比例する。</p>
+    <p class="formula"><span class="blank long"></span></p>
+  </div>
+
+  <p style="font-size:9.5pt; color:var(--ink-light); margin-top:5mm;">
+    これが<strong>ニュートン第2法則</strong>、通称<strong>運動方程式</strong>。<br>
+    F：<span class="blank short"></span>［N］、m：<span class="blank short"></span>［kg］、a：<span class="blank short"></span>［m/s²］。単位は N ＝ kg・m/s²。
+  </p>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      第1法則は「力が<strong>ない</strong>とき」の特別な場合。F = ma に F = 0 を代入すると a = 0 ── つまり静止か等速直線運動になります。「第1法則は第2法則の一部」と気づかせると、理解がぐっと深まります。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — F = ma を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　力と加速度の法則</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の F = ma ツアー</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🚲 自転車のペダル</p>
+        <p class="ex-body">強く踏むほど、<span class="blank short"></span>が大きくなる。踏む力＝F。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">⚾ キャッチボール</p>
+        <p class="ex-body">重いボールは、同じ力で投げても<span class="blank short"></span>が小さい。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">📦 台車で荷物運び</p>
+        <p class="ex-body">荷物が重いほど、同じ力では進みが<span class="blank short"></span>。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚗 車のアクセル</p>
+        <p class="ex-body">踏み込む力が強いほど、<span class="blank short"></span>が大きくなる。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある誤解を解く</h2>
+    <p><strong>Q.</strong> 力を強くすれば、重い物体も軽い物体と同じように加速するの？</p>
+    <p>半分正解。力を大きくすれば<span class="blank short"></span>は上がります。でも、同じ力なら、重い方の<span class="blank short"></span>は必ず小さいままです。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      力を2倍にすれば、<span class="blank short"></span>も2倍になる（比例）。<br>
+      でも質量を2倍にすると、加速度は<span class="blank short"></span>になる（反比例）。<br>
+      「比例」と「反比例」、向きが逆であることに注意。
+    </div>
+  </div>
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">質量　／　加速度　／　力　／　半分　／　小さい　／　小さくなる　／　大きくなる　／　遅い　／　F ＝ ma</p>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>キーワード（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr>
+        <th>加速度</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>質量</th>
+        <td class="write-line"></td>
+      </tr>
+      <tr>
+        <th>運動方程式</th>
+        <td class="write-line"></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      力を受けた物体は、<strong><span class="blank"></span>で応える。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:24mm;">
+    <p class="memo-label">MEMO — 身のまわりで F = ma を感じた場面</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　力と加速度の法則</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">ニュートンの運動方程式として正しいものはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">F ＝ ma</li>
+      <li data-label="B.">F ＝ mv</li>
+      <li data-label="C.">a ＝ Fm</li>
+      <li data-label="D.">m ＝ Fa</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">同じ力を加えたとき、質量が大きい物体ほど加速度はどうなる？</p>
+    <ul class="choices">
+      <li data-label="A.">大きくなる</li>
+      <li data-label="B.">小さくなる</li>
+      <li data-label="C.">変わらない</li>
+      <li data-label="D.">力によるので分からない</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用 · 計算</span></p>
+    <p class="quiz-q">質量2 kgの物体に4 Nの力を加えた。このときの加速度は何 m/s²か。</p>
+    <div class="answer-lines"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">同じ力で投げても、軽いボールより重いボールの方が勢いよく飛ばない理由を、<strong>F = ma</strong> を使って1〜2文で説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">空のカートと食品でいっぱいのカートを、まったく同じ力で押した。この状況の説明として最も適切なのは？</p>
+    <ul class="choices">
+      <li data-label="A.">カートの質量が変わっても、加速度は変わらない</li>
+      <li data-label="B.">食品でいっぱいの方が質量が大きいため、加速度は小さくなる</li>
+      <li data-label="C.">食品でいっぱいの方が摩擦がなくなるため、よく進む</li>
+      <li data-label="D.">力の向きが変わるため、進む方向が変わる</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第3回「運動の記述」</strong> — 速さ・速度・加速度を、グラフと数式で読み解く。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　力と加速度の法則</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>
