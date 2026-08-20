@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第4回　熱と仕事は化け物（エネルギー保存と不可逆性）【穴埋め版】｜高校物理基礎・熱力学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">04</div>
+  <p class="series-label">高校物理基礎 · 熱力学シリーズ</p>
+  <h1>熱と仕事は化け物（エネルギー保存と不可逆性）</h1>
+  <p class="subtitle">手をこすると温かくなる秘密。熱機関と熱効率。</p>
+
+  <div class="meta-row">
+    <span>第4回 / 全6回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約5〜10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>仕事と熱が同じ種類のエネルギーであることを説明できる</li>
+      <li>熱機関の熱効率 e＝W／Q<sub>in</sub> を計算できる</li>
+      <li>「熱は仕事に化けにくい」という不可逆性の意味を説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>手をこすると、なぜあったかくなる？</h2>
+    <p>寒い日、翔太は教室で両手をこすり合わせてあたためていた。</p>
+    <p class="dialogue">「あ、あったかくなってきた。……ってことは逆に、あったかいものを手でこすったら、手が勝手に動き出したりしませんか？」</p>
+    <p class="dialogue">先生「おもしろい発想だね。実はそれ、できそうでできないんだ。仕事は熱に化けやすいのに、熱は仕事に化けたがらない。今日はその『化け方の違い』を見ていこう」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>仕事も熱も、同じエネルギーの仲間</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「仕事Wと熱Qは、実はどちらも同じ『エネルギー』の仲間。単位はどちらもJ（ジュール）で表せる」</p>
+      <p>先生「さっきの『手をこする』動きは、まさに仕事が熱に変わった瞬間。まさつによって、運動のエネルギー（仕事）が、分子の運動（熱）に化けたんだ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>仕事W</strong>と<strong>熱Q</strong>は、どちらも同じ「<span class="blank short"></span>」の一種。単位はどちらも<span class="blank short"></span>。仕事は摩擦などによって、熱に変えることができる。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 身の回りで「仕事が熱に化けている」例を探してみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　熱と仕事は化け物（エネルギー保存と不可逆性）</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 02</span>
+    <p>先生「イギリスの科学者ジュールは、おもりを落として羽根車を回し、水をあたためる実験をした」</p>
+    <p>先生「おもりが落ちる『仕事』が、そっくりそのまま水の温度上昇という『熱』に変わることを、精密に測ったんだ」</p>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      この実験から生まれたのが「1cal＝4.2J」という換算。仕事と熱が同じ量として交換できることを示した、歴史的に重要な発見。この教材では熱量をJで統一して扱っているので、換算そのものより「仕事と熱は同じエネルギー」という事実を押さえておきたい。
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY — 熱を仕事に変える装置</p>
+    <h2>熱機関のしくみ</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「では逆に、熱を仕事に変える装置を考えよう。これが『熱機関』。エンジンや蒸気機関がその仲間だ」</p>
+      <p>先生「熱機関は、高温の熱源からQ<sub>in</sub>の熱をもらって、その一部を仕事Wに変え、残りのQ<sub>out</sub>を低温側に排熱として捨てる」</p>
+    </div>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 460 270" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <text x="230" y="24" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c5282">熱機関のエネルギーの流れ　Q<tspan baseline-shift="sub" font-size="70%">in</tspan> ＝ W ＋ Q<tspan baseline-shift="sub" font-size="70%">out</tspan></text>
+
+        <rect x="155" y="45" width="150" height="45" rx="4" fill="#fdece0" stroke="#c05621" stroke-width="2"/>
+        <text x="230" y="72" text-anchor="middle" font-size="13" font-weight="700" fill="#c05621">高温熱源</text>
+
+        <line x1="230" y1="90" x2="230" y2="117" stroke="#8b95a5" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrowMuted)"/>
+        <text x="248" y="107" text-anchor="start" font-size="12" font-weight="700" fill="#c05621">Q<tspan baseline-shift="sub" font-size="70%">in</tspan></text>
+
+        <rect x="155" y="120" width="150" height="60" rx="6" fill="#1a1f2e"/>
+        <text x="230" y="156" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">熱機関</text>
+
+        <line x1="305" y1="150" x2="384" y2="150" stroke="#2c5282" stroke-width="2" marker-end="url(#arrowAccent)"/>
+        <text x="345" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#2c5282">仕事 W</text>
+
+        <line x1="230" y1="180" x2="230" y2="207" stroke="#8b95a5" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrowMuted)"/>
+        <text x="248" y="197" text-anchor="start" font-size="12" font-weight="700" fill="#2c5282">Q<tspan baseline-shift="sub" font-size="70%">out</tspan></text>
+
+        <rect x="155" y="209" width="150" height="42" rx="4" fill="#ebf4ff" stroke="#2c5282" stroke-width="2"/>
+        <text x="230" y="234" text-anchor="middle" font-size="12" font-weight="700" fill="#2c5282">低温（排熱）</text>
+
+        <defs>
+          <marker id="arrowMuted" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#8b95a5"/>
+          </marker>
+          <marker id="arrowAccent" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#2c5282"/>
+          </marker>
+        </defs>
+      </g>
+      <text x="230" y="264" text-anchor="middle" font-size="10" fill="#8b95a5" font-family="Noto Sans JP">受け取った熱の一部が仕事になり、残りは排熱として低温側へ逃げる</text>
+    </svg>
+    <p class="illust-caption">熱機関のイメージ：Q<sub>in</sub>の一部がWになり、残りQ<sub>out</sub>は排熱として捨てられる</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <p class="law-statement">
+      熱効率 e ＝ <span class="blank short"></span><br>
+      Q<sub>in</sub> ＝ <span class="blank short"></span>（受け取った熱＝仕事＋捨てた熱）
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　熱と仕事は化け物（エネルギー保存と不可逆性）</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY — なぜ100%にならないのか</p>
+    <h2>熱は、仕事に化けたがらない</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 04</span>
+      <p>翔太「熱効率って、100%にはならないんですか？　全部仕事に変えられたらムダがなくていいのに」</p>
+      <p>先生「それができたらいいんだけどね。実際のエンジンは、だいたい30〜40%くらいしか仕事にならない。残りは全部、排熱として逃げていく」</p>
+      <p>翔太「え、そんなに捨ててるんですか……」</p>
+    </div>
+
+    <div class="callout callout-think">
+      <p class="callout-label">HERE'S THE THING</p>
+      <div class="callout-body">
+        仕事は摩擦などによって100%熱に変えられるのに、<strong>熱は100%仕事に変えられない</strong>。これを<span class="blank short"></span>という。手をこすってあたたかくなるのは簡単だが、あたたかいものをこすって仕事を取り出すことはできない——熱には「化けにくい」向きがある。
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <p class="callout-label">TEACHER'S NOTE</p>
+      <div class="callout-body">
+        「なぜ熱は仕事に完全に変わらないのか」を厳密に説明するにはエントロピーの概念が必要だが、物理基礎の範囲では扱わない。ここでは「熱は仕事に化けにくい」という直感的なイメージにとどめ、計算では熱効率e＝W／Q<sub>in</sub>が1（100%）にならないことだけ押さえればよい。
+      </div>
+    </div>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🔥 Q<sub>in</sub>＝1000J、e＝30%</p>
+        <p class="ex-body">W＝1000×0.3＝<span class="blank short"></span>J、Q<sub>out</sub>＝1000－300＝<span class="blank short"></span>J</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">⚙️ Q<sub>in</sub>＝2000J、W＝800J</p>
+        <p class="ex-body">e＝800／2000＝<span class="blank short"></span>％</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚂 Q<sub>in</sub>＝500J、Q<sub>out</sub>＝350J</p>
+        <p class="ex-body">W＝500－350＝150J、e＝150／500＝<span class="blank short"></span>％</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚗 e＝25%、Q<sub>in</sub>＝800J</p>
+        <p class="ex-body">W＝800×0.25＝<span class="blank short"></span>J、Q<sub>out</sub>＝800－200＝<span class="blank short"></span>J</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　熱と仕事は化け物（エネルギー保存と不可逆性）</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">エネルギー　／　J（ジュール）　／　W／Q<sub>in</sub>　／　W＋Q<sub>out</sub>　／　不可逆変化　／　300　／　700　／　40　／　30　／　200　／　600</p>
+  </div>
+
+  <div class="section" style="margin-bottom:8mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>熱と仕事は化け物（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr><th>仕事と熱</th><td class="write-line"></td></tr>
+      <tr><th>熱機関</th><td class="write-line"></td></tr>
+      <tr><th>熱効率</th><td class="write-line"></td></tr>
+      <tr><th>不可逆性</th><td class="write-line"></td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      仕事は熱になれるけど、<span class="blank long"></span>。だから、熱機関には必ずムダ（排熱）が出る。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:14mm; margin-bottom:8mm;">
+    <p class="memo-label">MEMO — 車のエンジンやブレーキで、仕事と熱がどう関係しているか考えてみよう</p>
+  </div>
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約5〜10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">仕事と熱の関係として正しいものはどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">仕事も熱も同じエネルギーの一種で、単位はどちらもJである</li>
+      <li data-label="B.">仕事と熱はまったく別の物理量である</li>
+      <li data-label="C.">熱は仕事より、つねに大きい</li>
+      <li data-label="D.">仕事は熱に変換できない</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎・計算</span></p>
+    <p class="quiz-q">熱機関がQ<sub>in</sub>＝1000Jの熱を受け取り、W＝250Jの仕事をした。熱効率eは何％か。</p>
+    <ul class="choices">
+      <li data-label="A.">15％</li>
+      <li data-label="B.">20％</li>
+      <li data-label="C.">25％</li>
+      <li data-label="D.">30％</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用・計算</span></p>
+    <p class="quiz-q">熱効率40%の熱機関がQ<sub>in</sub>＝1500Jの熱を受け取った。排熱Q<sub>out</sub>は何Jか。</p>
+    <ul class="choices">
+      <li data-label="A.">600J</li>
+      <li data-label="B.">900J</li>
+      <li data-label="C.">1500J</li>
+      <li data-label="D.">300J</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用・記述</span></p>
+    <p class="quiz-q">なぜ熱機関の熱効率は100%にならないのか、説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">「仕事は熱に化けやすいが、熱は仕事に化けにくい」の例として最も適切なのはどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">ブレーキで運動エネルギーがすべて熱になるが、その熱でブレーキが逆に走り出すことはない</li>
+      <li data-label="B.">水は高いところから低いところへ流れる</li>
+      <li data-label="C.">氷は水になるが、水は氷にならない</li>
+      <li data-label="D.">電気はすべて光になる</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第5回「気体のギモン！押しつぶすとどうなる？（ボイル・シャルルの法則）」</strong> — 圧力の正体、ボイル・シャルルの法則。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　熱と仕事は化け物（エネルギー保存と不可逆性）</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第6回　エネルギーの帳尻合わせ（熱力学第一法則）【解答版】｜高校物理基礎・熱力学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .choices li.correct::before {
+      color: var(--accent);
+    }
+
+    .explain {
+      margin-top: 3mm;
+      padding: 3mm 4mm;
+      background: var(--accent-soft);
+      border-radius: 1mm;
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      margin-right: 2mm;
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .answer-lines.filled {
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-radius: 1mm;
+      padding: 3mm 4mm;
+      font-size: 9pt;
+      color: var(--ink-light);
+      line-height: 1.7;
+      height: auto;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">06</div>
+  <p class="series-label">高校物理基礎 · 熱力学シリーズ</p>
+  <h1>エネルギーの帳尻合わせ（熱力学第一法則）</h1>
+  <p class="subtitle">内部エネルギーと熱力学第一法則、断熱変化。</p>
+
+  <div class="meta-row">
+    <span>第6回 / 全6回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約5〜10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>内部エネルギーの意味を説明できる</li>
+      <li>熱力学第一法則ΔU＝Q＋Wを使って計算できる</li>
+      <li>断熱変化のしくみを説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>圧縮しただけなのに、なぜ熱くなる？</h2>
+    <p>翔太は自転車のタイヤに、空気入れで空気を勢いよく何度も入れていた。</p>
+    <p class="dialogue">「あれ、ポンプの筒の部分が、だんだん熱くなってきた……なんであっためてもいないのに、熱くなるんですか？」</p>
+    <p class="dialogue">先生「いいところに気づいたね。それは『圧縮すると温度が上がる』という現象なんだ。今日は、気体のエネルギーの出入りを『帳尻合わせ』で考えてみよう」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>エネルギーの正体</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「気体を作っている分子は、絶えず飛び回ったり振動したりしている。その分子が持つ運動エネルギーの合計を、内部エネルギーUと呼ぶんだ」</p>
+      <p>先生「温度が高いほど分子の動きが激しいから、内部エネルギーUも大きくなる」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>内部エネルギーU</strong>は、気体分子が持つ運動エネルギーの合計。温度が<strong>高い</strong>ほど、内部エネルギーは<strong>大きく</strong>なる。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 気体をあたためると内部エネルギーはどうなるか、考えてみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　エネルギーの帳尻合わせ（熱力学第一法則）</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 02</span>
+    <p>先生「気体の内部エネルギーを変化させる方法は2つある。ひとつは熱を与えること（熱Q）。もうひとつは外から仕事をすること（仕事W）」</p>
+    <p>先生「第4回でやったね、熱も仕事も同じ種類のエネルギー。だからどちらも、内部エネルギーを増やしたり減らしたりできるんだ」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <text x="230" y="20" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c5282">気体の内部エネルギーとエネルギーの出入り</text>
+
+        <!-- piston head -->
+        <rect x="155" y="42" width="150" height="20" rx="3" fill="#1a1f2e"/>
+        <line x1="230" y1="30" x2="230" y2="42" stroke="#2c5282" stroke-width="2.5" marker-end="url(#arrowAccent6)"/>
+        <text x="248" y="34" text-anchor="start" font-size="12.5" font-weight="700" fill="#2c5282">仕事 W</text>
+
+        <!-- cylinder (gas container) -->
+        <rect x="140" y="62" width="180" height="140" fill="#ebf4ff" stroke="#2c5282" stroke-width="2"/>
+        <text x="230" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1f2e">気体</text>
+        <text x="230" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#2c5282">内部エネルギー U</text>
+
+        <!-- heat arrow from left -->
+        <line x1="55" y1="132" x2="136" y2="132" stroke="#c05621" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#arrowOrange6)"/>
+        <text x="95" y="118" text-anchor="middle" font-size="12.5" font-weight="700" fill="#c05621">熱 Q</text>
+
+        <defs>
+          <marker id="arrowAccent6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#2c5282"/>
+          </marker>
+          <marker id="arrowOrange6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#c05621"/>
+          </marker>
+        </defs>
+
+        <text x="230" y="232" text-anchor="middle" font-size="17" font-weight="700" fill="#1a1f2e">ΔU ＝ Q ＋ W</text>
+      </g>
+      <text x="230" y="252" text-anchor="middle" font-size="10" fill="#8b95a5" font-family="Noto Sans JP">熱Qと仕事Wの両方が、内部エネルギーUを変化させる</text>
+    </svg>
+    <p class="illust-caption">熱力学第一法則のイメージ：熱Qと仕事Wの合計が、内部エネルギーの変化ΔUになる</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <p class="law-statement">
+      熱力学第一法則：ΔU ＝ Q ＋ W<br>
+      （Qは気体が吸収した熱、Wは気体が外部からされた仕事）
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　エネルギーの帳尻合わせ（熱力学第一法則）</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY — 熱の出入りがない変化</p>
+    <h2>断熱変化：Q＝0だから、ΔU＝W</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「さっきの空気入れ、実は熱が出入りするヒマもないくらい一瞬で圧縮されている。これを断熱変化というんだ」</p>
+      <p>翔太「熱の出入りがないなら、Q＝0ってことですか？」</p>
+      <p>先生「その通り。Q＝0だから、熱力学第一法則はΔU＝Wになる」</p>
+      <p>先生「圧縮すると、気体は外から仕事をされる（Wが正）。だから内部エネルギーが増えて、温度が上がるんだ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <p class="law-statement">
+        断熱変化：熱の出入りがない変化（Q＝0）。ΔU ＝ W<br>
+        圧縮（Wが正）で温度上昇、膨張（Wが負）で温度低下。
+      </p>
+    </div>
+
+    <div class="callout callout-tip">
+      <p class="callout-label">TEACHER'S NOTE</p>
+      <div class="callout-body">
+        Q・Wの符号（正負）のとり方は、生徒がいちばん混乱しやすいポイント。この教材ではQ＝気体が吸収した熱（放熱なら負）、W＝気体が外部からされた仕事（膨張なら負）で統一している。教科書や問題集によって符号のとり方が異なることがあるので、模試や入試問題を扱うときは、その都度定義を確認させたい。
+      </div>
+    </div>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🔥 Q＝300J吸収、W＝100J（された仕事）</p>
+        <p class="ex-body">ΔU＝Q＋W＝300＋100＝<strong>400</strong>J</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚲 断熱圧縮、W＝250J（された仕事）</p>
+        <p class="ex-body">Q＝0なので、ΔU＝W＝<strong>250</strong>J</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">❄️ Q＝500J放出（Q＝－500J）、W＝200J（された仕事）</p>
+        <p class="ex-body">ΔU＝－500＋200＝<strong>－300</strong>J</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">💨 断熱膨張、W＝－150J（気体がした仕事）</p>
+        <p class="ex-body">Q＝0なので、ΔU＝W＝<strong>－150</strong>J</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　エネルギーの帳尻合わせ（熱力学第一法則）</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="section" style="margin-bottom:8mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>エネルギーの帳尻合わせ（解答例）</h2>
+    <table class="vocab-table">
+      <tr><th>内部エネルギー</th><td>気体分子が持つ運動エネルギーの合計。温度が高いほど大きい</td></tr>
+      <tr><th>熱力学第一法則</th><td>ΔU＝Q＋W（Qは吸収した熱、Wは外部からされた仕事）</td></tr>
+      <tr><th>断熱変化</th><td>熱の出入りがない変化（Q＝0）。ΔU＝W</td></tr>
+      <tr><th>符号のルール</th><td>Qは吸熱で正・放熱で負。Wは圧縮でされた仕事が正・膨張でされた仕事が負</td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      気体のエネルギーの出入りは、熱と仕事の<strong>「帳尻合わせ」</strong>で説明できる。ΔU＝Q＋W。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:14mm; margin-bottom:8mm;">
+    <p class="memo-label">MEMO — スプレー缶を使うと冷たくなる理由を、断熱変化の考え方で説明してみよう</p>
+  </div>
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約5〜10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">内部エネルギーの説明として正しいものはどれか。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">気体分子が持つ運動エネルギーの合計である</li>
+      <li data-label="B.">気体の重さそのものである</li>
+      <li data-label="C.">気体に加えた仕事の合計である</li>
+      <li data-label="D.">気体の体積そのものである</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>内部エネルギーUは、気体分子が持つ運動エネルギーの合計。温度が高いほど大きくなる。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎・計算</span></p>
+    <p class="quiz-q">気体がQ＝200Jの熱を吸収し、外部からW＝100Jの仕事をされた。内部エネルギーの変化ΔUは何Jか。</p>
+    <ul class="choices">
+      <li data-label="A.">100J</li>
+      <li data-label="B.">200J</li>
+      <li data-label="C." class="correct">300J</li>
+      <li data-label="D.">400J</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>ΔU＝Q＋W＝200＋100＝300J。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用・計算</span></p>
+    <p class="quiz-q">断熱変化で、気体が外部からW＝180Jの仕事をされた。内部エネルギーの変化ΔUは何Jか。</p>
+    <ul class="choices">
+      <li data-label="A.">0J</li>
+      <li data-label="B.">90J</li>
+      <li data-label="C." class="correct">180J</li>
+      <li data-label="D.">360J</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>断熱変化ではQ＝0なので、ΔU＝W＝180J。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用・記述</span></p>
+    <p class="quiz-q">断熱圧縮で気体の温度が上がる理由を説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>断熱変化ではQ＝0なので、ΔU＝W。圧縮すると気体は外部から仕事をされる（Wが正）ため、内部エネルギーUが増加し、温度が上がるから。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">スプレー缶を使い続けると、噴射口の付近が冷たくなることがある。その理由として最も適切なのはどれか。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">中の気体が急激に膨張して外部に仕事をする（断熱膨張）ため、内部エネルギーが減り温度が下がるから</li>
+      <li data-label="B.">中の気体がもともと冷たいものだから</li>
+      <li data-label="C.">缶の中に氷が入っているから</li>
+      <li data-label="D.">空気中の水分が缶に付着しただけだから</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>スプレーの噴射は、気体が急激に膨張して外部に仕事をする断熱変化。Q＝0でWが負（気体が仕事をした）になるため、ΔUが負となり温度が下がる。</div>
+  </div>
+
+  <div class="callout callout-think" style="margin-top:8mm;">
+    <p class="callout-label">SERIES COMPLETE</p>
+    <div class="callout-body">
+      <strong>熱力学シリーズ、これで完結！</strong> — 温度と熱の違いから始まり、比熱、熱量保存、熱と仕事、気体の法則、そして熱力学第一法則まで。「熱の正体＝分子の大暴れ」という1つのイメージで、全6回がひとつなぎの物語になった。お疲れさまでした。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　エネルギーの帳尻合わせ（熱力学第一法則）</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

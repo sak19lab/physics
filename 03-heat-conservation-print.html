@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第3回　あたたかさは逃げない（熱量保存則）【解答版】｜高校物理基礎・熱力学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .choices li.correct::before {
+      color: var(--accent);
+    }
+
+    .explain {
+      margin-top: 3mm;
+      padding: 3mm 4mm;
+      background: var(--accent-soft);
+      border-radius: 1mm;
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      margin-right: 2mm;
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .answer-lines.filled {
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-radius: 1mm;
+      padding: 3mm 4mm;
+      font-size: 9pt;
+      color: var(--ink-light);
+      line-height: 1.7;
+      height: auto;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">03</div>
+  <p class="series-label">高校物理基礎 · 熱力学シリーズ</p>
+  <h1>あたたかさは逃げない（熱量保存則）</h1>
+  <p class="subtitle">あつあつのお湯と冷水を混ぜたら何度になる？〜熱の受け渡し〜</p>
+
+  <div class="meta-row">
+    <span>第3回 / 全6回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約5〜10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>熱量保存則（Q<sub>out</sub>＝Q<sub>in</sub>）を説明できる</li>
+      <li>お湯と水を混ぜたときの混合後の温度を計算できる</li>
+      <li>質量が違うと混合温度が単純平均にならない理由を説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>本当に、真ん中の温度になる？</h2>
+    <p>翔太は台所で、40℃のお湯と20℃の水をコップに半分ずつ入れて混ぜていた。</p>
+    <p class="dialogue">「40℃と20℃を半分ずつ混ぜたら、単純に真ん中の30℃になるって、直感的にはそう思うんですけど……これって、ちゃんと理由があるんですか？」</p>
+    <p class="dialogue">先生「いい着眼点だね。実はその直感、正しいんだ。でも『なぜ正しいのか』を説明できるかい？　その理由が、今日の熱量保存則だよ」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>熱は、失われず引っ越すだけ</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「お湯と水を混ぜると、熱は高温側（お湯）から低温側（水）へ移動する。前に学んだ通りだね」</p>
+      <p>先生「ここで大事なのは、この熱が『消えたり、新しく生まれたりしない』ということ。高温側が失った熱量は、そのまま丸ごと低温側が受け取る」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>熱量保存則</strong>：外部に熱が逃げないとき、高温の物体が<strong>失った</strong>熱量（Q<sub>out</sub>）は、低温の物体が<strong>得た</strong>熱量（Q<sub>in</sub>）に等しい。　Q<sub>out</sub>＝Q<sub>in</sub>
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 熱の「引っ越し」を、自分の言葉で説明してみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第3回　あたたかさは逃げない（熱量保存則）</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 02</span>
+    <p>先生「Q<sub>out</sub>＝Q<sub>in</sub>は、天秤のようにつり合っているとイメージするといい」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 460 230" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <text x="230" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2c5282">熱量保存則　Q<tspan baseline-shift="sub" font-size="70%">out</tspan> ＝ Q<tspan baseline-shift="sub" font-size="70%">in</tspan></text>
+
+        <line x1="70" y1="70" x2="390" y2="70" stroke="#1a1f2e" stroke-width="3"/>
+        <polygon points="230,70 208,118 252,118" fill="#1a1f2e"/>
+        <rect x="200" y="118" width="60" height="10" fill="#1a1f2e"/>
+
+        <line x1="110" y1="70" x2="110" y2="110" stroke="#c05621" stroke-width="2"/>
+        <rect x="65" y="110" width="90" height="60" rx="4" fill="#fdece0" stroke="#c05621" stroke-width="2"/>
+        <text x="110" y="98" text-anchor="middle" font-size="13" font-weight="700" fill="#c05621">高温</text>
+        <text x="110" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#c05621">Q<tspan baseline-shift="sub" font-size="70%">out</tspan></text>
+        <text x="110" y="158" text-anchor="middle" font-size="9" fill="#c05621">失った熱量</text>
+
+        <line x1="350" y1="70" x2="350" y2="110" stroke="#2c5282" stroke-width="2"/>
+        <rect x="305" y="110" width="90" height="60" rx="4" fill="#ebf4ff" stroke="#2c5282" stroke-width="2"/>
+        <text x="350" y="98" text-anchor="middle" font-size="13" font-weight="700" fill="#2c5282">低温</text>
+        <text x="350" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#2c5282">Q<tspan baseline-shift="sub" font-size="70%">in</tspan></text>
+        <text x="350" y="158" text-anchor="middle" font-size="9" fill="#2c5282">得た熱量</text>
+
+        <path d="M155,140 L305,140" stroke="#8b95a5" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#8b95a5"/>
+          </marker>
+        </defs>
+      </g>
+      <text x="230" y="205" text-anchor="middle" font-size="10" fill="#8b95a5" font-family="Noto Sans JP">高温側が失った熱量が、そのまま低温側に移動する（天秤はつり合ったまま）</text>
+    </svg>
+    <p class="illust-caption">熱量保存則のイメージ：Q<sub>out</sub>とQ<sub>in</sub>は天秤のように等しい</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <p class="law-statement">
+      高温物体が失った熱量 Q<sub>out</sub> ＝ 質量m<sub>1</sub> × 比熱c × (t<sub>1</sub>－t)<br>
+      低温物体が得た熱量 Q<sub>in</sub> ＝ 質量m<sub>2</sub> × 比熱c × (t－t<sub>2</sub>)<br>
+      Q<sub>out</sub>＝Q<sub>in</sub> が成り立つ（t<sub>1</sub>：高温側の元の温度、t<sub>2</sub>：低温側の元の温度、t：混合後の温度）
+    </p>
+  </div>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>先生「じゃあ、翔太の疑問に戻ろう。同じ質量・同じ水どうしなら、比熱cはお互い同じだから、式から消せる」</p>
+    <p>先生「m<sub>1</sub>(t<sub>1</sub>－t)＝m<sub>2</sub>(t－t<sub>2</sub>)で、しかもm<sub>1</sub>＝m<sub>2</sub>（同じ質量）だから……」</p>
+    <p>翔太「t<sub>1</sub>－t＝t－t<sub>2</sub> になって……t＝(t<sub>1</sub>＋t<sub>2</sub>)／2！　やっぱり真ん中じゃないですか！」</p>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      「半分ずつ混ぜたら平均になる」という直感は、<strong>同じ質量・同じ物質のときだけ</strong>正しい。質量が違ったり、物質（比熱）が違ったりすると、単純な平均では求められない。この後、質量が違う場合を見ていく。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — なぜ「同じ質量・同じ物質」という条件が大事なのか、考えてみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第3回　あたたかさは逃げない（熱量保存則）</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>質量が違うと、単純平均にならない</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 04</span>
+      <p>先生「じゃあ、60℃のお湯300gと20℃の水100gを混ぜたら？　質量が3倍違う」</p>
+      <p>先生「Q<sub>out</sub>＝Q<sub>in</sub>を、そのまま数字で立ててみよう」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        300×(60－t)＝100×(t－20)<br>
+        18000－300t＝100t－2000<br>
+        20000＝400t　→　<strong>t＝50℃</strong>（単純平均の40℃ではない）
+      </div>
+    </div>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🫖 100gと100g（50℃＆10℃）</p>
+        <p class="ex-body">同じ質量なので単純平均：t＝<strong>30</strong>℃</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">♨️ 300gと100g（60℃＆20℃）</p>
+        <p class="ex-body">300(60－t)＝100(t－20)　→　t＝<strong>50</strong>℃</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🍵 200gと100g（70℃＆10℃）</p>
+        <p class="ex-body">200(70－t)＝100(t－10)　→　t＝<strong>50</strong>℃</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🛁 400gと100g（80℃＆10℃）</p>
+        <p class="ex-body">400(80－t)＝100(t－10)　→　t＝<strong>66</strong>℃</p>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <p class="callout-label">TEACHER'S NOTE</p>
+      <div class="callout-body">
+        質量が大きい方（熱量をたくさん持っている方）に、混合温度は引き寄せられる。上の例でも、お湯の量が多いほど答えは60℃寄りになっている。計算後は必ず「t<sub>1</sub>＞t＞t<sub>2</sub>になっているか」を検算する習慣をつけさせたい。
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>あたたかさは逃げない（解答例）</h2>
+    <table class="vocab-table">
+      <tr><th>熱量保存則</th><td>高温物体が失った熱量Q<sub>out</sub>＝低温物体が得た熱量Q<sub>in</sub></td></tr>
+      <tr><th>同質量どうし</th><td>比熱が消えて、混合温度t＝(t<sub>1</sub>＋t<sub>2</sub>)／2（単純平均）になる</td></tr>
+      <tr><th>質量が違う</th><td>m<sub>1</sub>(t<sub>1</sub>－t)＝m<sub>2</sub>(t－t<sub>2</sub>) を解いて求める。質量が大きい方に温度が引き寄せられる</td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      熱は消えず、<strong>失った分だけ相手が受け取る</strong>。だから、Q<sub>out</sub>＝Q<sub>in</sub>。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:16mm;">
+    <p class="memo-label">MEMO — お風呂の温度調整（差し湯・水）を、熱量保存則で考えてみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第3回　あたたかさは逃げない（熱量保存則）</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約5〜10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">熱量保存則の説明として正しいものはどれか（外部に熱は逃げないものとする）。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">高温物体が失った熱量と、低温物体が得た熱量は等しい</li>
+      <li data-label="B.">高温物体が失った熱量は、低温物体が得た熱量より必ず大きい</li>
+      <li data-label="C.">熱量は混ぜるとつねに半分になる</li>
+      <li data-label="D.">熱量は混ぜると増える</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>熱は消えたり生まれたりせず移動するだけなので、Q<sub>out</sub>＝Q<sub>in</sub>が成り立つ。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎・計算</span></p>
+    <p class="quiz-q">50℃のお湯100gと10℃の水100gを混ぜると、混合後の温度は何℃か。</p>
+    <ul class="choices">
+      <li data-label="A.">20℃</li>
+      <li data-label="B." class="correct">30℃</li>
+      <li data-label="C.">40℃</li>
+      <li data-label="D.">25℃</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>同じ質量・同じ物質なので単純平均。t＝(50＋10)／2＝30℃。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用・計算</span></p>
+    <p class="quiz-q">70℃のお湯200gと10℃の水100gを混ぜると、混合後の温度は何℃か。</p>
+    <ul class="choices">
+      <li data-label="A.">40℃</li>
+      <li data-label="B." class="correct">50℃</li>
+      <li data-label="C.">60℃</li>
+      <li data-label="D.">30℃</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>200(70－t)＝100(t－10)より、14000－200t＝100t－1000、15000＝300t、t＝50℃。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用・記述</span></p>
+    <p class="quiz-q">なぜ「高温側が失った熱量」と「低温側が得た熱量」は等しくなるのか、説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>外部に熱が逃げない場合、熱は高温側から低温側へ移動するだけで、新しく生まれたり消えたりしないから。高温側が失ったエネルギーは、そっくりそのまま低温側が受け取ることになる。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">質量が違う2つの水を混ぜるとき、混合温度が単純平均にならないのはなぜか。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">質量が大きい方が持っている熱量も大きく、混合温度はその質量が大きい方に引き寄せられるから</li>
+      <li data-label="B.">質量が違うと比熱が変わってしまうから</li>
+      <li data-label="C.">質量は熱量保存則に関係しないから</li>
+      <li data-label="D.">質量が大きい方が必ず低温になるから</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>m<sub>1</sub>(t<sub>1</sub>－t)＝m<sub>2</sub>(t－t<sub>2</sub>)より、質量mが大きい方の温度変化(t<sub>1</sub>－tやt－t<sub>2</sub>)は小さくなる。つまり、質量が大きい方の温度に近づく。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第4回「熱と仕事は化け物（エネルギー保存と不可逆性）」</strong> — 手をこすると温かくなる秘密。熱機関と熱効率。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第3回　あたたかさは逃げない（熱量保存則）</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

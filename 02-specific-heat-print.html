@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第2回　温まりやすさの科学（比熱と熱容量）【解答版】｜高校物理基礎・熱力学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .choices li.correct::before {
+      color: var(--accent);
+    }
+
+    .explain {
+      margin-top: 3mm;
+      padding: 3mm 4mm;
+      background: var(--accent-soft);
+      border-radius: 1mm;
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      margin-right: 2mm;
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .answer-lines.filled {
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-radius: 1mm;
+      padding: 3mm 4mm;
+      font-size: 9pt;
+      color: var(--ink-light);
+      line-height: 1.7;
+      height: auto;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">02</div>
+  <p class="series-label">高校物理基礎 · 熱力学シリーズ</p>
+  <h1>温まりやすさの科学（比熱と熱容量）</h1>
+  <p class="subtitle">なぜフライパンはすぐ熱くなり、お風呂のお湯は温まりにくいのか？</p>
+
+  <div class="meta-row">
+    <span>第2回 / 全6回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約5〜10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>熱容量C［J/K］と比熱c［J/(g・K)］の違いを説明できる</li>
+      <li>公式 Q＝mcΔT を使って熱量を計算できる</li>
+      <li>比熱の違いが「温まりやすさ」の違いを生むことを説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>砂浜だけアツアツな理由</h2>
+    <p>翔太は夏休み、家族と海に行った。焼けつくような砂浜を裸足で歩けず、悲鳴を上げながら海に飛び込んだ。でも海水はちょうどいい温度だった。</p>
+    <p>後日、教室でそのときの疑問を先生にぶつけてみた。</p>
+    <p class="dialogue">「同じ太陽の光を浴びてるのに、なんで砂だけあんなに熱くて、海はぬるいくらいなんですか？」</p>
+    <p class="dialogue">先生「それは、物質によって『温まりやすさ』の個性が違うからなんだ。今日はその正体を見ていこう」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>温まりやすさには、個性がある</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「前回、温度は分子の運動の激しさ、熱は移動するエネルギーだと学んだね。実は、同じ量の熱を受け取っても、物質によって温度の上がり方はぜんぜん違うんだ」</p>
+      <p>先生「物質1gあたり、温度を1K上げるのに必要な熱量を、比熱（記号c）という」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>比熱</strong>cとは、物質1gの温度を1K上げるのに必要な熱量である。単位は［J/(g・K)］。物質ごとに決まった値を持つ「温まりにくさの個性」といえる。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 「温まりやすいもの」「温まりにくいもの」を、身のまわりから探そう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　温まりやすさの科学（比熱と熱容量）</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 02</span>
+    <p>先生「じゃあ、その物体『全体』を1K上げるのに必要な熱量は？　それが熱容量（記号C）だ」</p>
+    <p>先生「熱容量は、比熱と質量をかけ算すれば求まる」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <text x="230" y="26" text-anchor="middle" font-size="14" font-weight="700" fill="#2c5282">熱容量 C ＝ この物体全体の温まりにくさ</text>
+
+        <rect x="70" y="42" width="320" height="140" rx="4" fill="none" stroke="#2c5282" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+        <!-- 4x2 grid of unit cells, each = 1g -->
+        <g>
+          <rect x="82" y="54" width="66" height="56" rx="3" fill="#c05621" stroke="#c05621" stroke-width="1.5"/>
+
+          <rect x="158" y="54" width="66" height="56" rx="3" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+          <rect x="234" y="54" width="66" height="56" rx="3" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+          <rect x="310" y="54" width="66" height="56" rx="3" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+
+          <rect x="82" y="116" width="66" height="56" rx="3" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+          <rect x="158" y="116" width="66" height="56" rx="3" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+          <rect x="234" y="116" width="66" height="56" rx="3" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+          <rect x="310" y="116" width="66" height="56" rx="3" fill="#ebf4ff" stroke="#2c5282" stroke-width="1.5"/>
+        </g>
+
+        <text x="115" y="105" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700">1g</text>
+
+        <line x1="115" y1="118" x2="115" y2="205" stroke="#c05621" stroke-width="1.2" stroke-dasharray="3,3"/>
+        <text x="115" y="220" text-anchor="middle" font-size="12" font-weight="700" fill="#c05621">比熱 c ＝1gあたりの温まりにくさ</text>
+
+        <text x="230" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#2c5282">全体は8g分 → 熱容量 C ＝ 8 × c</text>
+      </g>
+    </svg>
+    <p class="illust-caption">熱容量Cは物体全体の値、比熱cは物質1gあたりの値（C＝mc）</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <p class="law-statement">
+      熱容量 C[J/K] ＝ 質量 m[g] × 比熱 c[J/(g・K)]
+    </p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      <strong>C（大文字）</strong>は物体<strong>全体</strong>の話、<strong>c（小文字）</strong>は物質<strong>1gあたり</strong>の話。同じ水でも、コップ1杯とお風呂1杯では熱容量Cはぜんぜん違うが、比熱cはどちらも同じ（水という物質そのもので決まっている値だから）。
+    </div>
+  </div>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>先生「身のまわりの物質の比熱を比べてみよう。実は水は、とても比熱が大きい物質なんだ」</p>
+  </div>
+
+  <table class="vocab-table">
+    <tr><th>水</th><td>4.2 J/(g・K)　—　比熱がとても大きい。温まりにくく、冷めにくい</td></tr>
+    <tr><th>鉄（フライパン等）</th><td>0.45 J/(g・K)　—　比熱が小さい。温まりやすく、冷めやすい</td></tr>
+    <tr><th>砂</th><td>0.8 J/(g・K)　—　水よりずっと比熱が小さく、温まりやすい</td></tr>
+  </table>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 水の比熱が大きいことで、私たちの生活に役立っている場面を考えよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　温まりやすさの科学（比熱と熱容量）</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>熱量の計算、Q＝mcΔT</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 04</span>
+      <p>先生「比熱と熱容量がわかれば、実際にやりとりされる熱量Qを計算できる」</p>
+      <p>先生「質量×比熱×温度変化。この3つをかけ算するだけだ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <p class="law-statement">
+        熱量 Q[J] ＝ 質量 m[g] × 比熱 c[J/(g・K)] × 温度変化 ΔT[K]
+      </p>
+    </div>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">💧 水100gを10℃上昇</p>
+        <p class="ex-body">Q＝100×4.2×10＝<strong>4200</strong>J</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🍳 鉄50gを20℃上昇</p>
+        <p class="ex-body">Q＝50×0.45×20＝<strong>450</strong>J</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🏖️ 砂200gを15℃上昇</p>
+        <p class="ex-body">Q＝200×0.8×15＝<strong>2400</strong>J</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🧱 熱容量400J/Kの物体を5℃上昇</p>
+        <p class="ex-body">Q＝C×ΔT＝400×5＝<strong>2000</strong>J</p>
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <p class="callout-label">TEACHER'S NOTE</p>
+      <div class="callout-body">
+        覚え方：C（大文字）はCapacity「容量」＝物体まるごとの数値、c（小文字）はspecific「その物質固有」の数値。「大文字は大きい方（全体）、小文字は小さい単位（1gあたり）」とセットで覚えると、混同しにくい。
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>温まりやすさの科学（解答例）</h2>
+    <table class="vocab-table">
+      <tr><th>比熱 c</th><td>物質1gの温度を1K上げるのに必要な熱量［J/(g・K)］</td></tr>
+      <tr><th>熱容量 C</th><td>物体全体の温度を1K上げるのに必要な熱量［J/K］。C＝mc</td></tr>
+      <tr><th>熱量の公式</th><td>Q＝mcΔT（質量×比熱×温度変化）</td></tr>
+      <tr><th>水の比熱</th><td>4.2 J/(g・K)ととても大きく、温まりにくく冷めにくい</td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      熱容量Cは物体全体の個性、比熱cは物質1gあたりの個性。<strong>C＝mc</strong>でつながっている。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:16mm;">
+    <p class="memo-label">MEMO — 今日学んだQ＝mcΔTを使って、お風呂のお湯を沸かす計算をしてみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　温まりやすさの科学（比熱と熱容量）</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約5〜10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">比熱の単位として正しいものはどれか。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">J/(g・K)</li>
+      <li data-label="B.">J/K</li>
+      <li data-label="C.">J</li>
+      <li data-label="D.">g/K</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>比熱は「物質1gを1K上げるのに必要な熱量」なので、単位はJ/(g・K)。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">熱容量Cと比熱cの関係式として正しいものはどれか（質量をmとする）。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">C＝mc</li>
+      <li data-label="B.">C＝c／m</li>
+      <li data-label="C.">C＝m／c</li>
+      <li data-label="D.">C＝m＋c</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>熱容量は「物体全体」の値なので、1gあたりの比熱cに質量mをかけて求める。C＝mc。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用・計算</span></p>
+    <p class="quiz-q">水50gを15℃から35℃まで温めるのに必要な熱量は何Jか。（水の比熱c＝4.2 J/(g・K)）</p>
+    <ul class="choices">
+      <li data-label="A.">2100J</li>
+      <li data-label="B." class="correct">4200J</li>
+      <li data-label="C.">8400J</li>
+      <li data-label="D.">1050J</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>ΔT＝35－15＝20K。Q＝mcΔT＝50×4.2×20＝4200J。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用・記述</span></p>
+    <p class="quiz-q">フライパン（鉄）はすぐに熱くなるのに、お風呂の水はなかなか温まらない。この違いを「比熱」という言葉を使って説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>鉄は比熱が小さいため、少ない熱量でも温度が大きく上昇する。一方、水は比熱が大きいため、同じ熱量を加えても温度の上昇はわずかであり、温まるまでに多くの熱量が必要になる。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">「熱容量が大きい物体は、比熱も必ず大きい」——この主張は正しいか。理由とともに選べ。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">誤り。熱容量は比熱×質量で決まるので、比熱が小さくても質量が大きければ熱容量は大きくなる。</li>
+      <li data-label="B.">正しい。熱容量と比熱は比例するから。</li>
+      <li data-label="C.">誤り。比熱は熱容量と無関係だから。</li>
+      <li data-label="D.">正しい。同じ物質なら常に成り立つから。</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>C＝mcより、比熱cが小さくても質量mが十分大きければCは大きくなりうる（例：比熱の小さい鉄でも、質量が非常に大きければ熱容量は大きい）。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第3回「あたたかさは逃げない（熱量保存則）」</strong> — あつあつのお湯と冷水を混ぜたら何度になる？
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　温まりやすさの科学（比熱と熱容量）</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第5回　気体のギモン！押しつぶすとどうなる？（ボイル・シャルルの法則）【穴埋め版】｜高校物理基礎・熱力学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Stacked fraction (num over den) ── */
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+      line-height: 1.15;
+      margin: 0 0.15em;
+      position: relative;
+      top: 0.1em;
+    }
+
+    .frac .num {
+      padding: 0 0.12em 0.08em;
+      border-bottom: 0.08em solid currentColor;
+    }
+
+    .frac .den {
+      padding: 0.08em 0.12em 0;
+    }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">05</div>
+  <p class="series-label">高校物理基礎 · 熱力学シリーズ</p>
+  <h1>気体のギモン！押しつぶすとどうなる？（ボイル・シャルルの法則）</h1>
+  <p class="subtitle">圧力の正体と、ボイル・シャルルの法則。</p>
+
+  <div class="meta-row">
+    <span>第5回 / 全6回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約5〜10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>圧力の正体を、気体分子の運動と結びつけて説明できる</li>
+      <li>ボイルの法則・シャルルの法則を使って計算できる</li>
+      <li>ボイル・シャルルの法則（<span class="frac"><span class="num">PV</span><span class="den">T</span></span>＝一定）を使って気体の状態変化を計算できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>押せば押すほど、なぜ重くなる？</h2>
+    <p>翔太は自転車のタイヤに、空気入れで空気を入れていた。</p>
+    <p class="dialogue">「あれ、最初は軽かったのに、空気を入れれば入れるほど、ポンプを押すのが重くなってきた……なんでですか？」</p>
+    <p class="dialogue">先生「いいところに気づいたね。それは『圧力』の正体と関係している。今日は、気体の分子たちがどう暴れているかを見ていこう」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>圧力の正体</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「気体は、目に見えない分子が容器の中を飛び回っている。圧力は、その分子が壁にぶつかる『勢い』の合計なんだ」</p>
+      <p>先生「分子がたくさんぶつかるほど、勢いよくぶつかるほど、圧力は大きくなる」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>圧力P［Pa］</strong>は、気体分子が容器の壁にぶつかる勢いの合計。分子の数（密度）が<span class="blank short"></span>ほど、動きが<span class="blank short"></span>（温度が高い）ほど、圧力は大きくなる。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 身の回りで「圧力が高い／低い」を感じる場面を挙げてみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　気体のギモン！押しつぶすとどうなる？（ボイル・シャルルの法則）</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 02</span>
+    <p>先生「じゃあ、ピストンを押して体積を半分にしたら、圧力はどうなると思う？」</p>
+    <p>翔太「分子の数は変わらないのに、部屋が半分になったら……ぶつかる回数が増えそうです」</p>
+    <p>先生「その通り！　体積を半分にすると、同じ数の分子がより狭い空間に押し込められて、壁にぶつかる頻度が2倍になる。だから圧力も2倍になるんだ」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 460 235" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <text x="230" y="20" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c5282">体積を小さくすると圧力が上がる（ボイルの法則）</text>
+
+        <rect x="15" y="42" width="250" height="140" rx="6" fill="#ebf4ff" stroke="#2c5282" stroke-width="2"/>
+        <text x="140" y="64" text-anchor="middle" font-size="13.5" font-weight="700" fill="#2c5282">体積 大（低圧）</text>
+
+        <rect x="295" y="42" width="150" height="140" rx="6" fill="#fdece0" stroke="#c05621" stroke-width="2"/>
+        <text x="370" y="64" text-anchor="middle" font-size="13.5" font-weight="700" fill="#c05621">体積 小（高圧）</text>
+
+        <!-- large-volume molecules: same speed, spread out -->
+        <g stroke="#2c5282" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="70" cy="100" r="7" fill="#2c5282"/>
+          <path d="M70,100 l4,-3 M70,100 l-3,4"/>
+          <circle cx="200" cy="90" r="7" fill="#2c5282"/>
+          <path d="M200,90 l-4,3 M200,90 l3,-4"/>
+          <circle cx="110" cy="135" r="7" fill="#2c5282"/>
+          <path d="M110,135 l3,4 M110,135 l-4,-3"/>
+          <circle cx="220" cy="140" r="7" fill="#2c5282"/>
+          <path d="M220,140 l4,3 M220,140 l-3,-4"/>
+          <circle cx="60" cy="165" r="7" fill="#2c5282"/>
+          <path d="M60,165 l4,-3 M60,165 l-4,3"/>
+          <circle cx="160" cy="170" r="7" fill="#2c5282"/>
+          <path d="M160,170 l-3,-4 M160,170 l4,3"/>
+        </g>
+
+        <!-- small-volume molecules: same 6, same speed, packed tighter -->
+        <g stroke="#c05621" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="325" cy="100" r="7" fill="#c05621"/>
+          <path d="M325,100 l4,-3 M325,100 l-3,4"/>
+          <circle cx="410" cy="90" r="7" fill="#c05621"/>
+          <path d="M410,90 l-4,3 M410,90 l3,-4"/>
+          <circle cx="355" cy="135" r="7" fill="#c05621"/>
+          <path d="M355,135 l3,4 M355,135 l-4,-3"/>
+          <circle cx="425" cy="140" r="7" fill="#c05621"/>
+          <path d="M425,140 l4,3 M425,140 l-3,-4"/>
+          <circle cx="315" cy="165" r="7" fill="#c05621"/>
+          <path d="M315,165 l4,-3 M315,165 l-4,3"/>
+          <circle cx="380" cy="170" r="7" fill="#c05621"/>
+          <path d="M380,170 l-3,-4 M380,170 l4,3"/>
+        </g>
+      </g>
+      <text x="230" y="210" text-anchor="middle" font-size="10" fill="#8b95a5" font-family="Noto Sans JP">同じ数・同じ速さの分子でも、せまい容器ほど壁にぶつかる頻度が増える</text>
+    </svg>
+    <p class="illust-caption">ボイルの法則のイメージ：体積を小さくすると、分子が壁にぶつかる頻度が増える</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <p class="law-statement">
+      ボイルの法則：温度が一定のとき、気体の圧力Pと体積Vは<span class="blank short"></span>する。<br>
+      P × V ＝ 一定　→　P<sub>1</sub>V<sub>1</sub> ＝ P<sub>2</sub>V<sub>2</sub>
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　気体のギモン！押しつぶすとどうなる？（ボイル・シャルルの法則）</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY — 温度を上げても、圧力は変わる</p>
+    <h2>あたためると、なぜ膨らむ？</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 03</span>
+      <p>先生「今度は体積を変えずに、温度を上げてみよう。分子はどうなる？」</p>
+      <p>翔太「あたためられて……分子が激しく動くようになる？」</p>
+      <p>先生「そう。温度が上がると分子の運動が激しくなって、壁にぶつかる勢いが増す。体積が一定なら圧力が上がり、圧力を一定に保つなら体積がふくらむ」</p>
+      <p>先生「たとえば体積を変えずに、27℃から127℃にあたためたら？　絶対温度に直すと？」</p>
+      <p>翔太「27＋273＝300K、127＋273＝400Kですね」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <p class="law-statement">
+        シャルルの法則：圧力が一定のとき、気体の体積Vと絶対温度Tは<span class="blank short"></span>する。<br>
+        <span class="frac"><span class="num">V</span><span class="den">T</span></span> ＝ 一定　→　<span class="frac"><span class="num">V<sub>1</sub></span><span class="den">T<sub>1</sub></span></span> ＝ <span class="frac"><span class="num">V<sub>2</sub></span><span class="den">T<sub>2</sub></span></span>
+      </p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 04</span>
+      <p>先生「この2つを合体させると、圧力・体積・温度のどれが変わっても成り立つ法則になる」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <p class="law-statement">
+        ボイル・シャルルの法則：<br>
+        <span class="frac"><span class="num">PV</span><span class="den">T</span></span> ＝ 一定　→　<span class="frac"><span class="num">P<sub>1</sub>V<sub>1</sub></span><span class="den">T<sub>1</sub></span></span> ＝ <span class="frac"><span class="num">P<sub>2</sub>V<sub>2</sub></span><span class="den">T<sub>2</sub></span></span>
+      </p>
+    </div>
+
+    <div class="callout callout-tip">
+      <p class="callout-label">TEACHER'S NOTE</p>
+      <div class="callout-body">
+        今回の「分子が壁にぶつかる勢い」は比喩的なイメージ。圧力を力積や運動量変化から厳密に導出する計算は、物理基礎の範囲では扱わない。この直感レベルの理解を土台に、次の計算練習に進む。
+      </div>
+    </div>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🎈 P<sub>1</sub>＝1.0×10⁵Pa、V<sub>1</sub>＝6.0L → V<sub>2</sub>＝2.0L（温度一定）</p>
+        <p class="ex-body">P<sub>1</sub>V<sub>1</sub>＝P<sub>2</sub>V<sub>2</sub> → P<sub>2</sub>＝<span class="blank short"></span>Pa</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🌡️ V<sub>1</sub>＝3.0L、27℃（300K）→127℃（400K）（圧力一定）</p>
+        <p class="ex-body"><span class="frac"><span class="num">V<sub>1</sub></span><span class="den">T<sub>1</sub></span></span>＝<span class="frac"><span class="num">V<sub>2</sub></span><span class="den">T<sub>2</sub></span></span> → V<sub>2</sub>＝<span class="blank short"></span>L</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚲 P<sub>1</sub>＝2.0×10⁵Pa、27℃（300K）→57℃（330K）（体積一定）</p>
+        <p class="ex-body"><span class="frac"><span class="num">P<sub>1</sub></span><span class="den">T<sub>1</sub></span></span>＝<span class="frac"><span class="num">P<sub>2</sub></span><span class="den">T<sub>2</sub></span></span> → P<sub>2</sub>＝<span class="blank short"></span>Pa</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🎈 P<sub>1</sub>＝2.0×10⁵Pa、V<sub>1</sub>＝3.0L、27℃（300K）→P<sub>2</sub>＝1.0×10⁵Pa、－23℃（250K）</p>
+        <p class="ex-body"><span class="frac"><span class="num">P<sub>1</sub>V<sub>1</sub></span><span class="den">T<sub>1</sub></span></span>＝<span class="frac"><span class="num">P<sub>2</sub>V<sub>2</sub></span><span class="den">T<sub>2</sub></span></span> → V<sub>2</sub>＝<span class="blank short"></span>L</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　気体のギモン！押しつぶすとどうなる？（ボイル・シャルルの法則）</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">多い　／　激しい　／　反比例　／　比例　／　3.0×10⁵　／　4.0　／　2.2×10⁵　／　5.0　／　分子の勢い</p>
+  </div>
+
+  <div class="section" style="margin-bottom:8mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>気体のギモン（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr><th>圧力の正体</th><td class="write-line"></td></tr>
+      <tr><th>ボイルの法則</th><td class="write-line"></td></tr>
+      <tr><th>シャルルの法則</th><td class="write-line"></td></tr>
+      <tr><th>ボイル・シャルルの法則</th><td class="write-line"></td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      体積を小さくすれば圧力は上がり、温度を上げても圧力は上がる。ぜんぶ「<span class="blank short"></span>」で説明できる。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:14mm; margin-bottom:8mm;">
+    <p class="memo-label">MEMO — 高い山の上でお菓子の袋がふくらむ理由を、気体の法則で考えてみよう</p>
+  </div>
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約5〜10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">気体の圧力の正体として正しい説明はどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">気体分子が容器の壁にぶつかる勢いの合計である</li>
+      <li data-label="B.">気体の重さそのものである</li>
+      <li data-label="C.">気体の色の濃さである</li>
+      <li data-label="D.">気体分子の数とは無関係である</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎・計算</span></p>
+    <p class="quiz-q">温度一定で、圧力1.0×10⁵Pa・体積6.0Lの気体を、体積2.0Lまで圧縮した。圧力P₂は何Paか。</p>
+    <ul class="choices">
+      <li data-label="A.">1.0×10⁵Pa</li>
+      <li data-label="B.">2.0×10⁵Pa</li>
+      <li data-label="C.">3.0×10⁵Pa</li>
+      <li data-label="D.">6.0×10⁵Pa</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用・計算</span></p>
+    <p class="quiz-q">圧力一定で、体積3.0L・300Kの気体を400Kまであたためた。体積V₂は何Lか。</p>
+    <ul class="choices">
+      <li data-label="A.">2.25L</li>
+      <li data-label="B.">3.0L</li>
+      <li data-label="C.">4.0L</li>
+      <li data-label="D.">5.0L</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用・記述</span></p>
+    <p class="quiz-q">体積を一定に保ったまま気体の温度を上げると、圧力はどうなるか。理由とともに説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">高い山に登ると、お菓子の袋がふくらむことがある。その理由として最も適切なのはどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">山の上は外の気圧が低く、袋の中の圧力とのバランスがくずれて袋がふくらむから</li>
+      <li data-label="B.">山の上は気温が高いから</li>
+      <li data-label="C.">袋の中の気体分子の数が増えるから</li>
+      <li data-label="D.">山の上では重力が弱くなるから</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第6回「エネルギーの帳尻合わせ（熱力学第一法則）」</strong> — 内部エネルギーU、熱力学第一法則ΔU＝Q＋W、断熱変化。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　気体のギモン！押しつぶすとどうなる？（ボイル・シャルルの法則）</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

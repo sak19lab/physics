@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第1回　温度の正体と状態変化【穴埋め版】｜高校物理基礎・熱力学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 150mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">01</div>
+  <p class="series-label">高校物理基礎 · 熱力学シリーズ</p>
+  <h1>温度の正体と状態変化</h1>
+  <p class="subtitle">「熱い」ってどういうこと？〜分子が大暴れするミクロの世界〜</p>
+
+  <div class="meta-row">
+    <span>第1回 / 全6回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約5〜10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>「温度」と「熱」の違いを、分子の運動のイメージで説明できる</li>
+      <li>セルシウス温度と絶対温度（K）を変換できる</li>
+      <li>状態変化のとき温度が一定になる理由を説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>針が止まった理由</h2>
+    <p>翔太は、氷水にストップウォッチと温度計をセットして、コンロで温め続ける実験をしていた。氷が溶けはじめても、温度計の針は0℃のまま、ぴくりとも動かない。</p>
+    <p class="dialogue">「え、ちゃんと加熱してるのに……氷は溶けていってるのに、なんで温度は上がらないんですか？」</p>
+    <p>先生が近づいてきて、温度計をのぞきこんだ。</p>
+    <p class="dialogue">「いい質問だね。それを理解するには、まず『温度』と『熱』が、実は別のものだって知る必要がある」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>温度の正体は、分子の「暴れ具合」</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「ものはすべて、目に見えないほど小さな分子でできている。この分子は、どんなに静かに見えるものの中でも、絶えず動き回っている」</p>
+      <p>先生「温度が高いというのは、この分子の運動が激しい、つまり分子が『大暴れ』しているということなんだ」</p>
+      <p>翔太「じゃあ、温度が低いときは……」</p>
+      <p>先生「分子はおとなしく、ゆっくり動いているだけ。分子の運動が止まると考えられる温度が、理論上の最低温度、絶対零度（－273℃）だよ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>温度</strong>とは、物質をつくる分子の<span class="blank long"></span>を表す数値である。温度が高いほど、分子は激しく運動している。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 「熱い」「冷たい」を、分子の動きのことばで言い換えてみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　温度の正体と状態変化</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 02</span>
+    <p>先生「じゃあ『熱』とは何か。これは、温度が高い物体から低い物体へ、実際に移動していくエネルギーのことだ」</p>
+    <p>先生「お湯にスプーンを入れると、スプーンが温まる。あれは、お湯（高温）からスプーン（低温）へ、熱というエネルギーが流れ込んでいるからなんだ」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 460 210" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <rect x="20" y="35" width="180" height="140" rx="6" fill="#ebf4ff" stroke="#2c5282" stroke-width="2"/>
+        <text x="110" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2c5282">低温</text>
+
+        <rect x="260" y="35" width="180" height="140" rx="6" fill="#fdece0" stroke="#c05621" stroke-width="2"/>
+        <text x="350" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#c05621">高温</text>
+
+        <!-- low temp molecules: small, short jitters -->
+        <g stroke="#2c5282" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="60" cy="75" r="7" fill="#2c5282"/>
+          <path d="M60,75 l4,-3 M60,75 l-3,4"/>
+          <circle cx="140" cy="65" r="7" fill="#2c5282"/>
+          <path d="M140,65 l-4,3 M140,65 l3,-4"/>
+          <circle cx="90" cy="115" r="7" fill="#2c5282"/>
+          <path d="M90,115 l3,4 M90,115 l-4,-3"/>
+          <circle cx="165" cy="120" r="7" fill="#2c5282"/>
+          <path d="M165,120 l4,3 M165,120 l-3,-4"/>
+          <circle cx="55" cy="150" r="7" fill="#2c5282"/>
+          <path d="M55,150 l4,-3 M55,150 l-4,3"/>
+          <circle cx="130" cy="155" r="7" fill="#2c5282"/>
+          <path d="M130,155 l-3,-4 M130,155 l4,3"/>
+        </g>
+
+        <!-- high temp molecules: bigger, longer chaotic motion marks -->
+        <g stroke="#c05621" stroke-width="2" stroke-linecap="round">
+          <circle cx="300" cy="75" r="7" fill="#c05621"/>
+          <path d="M300,75 l14,-11 M300,75 l-13,9 M300,75 l3,15"/>
+          <circle cx="380" cy="65" r="7" fill="#c05621"/>
+          <path d="M380,65 l-15,7 M380,65 l12,10 M380,65 l-2,-14"/>
+          <circle cx="330" cy="115" r="7" fill="#c05621"/>
+          <path d="M330,115 l13,10 M330,115 l-14,-8 M330,115 l2,-14"/>
+          <circle cx="405" cy="120" r="7" fill="#c05621"/>
+          <path d="M405,120 l14,8 M405,120 l-12,-11 M405,120 l-3,15"/>
+          <circle cx="295" cy="150" r="7" fill="#c05621"/>
+          <path d="M295,150 l14,-9 M295,150 l-13,7 M295,150 l1,-15"/>
+          <circle cx="370" cy="155" r="7" fill="#c05621"/>
+          <path d="M370,155 l-13,-9 M370,155 l14,7 M370,155 l-2,-15"/>
+        </g>
+      </g>
+      <text x="230" y="200" text-anchor="middle" font-size="9" fill="#8b95a5" font-family="Noto Sans JP">分子はどちらも動いているが、高温のほうが動きが激しい</text>
+    </svg>
+    <p class="illust-caption">温度のちがい＝分子の運動の激しさのちがい</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <div class="callout-body">
+      <strong>熱</strong>とは、温度の高い物体から低い物体へ移動する<span class="blank short"></span>である。熱は、高温側から低温側へしか流れない。
+    </div>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      「温度が高い＝熱をたくさん持っている」は誤解。同じ100℃でも、お風呂1杯とスプーン1本では、持っているエネルギーの量（熱量）はまったくちがう。温度は「激しさ」、熱は「移動する量」——別のものだ。（この続きは次回「比熱と熱容量」で扱う）
+    </div>
+  </div>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>先生「分子の運動という視点で温度を測り直したのが、絶対温度（単位：K、ケルビン）だ。分子の運動が完全に止まる温度を0Kとする」</p>
+    <p>先生「セルシウス温度と絶対温度の関係は、とてもシンプル」</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <p class="law-statement">
+      絶対温度 T[K] ＝ セルシウス温度 t[℃] ＋ <span class="blank short"></span>
+    </p>
+  </div>
+
+  <table class="vocab-table">
+    <tr><th>0℃</th><td><span class="blank short"></span>K（水が凍る温度）</td></tr>
+    <tr><th>27℃</th><td><span class="blank short"></span>K（だいたい室温）</td></tr>
+    <tr><th>100℃</th><td><span class="blank short"></span>K（水が沸く温度）</td></tr>
+    <tr><th>－273℃</th><td><span class="blank short"></span>K（絶対零度＝分子の運動が止まる温度）</td></tr>
+  </table>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 今日の自分の体温を、絶対温度[K]に変換してみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　温度の正体と状態変化</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>温度計が止まった、本当の理由</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 04</span>
+      <p>先生「氷を加熱すると、温度はどんどん上がっていく。ところが0℃になったところで、氷が溶けきるまで温度はぴたっと止まる。溶け終わると、また温度が上がりはじめる」</p>
+      <p>翔太「加熱してるのに、温度が上がらない時間があるってことですか？」</p>
+      <p>先生「そう。そのあいだ、熱は分子の運動を激しくすることには使われず、氷の分子どうしの結びつきを断ち切って、水という『バラバラに動ける状態』に変えることだけに使われているんだ」</p>
+    </div>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">① 氷を加熱</p>
+        <p class="ex-body">分子の運動が激しくなり、温度が上昇する</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">② 0℃で融解中</p>
+        <p class="ex-body">熱は分子の結びつきを切るのに使われ、温度は一定（<span class="blank short"></span>）</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">③ 水を加熱</p>
+        <p class="ex-body">再び分子の運動が激しくなり、温度が上昇する</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">④ 100℃で沸騰中</p>
+        <p class="ex-body">熱は水を水蒸気に変えるのに使われ、温度は一定（<span class="blank short"></span>）</p>
+      </div>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        状態変化（融解・蒸発）の最中は、加えた熱が分子の運動を激しくするのではなく、分子どうしの<span class="blank short"></span>方（状態）を変えるために使われる。だから、状態変化中は温度が一定になる。
+      </div>
+    </div>
+
+    <div class="callout callout-tip">
+      <p class="callout-label">TEACHER'S NOTE</p>
+      <div class="callout-body">
+        「温度が上がらない＝熱が伝わっていない」ではない。温度計は分子の運動の激しさしか測れないので、分子の『結びつき方』を変えるのに使われている熱は、温度計には見えない。これが実験の一番のひっかけどころ。
+      </div>
+    </div>
+  </div>
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">運動の激しさ　／　エネルギー　／　273　／　結びつき　／　融解熱　／　蒸発熱　／　暴れ具合　／　移動するエネルギー</p>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>温度の正体と状態変化（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr><th>温度</th><td class="write-line"></td></tr>
+      <tr><th>熱</th><td class="write-line"></td></tr>
+      <tr><th>絶対温度</th><td class="write-line"></td></tr>
+      <tr><th>状態変化中</th><td class="write-line"></td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      温度は分子の<span class="blank short"></span>、熱は物体から物体へ<span class="blank long"></span>。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:16mm;">
+    <p class="memo-label">MEMO — 身のまわりで「状態変化中は温度が一定」な場面を探そう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　温度の正体と状態変化</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約5〜10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">「温度」の説明として正しいものはどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">物体が持っている熱の量</li>
+      <li data-label="B.">分子の運動の激しさを表す数値</li>
+      <li data-label="C.">物体の重さに関係する量</li>
+      <li data-label="D.">熱が移動する速さ</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">27℃は絶対温度で何Kか。</p>
+    <ul class="choices">
+      <li data-label="A.">27K</li>
+      <li data-label="B.">246K</li>
+      <li data-label="C.">300K</li>
+      <li data-label="D.">373K</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用・記述</span></p>
+    <p class="quiz-q">氷を加熱し続けても、0℃で氷がすべて溶けきるまで温度計の示す値が変わらないのはなぜか。「分子」「結びつき」という言葉を使って説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">－173℃は絶対温度で何Kか。</p>
+    <ul class="choices">
+      <li data-label="A.">73K</li>
+      <li data-label="B.">100K</li>
+      <li data-label="C.">173K</li>
+      <li data-label="D.">446K</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">「同じ100℃なら、お風呂1杯の水もスプーン1本の熱湯も、持っている熱の量は同じである」——この主張は正しいか。理由とともに選べ。</p>
+    <ul class="choices">
+      <li data-label="A.">正しい。温度が同じなら熱の量も同じだから。</li>
+      <li data-label="B.">誤り。温度が同じでも、量（質量）がちがえば持っているエネルギーの総量はちがうから。</li>
+      <li data-label="C.">誤り。お風呂のほうが分子の運動が激しいから。</li>
+      <li data-label="D.">正しい。熱は温度だけで決まる量だから。</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第2回「温まりやすさの科学（比熱と熱容量）」</strong> — なぜフライパンはすぐ熱くなり、お風呂のお湯は温まりにくいのか？
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　温度の正体と状態変化</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>
