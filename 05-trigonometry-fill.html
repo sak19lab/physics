@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第5回　三角関数（sin, cos, tan）【穴埋め版】｜高校物理基礎・物理数学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 140mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">05</div>
+  <p class="series-label">高校物理基礎 · 物理数学シリーズ</p>
+  <h1>三角関数（sin, cos, tan）</h1>
+  <p class="subtitle">斜めのベクトルを、数字で分解する</p>
+
+  <div class="meta-row">
+    <span>第5回 / 全6回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>直角三角形の3辺の名前（斜辺・対辺・隣辺）を説明できる</li>
+      <li>sinθ・cosθ・tanθの定義を説明できる</li>
+      <li>30°・45°・60°の値を使って、ベクトルを成分に分解できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>あの矢印、数字にできる？</h2>
+    <p>前回、翔太は斜めのベクトルを「東西方向」と「南北方向」の2本に分けられることを知った。でも——</p>
+    <p class="dialogue">「分けられるのは分かったけど、それぞれ何mになるかは、どうやって求めるんですか？」</p>
+    <p>先生はにやりと笑った。</p>
+    <p class="dialogue">「それを教えるのが、今日の三角関数だよ」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>直角三角形の3つの辺</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「直角三角形を描いてみよう。直角ではない角の1つをθ（シータ）としよう」</p>
+      <p>先生「この3つの辺には、それぞれ名前がある」</p>
+      <p>・斜辺（しゃへん）＝直角の向かいにある、いちばん長い辺<br>
+      ・対辺（たいへん）＝角θの向かいにある辺<br>
+      ・隣辺（りんぺん）＝角θのとなりにある辺（斜辺以外）</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        直角の向かいにある最も長い辺を<span class="blank short"></span>、角θの向かいにある辺を<span class="blank short"></span>、角θのとなりにある辺を<span class="blank short"></span>という。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分で三角形を描いて、3つの辺に名前をつけてみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　三角関数（sin, cos, tan）</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 02</span>
+    <p>先生「この3つの辺の『比』が、角度θによって決まった値になる。これがsin, cos, tanだ」</p>
+    <p>先生「定義はこう」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <line x1="60" y1="190" x2="221" y2="91.5" stroke="#2c5282" stroke-width="3"/>
+        <polygon points="0,0 -10,-5 -10,5" fill="#2c5282" transform="translate(230,90) rotate(-30.5)"/>
+        <text x="110" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="#2c5282">斜辺 F</text>
+
+        <path d="M 100,190 A 40,40 0 0 0 94.5,169.7" stroke="#8b95a5" stroke-width="1.2" fill="none"/>
+        <text x="112" y="178" font-size="12" fill="#8b95a5">θ</text>
+
+        <line x1="60" y1="190" x2="222" y2="190" stroke="#c05621" stroke-width="2.5" stroke-dasharray="5,4"/>
+        <polygon points="0,0 -10,-5 -10,5" fill="#c05621" transform="translate(230,190)"/>
+        <text x="145" y="212" text-anchor="middle" font-size="12" font-weight="700" fill="#c05621">隣辺　Fx＝Fcosθ</text>
+
+        <line x1="230" y1="190" x2="230" y2="98" stroke="#c05621" stroke-width="2.5" stroke-dasharray="5,4"/>
+        <polygon points="0,0 -10,-5 -10,5" fill="#c05621" transform="translate(230,90) rotate(-90)"/>
+        <text x="295" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#c05621">対辺　Fy＝Fsinθ</text>
+
+        <rect x="218" y="178" width="12" height="12" fill="none" stroke="#8b95a5" stroke-width="1"/>
+        <circle cx="60" cy="190" r="3" fill="#1a1f2e"/>
+      </g>
+      <text x="210" y="222" text-anchor="middle" font-size="8" fill="#8b95a5" font-family="Noto Sans JP">角度θは、斜辺と隣辺（水平方向）の間の角</text>
+    </svg>
+    <p class="illust-caption">直角三角形の3辺とsin・cos・tan（力の分解の例）</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <div class="callout-body">
+      sinθ ＝ <span class="blank short"></span>／斜辺<br>
+      cosθ ＝ <span class="blank short"></span>／斜辺<br>
+      tanθ ＝ <span class="blank short"></span>／<span class="blank short"></span>
+    </div>
+  </div>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>先生「特によく使うのが、30°・45°・60°のときの値。三角定規の角度でもあるから、覚えてしまおう」</p>
+  </div>
+
+  <table class="vocab-table">
+    <tr><th>30°</th><td>sinθ＝<span class="blank short"></span>　cosθ＝√3／2　tanθ＝1／√3</td></tr>
+    <tr><th>45°</th><td>sinθ＝√2／2　cosθ＝<span class="blank short"></span>　tanθ＝1</td></tr>
+    <tr><th>60°</th><td>sinθ＝√3／2　cosθ＝1／2　tanθ＝<span class="blank short"></span></td></tr>
+  </table>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      覚えるコツ：30°と60°はsinとcosが入れ替わっただけ（対称）。45°はsin＝cosで覚えやすい。テストでは公式集や電卓を使ってよい場合も多いので、まずは「辺の比になっている」という考え方を大事にしよう。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 30°・45°・60°の値、覚え方を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　三角関数（sin, cos, tan）</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>いよいよ、ベクトルを分解する</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 04</span>
+      <p>先生「じゃあ、前回の宿題に戻ろう。5Nの力を、水平から30°の角度で引いている。水平成分と垂直成分は？」</p>
+      <p>翔太「さっきの図と同じ形だ……隣辺が水平成分、対辺が垂直成分ですよね」</p>
+      <p>先生「その通り。角度θが水平から測られているときは、隣辺＝水平成分、対辺＝垂直成分になる」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <p class="law-statement">
+        水平成分 Fx ＝ F × <span class="blank short"></span>θ<br>
+        垂直成分 Fy ＝ F × <span class="blank short"></span>θ
+      </p>
+    </div>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">💪 5Nを30°で引く</p>
+        <p class="ex-body">垂直成分＝5×sin30°＝5×<span class="blank short"></span>＝<span class="blank short"></span>N</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🎣 10Nを60°で引く</p>
+        <p class="ex-body">水平成分＝10×cos60°＝10×<span class="blank short"></span>＝<span class="blank short"></span>N</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🛹 8Nを45°で引く</p>
+        <p class="ex-body">水平成分＝8×cos45°＝8×<span class="blank short"></span>≈<span class="blank short"></span>N</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🏋️ 20Nを30°で引く</p>
+        <p class="ex-body">垂直成分＝20×sin30°＝20×<span class="blank short"></span>＝<span class="blank short"></span>N</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>角度をどこから測るかで、答えが変わる？</h2>
+    <p><strong>Q.</strong> さっきは「水平からの角度」で、隣辺＝水平成分、対辺＝垂直成分だった。でも、もし角度を垂直方向から測ったら？</p>
+    <p>隣辺と対辺の役割が入れ替わり、水平成分は<span class="blank short"></span>θ、垂直成分は<span class="blank short"></span>θになる。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      sinとcosは、絶対的に「水平」「垂直」を表す記号ではない。<strong>角度をどこから測るか</strong>によって、隣辺・対辺の役割が変わり、sinとcosが入れ替わることがある。図をかいて、角度がどこにあるかを必ず確認しよう。
+    </div>
+  </div>
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">斜辺　／　対辺　／　隣辺　／　sinθ　／　cosθ　／　tanθ　／　成分</p>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>三角関数（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr><th>sinθの定義</th><td class="write-line"></td></tr>
+      <tr><th>cosθの定義</th><td class="write-line"></td></tr>
+      <tr><th>tanθの定義</th><td class="write-line"></td></tr>
+      <tr><th>分解の公式</th><td class="write-line"></td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      三角形の辺の<span class="blank short"></span>が分かれば、ベクトルを数字で分解できる。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:16mm;">
+    <p class="memo-label">MEMO — 身のまわりで角度と力が関係する場面を探そう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　三角関数（sin, cos, tan）</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">直角三角形で、sinθの定義はどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">対辺／斜辺</li>
+      <li data-label="B.">隣辺／斜辺</li>
+      <li data-label="C.">対辺／隣辺</li>
+      <li data-label="D.">斜辺／対辺</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">tan45°の値はどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">1／2</li>
+      <li data-label="B.">√2／2</li>
+      <li data-label="C.">1</li>
+      <li data-label="D.">√3</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">10Nの力を、水平から30°上向きに引くとき、垂直方向の成分の大きさは何Nか。（sin30°＝1／2）</p>
+    <ul class="choices">
+      <li data-label="A.">5N</li>
+      <li data-label="B.">8.7N</li>
+      <li data-label="C.">10N</li>
+      <li data-label="D.">2.5N</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">力を水平成分と垂直成分に分けるとき、なぜ Fx＝Fcosθ、Fy＝Fsinθ になるのか、直角三角形の「対辺」「隣辺」「斜辺」という言葉を使って説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">20Nの力を、水平から60°上向きに引くとき、水平方向の成分の大きさは何Nか。（cos60°＝1／2）</p>
+    <ul class="choices">
+      <li data-label="A.">10N</li>
+      <li data-label="B.">17.3N</li>
+      <li data-label="C.">20N</li>
+      <li data-label="D.">5N</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第6回「グラフの読み取り」</strong> — 傾き・切片・面積から、物理の意味を読み取る。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第5回　三角関数（sin, cos, tan）</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第1回　単位のルール【穴埋め版】｜高校物理基礎・物理数学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 140mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">01</div>
+  <p class="series-label">高校物理基礎 · 物理数学シリーズ</p>
+  <h1>単位のルール</h1>
+  <p class="subtitle">数字だけでは、物理は語れない</p>
+
+  <div class="meta-row">
+    <span>第1回 / 全6回</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>物理量が「数値×単位」で表されることを説明できる</li>
+      <li>SI基本単位（長さ・質量・時間など）を答えられる</li>
+      <li>組み立て単位が基本単位の組み合わせであることを説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>その答案、なぜ×だったのか</h2>
+    <p>小テストの返却日。翔太の答案には、大きく赤い×。</p>
+    <p class="dialogue">「え、計算合ってるのに……なんで×なんですか！？」</p>
+    <p>翔太が書いた答えは、こうだった。</p>
+    <p class="dialogue">「質量は　250」</p>
+    <p>先生は静かに聞き返した。</p>
+    <p class="dialogue">「250、何？　250 g？　250 kg？　それとも250円？」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>翔太の物理ノート、はじまりの日</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>翔太「え、そんなの……グラムに決まってるじゃないですか」</p>
+      <p>先生「決まってない。<strong>数字だけ</strong>では、それが何の量なのか誰にも伝わらない」</p>
+      <p>先生「物理の世界では、数字は必ず<strong>単位</strong>とセットで初めて意味を持つ」</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>先生「たとえば『250』という数字だけなら、質量にも、値段にも、点数にもなれる」</p>
+      <p>先生「でも『250 g』と書けば、それは<strong>質量という物理量</strong>だと、誰が見てもわかる」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>物理量 ＝ <span class="blank short"></span> × <span class="blank short"></span></strong><br><br>
+        数字だけでは物理量にならない。<span class="blank"></span>があって初めて、意味を持つ。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　単位のルール</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>先生が黒板に、大きく5つの文字を書いた。</p>
+    <p class="dialogue">「m、kg、s、A、K ―― これが、世界共通の“基準”だ」</p>
+    <p>先生「これを<strong>SI基本単位</strong>（国際単位系）という。世界中どこの国でも、この基準で物理量を測っている」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 420 130" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- 5 base unit blocks -->
+      <g font-family="Noto Sans JP">
+        <rect x="15" y="20" width="70" height="60" rx="4" stroke="#2c5282" stroke-width="1.2" fill="#ebf4ff"/>
+        <text x="50" y="52" text-anchor="middle" font-size="16" font-weight="700" fill="#2c5282">m</text>
+        <text x="50" y="68" text-anchor="middle" font-size="7" fill="#4a5568">長さ</text>
+
+        <rect x="100" y="20" width="70" height="60" rx="4" stroke="#2c5282" stroke-width="1.2" fill="#ebf4ff"/>
+        <text x="135" y="52" text-anchor="middle" font-size="16" font-weight="700" fill="#2c5282">kg</text>
+        <text x="135" y="68" text-anchor="middle" font-size="7" fill="#4a5568">質量</text>
+
+        <rect x="185" y="20" width="70" height="60" rx="4" stroke="#2c5282" stroke-width="1.2" fill="#ebf4ff"/>
+        <text x="220" y="52" text-anchor="middle" font-size="16" font-weight="700" fill="#2c5282">s</text>
+        <text x="220" y="68" text-anchor="middle" font-size="7" fill="#4a5568">時間</text>
+
+        <rect x="270" y="20" width="70" height="60" rx="4" stroke="#2c5282" stroke-width="1.2" fill="#ebf4ff"/>
+        <text x="305" y="52" text-anchor="middle" font-size="16" font-weight="700" fill="#2c5282">A</text>
+        <text x="305" y="68" text-anchor="middle" font-size="7" fill="#4a5568">電流</text>
+
+        <rect x="355" y="20" width="55" height="60" rx="4" stroke="#2c5282" stroke-width="1.2" fill="#ebf4ff"/>
+        <text x="382" y="52" text-anchor="middle" font-size="16" font-weight="700" fill="#2c5282">K</text>
+        <text x="382" y="68" text-anchor="middle" font-size="7" fill="#4a5568">温度</text>
+      </g>
+      <text x="210" y="108" text-anchor="middle" font-size="8" fill="#8b95a5" font-family="Noto Sans JP">これ以上、他の単位に分解できない「いちばん基礎の単位」</text>
+    </svg>
+    <p class="illust-caption">SI基本単位（高校物理基礎でよく使う5つ）</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">BASE UNITS</p>
+    <p class="law-statement"><span class="blank short"></span>単位とは、<br>他の単位を使わずに定義された、<span class="blank"></span>単位のこと。</p>
+  </div>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>先生「じゃあ、『力』の単位<strong>N（ニュートン）</strong>は、どこから来たと思う？」</p>
+    <p>翔太「……習ったばかりの単位ですけど、覚えるしかないですよね？」</p>
+    <p>先生「いや、覚えなくていい。運動方程式 <strong>ma ＝ F</strong> から、そのまま<strong>導ける</strong>んだ」</p>
+  </div>
+
+  <p style="font-size:9.5pt; color:var(--ink-light); margin-top:2mm;">
+    質量 kg ×　加速度 m/s²　＝　力 N　　つまり　　N ＝ <span class="blank short"></span>
+  </p>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      単位は暗記するものではなく、<strong>式から導けるもの</strong>。基本単位を組み合わせてできた単位を<strong><span class="blank short"></span>単位</strong>という。エネルギーの単位J（ジュール）も同じ発想で、J ＝ N・m ＝ kg・m²/s² と導ける。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 「N＝kg・m/s²」を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　単位のルール</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>日常の単位ツアー</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">🚗 速さ km/h</p>
+        <p class="ex-body">日常でよく使うが、物理の基本単位では<span class="blank short"></span>で表す。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🌡 圧力 Pa</p>
+        <p class="ex-body">Pa（パスカル）＝ N/m²。<span class="blank short"></span>単位の一つ。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">💡 電力 W</p>
+        <p class="ex-body">W（ワット）＝ J/s。仕事率＝仕事÷<span class="blank short"></span>から導ける。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🔋 エネルギー J</p>
+        <p class="ex-body">J（ジュール）＝ N・<span class="blank short"></span>。力×距離から導ける。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある疑問</h2>
+    <p><strong>Q.</strong> 「1000000000000 W」って、書きにくくない？</p>
+    <p>光の速さは秒速約300000000 m。桁の多い数字は、書くのも読むのも大変……。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      そこで登場するのが<strong><span class="blank short"></span></strong>。単位の前につけて、桁数をコンパクトに表す記号のことです。<br>
+      1000 m ＝ 1 <span class="blank short"></span>m　　0.001 s ＝ 1 <span class="blank short"></span>s
+    </div>
+  </div>
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">数値　／　単位　／　基本　／　組み立て（組立）　／　kg・m/s²　／　m　／　時間　／　接頭辞　／　k（キロ）　／　m（ミリ）　／　m/s</p>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>接頭辞の一覧（自分で書き込もう）</h2>
+    <table class="vocab-table">
+      <tr><th>G（ギガ）</th><td class="write-line"></td></tr>
+      <tr><th>M（メガ）</th><td class="write-line"></td></tr>
+      <tr><th>k（キロ）</th><td class="write-line"></td></tr>
+      <tr><th>c（センチ）</th><td class="write-line"></td></tr>
+      <tr><th>m（ミリ）</th><td class="write-line"></td></tr>
+      <tr><th>μ（マイクロ）</th><td class="write-line"></td></tr>
+      <tr><th>n（ナノ）</th><td class="write-line"></td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      数字だけでは、物理は語れない。<strong><span class="blank"></span>があって、初めて意味を持つ。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:20mm;">
+    <p class="memo-label">MEMO — 身のまわりで見つけた単位</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　単位のルール</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">質量を表すSI基本単位はどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">g（グラム）</li>
+      <li data-label="B.">kg（キログラム）</li>
+      <li data-label="C.">N（ニュートン）</li>
+      <li data-label="D.">J（ジュール）</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">力の単位 N（ニュートン）を、基本単位を使って表すとどうなる？</p>
+    <ul class="choices">
+      <li data-label="A.">kg・m/s</li>
+      <li data-label="B.">kg・m/s²</li>
+      <li data-label="C.">kg/m²</li>
+      <li data-label="D.">kg・m²/s</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">5000 m を、接頭辞を使って正しく表しているのはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">5 km</li>
+      <li data-label="B.">5 Mm</li>
+      <li data-label="C.">5 cm</li>
+      <li data-label="D.">5 mm</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">なぜ物理量には単位が必要なのか、今日の授業で学んだことをもとに1〜2文で説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">2.5×10⁻³ s を、接頭辞を使って正しく表しているのはどれ？</p>
+    <ul class="choices">
+      <li data-label="A.">2.5 ms</li>
+      <li data-label="B.">2.5 μs</li>
+      <li data-label="C.">2.5 ns</li>
+      <li data-label="D.">2.5 cs</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第2回「指数の扱い方」</strong> — 巨大な数・小さな数を、上手に書きこなす道具へ。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第1回　単位のルール</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

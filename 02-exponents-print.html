@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第2回　指数の扱い方【解答版】｜高校物理基礎・物理数学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.7;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 140mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    /* ── Answer key (解答版のみ) ── */
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 1mm;
+    }
+
+    .choices li.correct::after {
+      content: '← 正解';
+      margin-left: 3mm;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .explain {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      margin-top: 3mm;
+      line-height: 1.6;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-right: 2mm;
+    }
+
+    .answer-lines.filled {
+      height: auto;
+      min-height: 22mm;
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-left: 2pt solid var(--accent);
+      padding: 3mm 4mm;
+      font-size: 9.5pt;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">02</div>
+  <p class="series-label">高校物理基礎 · 物理数学シリーズ</p>
+  <h1>指数の扱い方</h1>
+  <p class="subtitle">10³×10⁴は、10¹²じゃない</p>
+
+  <div class="meta-row">
+    <span>第2回 / 全6回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>指数どうしの掛け算・割り算のルールを説明できる</li>
+      <li>累乗のべき乗（(aᵐ)ⁿ）を計算できる</li>
+      <li>a⁰＝1、負の指数の意味を説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>その計算、ちょっと待った</h2>
+    <p>宿題のプリントを見せながら、翔太が自信満々に言った。</p>
+    <p class="dialogue">「10³×10⁴だから……答えは10¹²ですよね？」</p>
+    <p>先生は首を横に振った。</p>
+    <p class="dialogue">「残念、それは違う。指数の掛け算は、指数を掛けちゃダメなんだ」</p>
+    <p>翔太「え……？　じゃあ、どうすればいいんですか」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>指数って、そもそも何だっけ</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「指数は『同じ数を何回掛けるか』を表す数字。10³は10を3回掛けるって意味だったよね」</p>
+      <p>10³ ＝ 10×10×10　　10⁴ ＝ 10×10×10×10</p>
+    </div>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 02</span>
+      <p>先生「じゃあ、10³×10⁴を全部書き出してみよう」</p>
+      <p>10³×10⁴ ＝ (10×10×10) × (10×10×10×10)</p>
+      <p>先生「10は、全部でいくつ並んでる？」</p>
+      <p>翔太「……3個と4個で、<strong>7</strong>個！」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>a<sup>m</sup> × a<sup>n</sup> ＝ a<sup>m＋n</sup></strong><br><br>
+        指数どうしの掛け算は、指数の<strong>足し</strong>算になる。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 自分の言葉でメモを</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　指数の扱い方</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>先生「じゃあ割り算は？　10⁵÷10²を考えてみよう」</p>
+    <p>10⁵÷10² ＝ (10×10×10×10×10) ÷ (10×10)</p>
+    <p>先生「上と下で10が2個ずつ打ち消し合う。残るのは10が何個？」</p>
+    <p>翔太「5個から2個引いて……<strong>3</strong>個！」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 420 110" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <text x="30" y="35" font-size="15" fill="#1a1f2e">10×10×10×10×10</text>
+        <line x1="30" y1="45" x2="170" y2="45" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="30" y="65" font-size="15" fill="#8b95a5">10×10</text>
+        <text x="200" y="52" font-size="15" fill="#4a5568">＝</text>
+        <rect x="230" y="25" width="130" height="40" rx="4" stroke="#2c5282" stroke-width="1.2" fill="#ebf4ff"/>
+        <text x="295" y="52" text-anchor="middle" font-size="18" font-weight="700" fill="#2c5282">10 × 10 × 10</text>
+      </g>
+      <text x="210" y="95" text-anchor="middle" font-size="8" fill="#8b95a5" font-family="Noto Sans JP">上下で打ち消し合った分を引く＝指数の引き算</text>
+    </svg>
+    <p class="illust-caption">10⁵ ÷ 10² のイメージ</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <div class="callout-body">
+      <strong>a<sup>m</sup> ÷ a<sup>n</sup> ＝ a<sup>m－n</sup></strong><br><br>
+      指数どうしの割り算は、指数の<strong>引き</strong>算になる。
+    </div>
+  </div>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 04</span>
+    <p>先生「最後に、累乗のべき乗。(10²)³ってどういう意味？」</p>
+    <p>(10²)³ ＝ 10²×10²×10²　　（10²を3回掛ける）</p>
+    <p>先生「さっき習った掛け算のルールを使うと、指数は2＋2＋2、つまり2×3。だから……」</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <p class="law-statement">(a<sup>m</sup>)<sup>n</sup> ＝ a<sup>mn</sup></p>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      指数法則は3つだけ：①掛け算は指数を<strong>足</strong>す、②割り算は指数を<strong>引</strong>く、③べき乗は指数を<strong>掛</strong>ける。焦らず、10²や10³のような小さい数字で実際に書き出して確かめながら覚えよう。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 3つの指数法則を自分の言葉で</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　指数の扱い方</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>指数だらけの世界</h2>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">💡 光の速さ</p>
+        <p class="ex-body">秒速およそ 3×10<strong>⁸</strong> m。桁が多いので指数で表す。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">⚛️ 原子の大きさ</p>
+        <p class="ex-body">およそ 10<strong>⁻¹⁰</strong> m（マイナスの指数＝とても小さい数）。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">💾 メモリ容量</p>
+        <p class="ex-body">2<strong>¹⁰</strong> ＝ 1024。コンピュータの世界は2の指数だらけ。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🌍 地球の質量</p>
+        <p class="ex-body">およそ 6×10<strong>²⁴</strong> kg。とてつもなく大きな数。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>よくある疑問</h2>
+    <p><strong>Q.</strong> a⁰＝1って、なんで？　0回掛けたら0になりそうなのに……</p>
+    <p>a<sup>m</sup>÷a<sup>m</sup>を考えてみよう。指数のルールなら a<sup>m－m</sup>＝a<strong>⁰</strong>。</p>
+    <p>でも同じ数どうしの割り算だから、答えは絶対に<strong>1</strong>のはず。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      だから <strong>a⁰ ＝ 1</strong> と決める。同じように、負の指数は分数として決められる：<br>
+      <strong>a<sup>－n</sup> ＝ 1/aⁿ</strong>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>指数法則</h2>
+    <table class="vocab-table">
+      <tr><th>aᵐ×aⁿ</th><td>＝ a<sup>m＋n</sup>（指数を足す）</td></tr>
+      <tr><th>aᵐ÷aⁿ</th><td>＝ a<sup>m－n</sup>（指数を引く）</td></tr>
+      <tr><th>(aᵐ)ⁿ</th><td>＝ a<sup>mn</sup>（指数を掛ける）</td></tr>
+      <tr><th>a⁰</th><td>＝ 1（どんなaでも0乗は1。負の指数は a<sup>－n</sup>＝1/aⁿ）</td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      指数の計算は、<strong>足す・引く・掛けるの3つだけ。</strong>
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:16mm;">
+    <p class="memo-label">MEMO — 身のまわりで見つけた指数</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　指数の扱い方</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">10³×10⁵ を計算しなさい。</p>
+    <ul class="choices">
+      <li data-label="A." class="correct">10⁸</li>
+      <li data-label="B.">10¹⁵</li>
+      <li data-label="C.">10²</li>
+      <li data-label="D.">10¹⁵⁰</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>掛け算は指数どうしを足す。3＋5＝8なので10⁸。指数を掛けてしまう（10¹⁵）は典型的な間違い。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">10⁷÷10³ を計算しなさい。</p>
+    <ul class="choices">
+      <li data-label="A.">10²¹</li>
+      <li data-label="B." class="correct">10⁴</li>
+      <li data-label="C.">10¹⁰</li>
+      <li data-label="D.">10²·³³</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>割り算は指数どうしを引く。7－3＝4なので10⁴。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">(10²)⁴ を計算しなさい。</p>
+    <ul class="choices">
+      <li data-label="A.">10⁶</li>
+      <li data-label="B." class="correct">10⁸</li>
+      <li data-label="C.">10¹⁶</li>
+      <li data-label="D.">10²</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>べき乗のべき乗は指数どうしを掛ける。2×4＝8なので10⁸。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">なぜ a⁰＝1 になるのか、今日の授業で学んだ考え方をもとに説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>a<sup>m</sup>÷a<sup>m</sup>を指数のルールで計算するとa<sup>m－m</sup>＝a⁰になる。一方、同じ数どうしの割り算なので答えは必ず1になる。この2つが一致するように、a⁰＝1と定義されている。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">2³×2⁻¹ を計算しなさい。</p>
+    <ul class="choices">
+      <li data-label="A.">2</li>
+      <li data-label="B." class="correct">4</li>
+      <li data-label="C.">8</li>
+      <li data-label="D.">16</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>指数を足すと3＋(－1)＝2なので2²＝4。2⁻¹＝1/2として2³×(1/2)＝8÷2＝4と計算しても同じ。</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第3回「有効数字」</strong> — 測った数字は、どこまで正確に書いていい？
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第2回　指数の扱い方</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

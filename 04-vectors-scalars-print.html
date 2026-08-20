@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第4回　ベクトルとスカラー【解答版】｜高校物理基礎・物理数学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 140mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .choices li.correct {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .choices li.correct::before {
+      color: var(--accent);
+    }
+
+    .explain {
+      margin-top: 3mm;
+      padding: 3mm 4mm;
+      background: var(--accent-soft);
+      border-radius: 1mm;
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    .explain-label {
+      font-weight: 700;
+      color: var(--accent);
+      margin-right: 2mm;
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    .answer-lines.filled {
+      border-bottom: none;
+      background: var(--accent-soft);
+      border-radius: 1mm;
+      padding: 3mm 4mm;
+      font-size: 9pt;
+      color: var(--ink-light);
+      line-height: 1.7;
+      height: auto;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">04</div>
+  <p class="series-label">高校物理基礎 · 物理数学シリーズ</p>
+  <h1>ベクトルとスカラー</h1>
+  <p class="subtitle">「3m/s」だけじゃ、答えは半分</p>
+
+  <div class="meta-row">
+    <span>第4回 / 全6回</span>
+    <span>解答版 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>スカラーとベクトルの違いを説明できる</li>
+      <li>ベクトルを矢印で表せる</li>
+      <li>ベクトルの合成・分解の基本的な考え方を理解する</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>その答え、半分足りない</h2>
+    <p>小テストの答案を返してもらいながら、翔太は納得がいかない顔をしていた。</p>
+    <p class="dialogue">「台車の速度は、3m/sです！　計算、合ってますよね？」</p>
+    <p>先生はうなずきながらも、少し困った顔をした。</p>
+    <p class="dialogue">「計算は合ってる。でも、それだけだと△なんだ」</p>
+    <p>翔太「え！？　数字、間違ってないのに……？」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>大きさだけの量、大きさ＋向きの量</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「質量や時間、温度に『向き』ってあると思う？」</p>
+      <p>翔太「……ないです。ただの数字ですよね」</p>
+      <p>先生「そのとおり。でも力や速度には、向きが切り離せないんだ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        <strong>スカラー</strong> ＝ <strong>大きさ</strong>だけを持つ量<br><br>
+        <strong>ベクトル</strong> ＝ <strong>大きさ</strong>と<strong>向き</strong>を持つ量
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — スカラーとベクトル、身近な例を挙げてみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　ベクトルとスカラー</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 02</span>
+    <p>先生「じゃあ、向きを持つ量ってどうやって表す？」</p>
+    <p>先生「矢印だよ。矢の長さが大きさ、矢の向きがそのままベクトルの向きになる」</p>
+    <p>翔太「なるほど、数字だけじゃ足りないから、絵で描くんですね」</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <div class="callout-body">
+      <strong>ベクトル</strong>は、<strong>矢印</strong>で表す。矢の<strong>長さ</strong>が大きさ、矢の<strong>向き</strong>がベクトルの向きを表す。
+    </div>
+  </div>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>先生「じゃあ、台車が東へ3m動いて、続けて北へ4m動いたとしよう。出発点から見た『移動』はどうなる？」</p>
+    <p>翔太「東に3m、北に4m……足すと7m、じゃないんですか？」</p>
+    <p>先生「向きが違うから、そのまま足せないんだ。矢印をつなげて考えてみよう」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <line x1="60" y1="190" x2="222" y2="190" stroke="#2c5282" stroke-width="2.5"/>
+        <polygon points="0,0 -10,-5 -10,5" fill="#2c5282" transform="translate(230,190)"/>
+        <text x="145" y="178" text-anchor="middle" font-size="12" font-weight="700" fill="#2c5282">東へ 3m</text>
+
+        <line x1="230" y1="190" x2="230" y2="98" stroke="#2c5282" stroke-width="2.5"/>
+        <polygon points="0,0 -10,-5 -10,5" fill="#2c5282" transform="translate(230,90) rotate(-90)"/>
+        <text x="295" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#2c5282">北へ 4m</text>
+
+        <rect x="218" y="178" width="12" height="12" fill="none" stroke="#8b95a5" stroke-width="1"/>
+
+        <line x1="60" y1="190" x2="221" y2="91.5" stroke="#c05621" stroke-width="2.5" stroke-dasharray="5,4"/>
+        <polygon points="0,0 -10,-5 -10,5" fill="#c05621" transform="translate(230,90) rotate(-30.5)"/>
+        <text x="110" y="115" text-anchor="middle" font-size="12" font-weight="700" fill="#c05621">合成した変位 5m</text>
+
+        <circle cx="60" cy="190" r="3" fill="#1a1f2e"/>
+        <text x="55" y="208" text-anchor="middle" font-size="10" fill="#4a5568">出発点</text>
+      </g>
+      <text x="210" y="222" text-anchor="middle" font-size="8" fill="#8b95a5" font-family="Noto Sans JP">矢印の始点と終点をつなげると、合成したベクトルになる</text>
+    </svg>
+    <p class="illust-caption">ベクトルの合成（矢印をつなげる）</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <div class="callout-body">
+      ベクトルの合成は、1つ目の矢印の<strong>終点</strong>に、2つ目の矢印の<strong>始点</strong>をつなげて求める。出発点から最後の矢の先端までが、合成した<strong>ベクトル</strong>になる。
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      まずは矢印を実際に描いて、目で合成の形をつかもう。東3m＋北4mの「合成した大きさ」は次回、三角関数を使ってきちんと計算する。工業科クラスでは特に、定規で矢印の長さを測らせると実感がわきやすい。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 矢印の絵を描いてみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　ベクトルとスカラー</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>逆に、1本を2本に分ける</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 04</span>
+      <p>先生「実は、逆の見方もできる。斜めに進んだ1本の矢印を、東方向と北方向、2本の矢印に分けて考えることもできるんだ」</p>
+      <p>翔太「さっきの逆ですね。1本を2本に分ける……」</p>
+      <p>先生「そう、これを『分解』という。次回、三角関数を使ってこの分解を数値で計算する方法を学ぶよ」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        1つのベクトルは、垂直に交わる2方向の<strong>成分</strong>に分けて考えることができる。これを<strong>分解</strong>という。
+      </div>
+    </div>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">⚖️ 質量</p>
+        <p class="ex-body">60kgのように、<strong>大きさ</strong>だけで表せる（スカラー）。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🏃 変位</p>
+        <p class="ex-body">東へ100mのように、大きさと<strong>向き</strong>が必要（ベクトル）。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🌡️ 速さ</p>
+        <p class="ex-body">時速40kmのように、大きさだけ（スカラー）。</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚗 速度</p>
+        <p class="ex-body">北向きに時速40kmのように、大きさと<strong>向き</strong>（ベクトル）。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>なぜ「速さ」と「速度」は別の量なの？</h2>
+    <p><strong>Q.</strong> どちらも「はやさ」を表す言葉なのに、物理ではなぜ区別するんだろう？</p>
+    <p>速さは、動いた<strong>大きさ</strong>だけを表す数字。<br>速度は、その数字に<strong>向き</strong>の情報を加えたもの。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      同じ「時速40km」でも、東に向かっているのか、北に向かっているのかで、その後どこに着くかはまったく違う。だから物理では、<strong>向きの情報があるかどうか</strong>で、速さ（スカラー）と速度（ベクトル）を別の量として区別する。
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>ベクトルとスカラー（解答例）</h2>
+    <table class="vocab-table">
+      <tr><th>スカラーの例</th><td>質量・時間・温度・速さ など。大きさだけを持つ量。</td></tr>
+      <tr><th>ベクトルの例</th><td>変位・速度・力・加速度 など。大きさと向きを持つ量。</td></tr>
+      <tr><th>ベクトルの表し方</th><td>矢印。矢の長さが大きさ、矢の向きがベクトルの向き。</td></tr>
+      <tr><th>ベクトルの合成</th><td>1つ目の矢印の終点に2つ目の始点をつなげ、出発点から先端までを求める。</td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      向きが<strong>あるかないか</strong>、それがスカラーとベクトルの分かれ道。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:16mm;">
+    <p class="memo-label">MEMO — 身のまわりのスカラー・ベクトルを探してみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　ベクトルとスカラー</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 解答・解説付き（教員用）</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">次の物理量のうち、ベクトルはどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">質量</li>
+      <li data-label="B.">時間</li>
+      <li data-label="C." class="correct">速度</li>
+      <li data-label="D.">温度</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>質量・時間・温度は向きを持たないスカラー。速度は大きさと向きを持つベクトル。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">次の物理量のうち、スカラーはどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">力</li>
+      <li data-label="B.">変位</li>
+      <li data-label="C." class="correct">速さ</li>
+      <li data-label="D.">加速度</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>力・変位・加速度は向きを持つベクトル。速さは向きを含まない、大きさだけの量。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">東向きに3m、続けて東向きに4m移動した。出発点から見た合成の変位は？</p>
+    <ul class="choices">
+      <li data-label="A.">1m東</li>
+      <li data-label="B." class="correct">7m東</li>
+      <li data-label="C.">7m西</li>
+      <li data-label="D.">12m東</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>同じ向きへの移動なので、そのまま足し算できる。3＋4＝7で7m東。</div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">「速さ」と「速度」の違いを、今日習った「大きさ」「向き」という言葉を使って説明しなさい。</p>
+    <div class="answer-lines filled">
+      <span class="explain-label">解答例</span>速さは移動の大きさだけを表す量（スカラー）。速度は、その大きさに加えて向きの情報も持つ量（ベクトル）。同じ「時速40km」でも、向きが違えば速度としては別のものになる。
+    </div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">東向きに3m、北向きに4m移動した。合成した変位の大きさは何mか。</p>
+    <ul class="choices">
+      <li data-label="A.">3m</li>
+      <li data-label="B.">4m</li>
+      <li data-label="C." class="correct">5m</li>
+      <li data-label="D.">7m</li>
+    </ul>
+    <div class="explain"><span class="explain-label">解説</span>東3m・北4mは直角に交わる2つの移動。矢印をつなげると直角三角形ができ、三平方の定理より3²＋4²＝5²なので、合成した変位の大きさは5m。（向きの計算は次回、三角関数で学ぶ）</div>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">NEXT</p>
+    <div class="callout-body">
+      <strong>第5回「三角関数（sin, cos, tan）」</strong> — 斜めのベクトルを、数値で分解する方法。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第4回　ベクトルとスカラー</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>

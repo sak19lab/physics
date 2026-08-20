@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第6回　グラフの読み取り【穴埋め版】｜高校物理基礎・物理数学シリーズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --ink-light: #4a5568;
+      --ink-muted: #8b95a5;
+      --paper: #faf9f7;
+      --accent: #2c5282;
+      --accent-soft: #ebf4ff;
+      --line: #e2e8f0;
+      --callout-key: #2c5282;
+      --callout-tip: #744210;
+      --callout-tip-bg: #fffbeb;
+      --callout-think: #553c9a;
+      --callout-think-bg: #faf5ff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 10.5pt;
+      line-height: 1.85;
+      color: var(--ink);
+      background: #e8e6e3;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 22mm 24mm 26mm;
+      background: var(--paper);
+      position: relative;
+    }
+
+    /* ── Header ── */
+    .series-label {
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-bottom: 6mm;
+    }
+
+    .lesson-number {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 48pt;
+      font-weight: 600;
+      color: var(--line);
+      line-height: 1;
+      position: absolute;
+      top: 18mm;
+      right: 24mm;
+    }
+
+    h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 3mm;
+      line-height: 1.35;
+    }
+
+    .subtitle {
+      font-size: 10pt;
+      color: var(--ink-light);
+      font-weight: 300;
+      margin-bottom: 10mm;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 8mm;
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      padding-bottom: 8mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 10mm;
+    }
+
+    .meta-row span::before {
+      content: '—';
+      margin-right: 2mm;
+      color: var(--line);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 9mm;
+    }
+
+    .section-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4mm;
+      line-height: 1.4;
+    }
+
+    p { margin-bottom: 4mm; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Goals ── */
+    .goals {
+      padding: 5mm 6mm;
+      border-left: 2pt solid var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12mm;
+    }
+
+    .goals-title {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .goals ul {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .goals li {
+      padding-left: 5mm;
+      position: relative;
+      margin-bottom: 1.5mm;
+    }
+
+    .goals li::before {
+      content: '○';
+      position: absolute;
+      left: 0;
+      font-size: 7pt;
+      color: var(--accent);
+      top: 1pt;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 5mm 6mm;
+      margin: 6mm 0;
+      border: 0.5pt solid;
+      border-radius: 1mm;
+    }
+
+    .callout-key {
+      border-color: var(--callout-key);
+      background: var(--accent-soft);
+    }
+
+    .callout-key .callout-label {
+      color: var(--callout-key);
+    }
+
+    .callout-tip {
+      border-color: #d69e2e;
+      background: var(--callout-tip-bg);
+    }
+
+    .callout-tip .callout-label {
+      color: var(--callout-tip);
+    }
+
+    .callout-think {
+      border-color: #9f7aea;
+      background: var(--callout-think-bg);
+    }
+
+    .callout-think .callout-label {
+      color: var(--callout-think);
+    }
+
+    .callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5mm;
+    }
+
+    .callout-body {
+      font-size: 9.5pt;
+      line-height: 1.75;
+    }
+
+    .law-statement {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.9;
+      text-align: center;
+      padding: 2mm 0;
+    }
+
+    /* ── Story scenes ── */
+    .scene {
+      margin-bottom: 8mm;
+    }
+
+    .scene-tag {
+      display: inline-block;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      border: 0.5pt solid var(--line);
+      padding: 1mm 3mm;
+      margin-bottom: 3mm;
+    }
+
+    .dialogue {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 11pt;
+      font-style: italic;
+      color: var(--ink-light);
+      padding: 4mm 6mm;
+      border-left: 1.5pt solid var(--line);
+      margin: 4mm 0 4mm 4mm;
+    }
+
+    /* ── Illustration ── */
+    .illust {
+      text-align: center;
+      margin: 6mm 0 8mm;
+      padding: 6mm;
+    }
+
+    .illust svg {
+      max-width: 140mm;
+      height: auto;
+    }
+
+    .illust-caption {
+      font-size: 8pt;
+      color: var(--ink-muted);
+      margin-top: 3mm;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Two column examples ── */
+    .examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin: 5mm 0;
+    }
+
+    .example-card {
+      padding: 4mm 5mm;
+      border: 0.5pt solid var(--line);
+      border-radius: 1mm;
+    }
+
+    .example-card .ex-title {
+      font-size: 8.5pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: var(--ink);
+    }
+
+    .example-card .ex-body {
+      font-size: 8.5pt;
+      color: var(--ink-light);
+      line-height: 1.65;
+    }
+
+    /* ── Vocabulary ── */
+    .vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 5mm 0;
+    }
+
+    .vocab-table th {
+      text-align: left;
+      font-weight: 700;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 2mm 4mm 2mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      width: 28%;
+    }
+
+    .vocab-table td {
+      padding: 3mm 0;
+      border-bottom: 0.5pt solid var(--line);
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    .vocab-table td.write-line {
+      border-bottom: 0.5pt solid var(--line);
+      height: 14mm;
+    }
+
+    /* ── Memo space ── */
+    .memo-area {
+      margin-top: 8mm;
+      padding: 5mm 6mm;
+      min-height: 22mm;
+      border: 0.5pt dashed var(--line);
+      border-radius: 1mm;
+    }
+
+    .memo-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      margin-bottom: 3mm;
+    }
+
+    /* ── Fill-in blanks ── */
+    .blank {
+      display: inline-block;
+      min-width: 44mm;
+      border-bottom: 0.8pt solid var(--ink-muted);
+      margin: 0 1.5mm;
+      text-align: center;
+    }
+
+    .blank.short { min-width: 28mm; }
+    .blank.long { min-width: 62mm; }
+
+    /* ── Word bank ── */
+    .word-bank {
+      margin: 6mm 0;
+      padding: 5mm 6mm;
+      border: 0.5pt dashed var(--accent);
+      border-radius: 1mm;
+      background: var(--accent-soft);
+    }
+
+    .word-bank .wb-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 3mm;
+    }
+
+    .word-bank .wb-words {
+      font-size: 9pt;
+      line-height: 2;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Quiz ── */
+    .quiz-header {
+      padding-bottom: 6mm;
+      border-bottom: 0.5pt solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .quiz-item {
+      margin-bottom: 10mm;
+    }
+
+    .quiz-num {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 2mm;
+    }
+
+    .quiz-q {
+      font-size: 10pt;
+      margin-bottom: 4mm;
+      line-height: 1.7;
+    }
+
+    .quiz-level {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-left: 3mm;
+    }
+
+    .choices {
+      list-style: none;
+      font-size: 9.5pt;
+    }
+
+    .choices li {
+      padding: 2mm 0 2mm 7mm;
+      position: relative;
+    }
+
+    .choices li::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .answer-lines {
+      margin-top: 4mm;
+      border-bottom: 0.5pt solid var(--line);
+      height: 10mm;
+    }
+
+    .answer-lines.double {
+      height: 22mm;
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 14mm;
+      left: 24mm;
+      right: 24mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .page:last-child { page-break-after: auto; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PAGE 1 ═══ -->
+<div class="page">
+  <div class="lesson-number">06</div>
+  <p class="series-label">高校物理基礎 · 物理数学シリーズ</p>
+  <h1>グラフの読み取り</h1>
+  <p class="subtitle">傾き・切片・面積で、数字の裏側を読む</p>
+
+  <div class="meta-row">
+    <span>第6回 / 全6回（最終回）</span>
+    <span>穴埋め版・生徒用 · インプット約20分 ＋ 確認テスト約10分</span>
+    <span>名前 _______________</span>
+  </div>
+
+  <div class="goals">
+    <p class="goals-title">今日のゴール</p>
+    <ul>
+      <li>グラフの傾きの意味と求め方を説明できる</li>
+      <li>グラフの切片の意味を説明できる</li>
+      <li>グラフの面積が表す意味を説明できる</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">OPENING</p>
+    <h2>「上がってます」だけじゃ、伝わらない</h2>
+    <p>先生が1枚のグラフを見せた。「このグラフから、何が読み取れる？」</p>
+    <p class="dialogue">「えっと……右上がりです。上がってます」</p>
+    <p>先生は苦笑いした。</p>
+    <p class="dialogue">「形の説明はできてる。でも、グラフには数字としての意味が3つ隠れているんだ」</p>
+  </div>
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>グラフの基本を確認する</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 01</span>
+      <p>先生「グラフを読む前に、まず横軸と縦軸が何を表しているかを確認する。これを飛ばすと、どんなグラフも意味を持たない」</p>
+      <p>翔太「たしかに……軸を見ずに形だけ見てました」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        グラフを読むときは、まず<span class="blank short"></span>軸と<span class="blank short"></span>軸が、それぞれ何の量を表しているかを確認する。
+      </div>
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 今まで見たグラフの軸を思い出してみよう</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　グラフの読み取り</span>
+    <span>1 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 2 ═══ -->
+<div class="page">
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 02</span>
+    <p>先生「グラフに隠れている1つ目の情報が『傾き』。横軸が変化したとき、縦軸がどれだけ変わるかの割合だ」</p>
+  </div>
+
+  <div class="illust">
+    <svg viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g font-family="Noto Sans JP">
+        <polygon points="60,190 60,150 330,55 330,190" fill="#ebf4ff" stroke="none"/>
+
+        <line x1="60" y1="190" x2="400" y2="190" stroke="#8b95a5" stroke-width="1.5"/>
+        <polygon points="0,0 -8,-4 -8,4" fill="#8b95a5" transform="translate(400,190)"/>
+        <text x="360" y="207" font-size="11" fill="#4a5568">時間 t [s]</text>
+
+        <line x1="60" y1="190" x2="60" y2="25" stroke="#8b95a5" stroke-width="1.5"/>
+        <polygon points="0,0 -4,8 4,8" fill="#8b95a5" transform="translate(60,25)"/>
+        <text x="18" y="20" font-size="11" fill="#4a5568">速度 v [m/s]</text>
+
+        <line x1="60" y1="150" x2="330" y2="55" stroke="#2c5282" stroke-width="3"/>
+        <polygon points="0,0 -10,-4 -10,4" fill="#2c5282" transform="translate(330,55) rotate(-19.6)"/>
+
+        <circle cx="60" cy="150" r="4" fill="#1a1f2e"/>
+        <text x="10" y="147" font-size="11" fill="#1a1f2e" font-weight="700">切片 v₀</text>
+
+        <line x1="150" y1="118" x2="270" y2="118" stroke="#c05621" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <line x1="270" y1="118" x2="270" y2="76" stroke="#c05621" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="150" cy="118" r="3" fill="#2c5282"/>
+        <circle cx="270" cy="76" r="3" fill="#2c5282"/>
+        <text x="200" y="132" text-anchor="middle" font-size="11" fill="#c05621" font-weight="700">Δt</text>
+        <text x="278" y="100" font-size="11" fill="#c05621" font-weight="700">Δv</text>
+
+        <text x="160" y="175" font-size="11" fill="#2c5282" font-weight="700">面積＝移動距離</text>
+      </g>
+      <text x="230" y="222" text-anchor="middle" font-size="8" fill="#8b95a5" font-family="Noto Sans JP">傾き＝Δv／Δt　切片＝t＝0のときのv　面積＝vとtの積み重ね</text>
+    </svg>
+    <p class="illust-caption">v-tグラフに隠れた3つの情報（傾き・切片・面積）</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <div class="callout-body">
+      傾き ＝ 縦軸の変化量 ／ <span class="blank short"></span>の変化量 ＝ Δy／Δx
+    </div>
+  </div>
+
+  <div class="scene">
+    <span class="scene-tag">SCENE 03</span>
+    <p>先生「2つ目が『切片』。グラフが縦軸と交わる点、つまり横軸が0のときの縦軸の値だ」</p>
+    <p>翔太「さっきの図だと、v₀のところですね」</p>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">KEY POINT</p>
+    <div class="callout-body">
+      切片 ＝ 横軸が<span class="blank short"></span>のときの、縦軸の値。
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <p class="callout-label">TEACHER'S NOTE</p>
+    <div class="callout-body">
+      傾きの計算は難しい公式ではなく、「2点を選んで、変化量を引き算して、割るだけ」。工業科クラスでは特に、グラフ上に実際に2点を打たせて、Δの三角形を描かせると理解が早い。
+    </div>
+  </div>
+
+  <div class="memo-area">
+    <p class="memo-label">MEMO — 傾きと切片を自分の言葉でメモ</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　グラフの読み取り</span>
+    <span>2 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 3 ═══ -->
+<div class="page">
+
+  <div class="section">
+    <p class="section-label">STORY</p>
+    <h2>3つ目の情報は「面積」</h2>
+
+    <div class="scene">
+      <span class="scene-tag">SCENE 04</span>
+      <p>先生「3つ目が『面積』。グラフと横軸のあいだの面積は、縦軸の値と横軸の変化量を掛け合わせた量になる」</p>
+      <p>翔太「掛け算……面積だから、たしかに『縦×横』ですね」</p>
+      <p>先生「その通り。さっきのv-tグラフなら、面積は速度×時間。単位で考えると (m/s)×s＝mだから——」</p>
+      <p>翔太「距離になる！」</p>
+    </div>
+
+    <div class="callout callout-key">
+      <p class="callout-label">KEY POINT</p>
+      <div class="callout-body">
+        グラフの面積 ＝ 縦軸の値 × 横軸の<span class="blank short"></span>の積み重ね。単位を掛け合わせると、面積が何を表すかが分かる。
+      </div>
+    </div>
+
+    <div class="examples">
+      <div class="example-card">
+        <p class="ex-title">📈 直線の傾き</p>
+        <p class="ex-body">2点(1, 3)と(3, 9)を通る直線の傾き＝(9－3)／(3－1)＝<span class="blank short"></span></p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">📊 グラフの切片</p>
+        <p class="ex-body">あるグラフがy軸を高さ2で通っているとき、切片＝<span class="blank short"></span></p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🚗 v-tグラフの面積</p>
+        <p class="ex-body">一定速度4m/sで3秒間走ったときの面積＝4×3＝<span class="blank short"></span>m</p>
+      </div>
+      <div class="example-card">
+        <p class="ex-title">🌡️ 傾きの符号</p>
+        <p class="ex-body">気温が時間とともに下がっているとき、グラフの傾きは<span class="blank short"></span>（正／負／0）</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">THINK</p>
+    <h2>曲線のグラフだったら？</h2>
+    <p><strong>Q.</strong> 直線ならどこで測っても傾きは同じ。でも、曲線のグラフだったら、傾きはどうなる？</p>
+    <p>曲線では、場所によって傾きの大きさが<span class="blank short"></span>。まっすぐな部分と急な部分で、変化の割合が違うということ。</p>
+  </div>
+
+  <div class="callout callout-think">
+    <p class="callout-label">HERE'S THE THING</p>
+    <div class="callout-body">
+      傾き・切片・面積を読み取る技能は、物理のグラフだけのものじゃない。気温のグラフ、成績のグラフ、株価のグラフ——<strong>あらゆるデータ</strong>に使える、汎用的な読み取り方だ。
+    </div>
+  </div>
+
+  <div class="word-bank">
+    <p class="wb-label">WORD BANK（この中から選んで書き込もう）</p>
+    <p class="wb-words">横　／　縦　／　0　／　変化量　／　変わる　／　傾き　／　切片　／　面積</p>
+  </div>
+
+  <div class="section" style="margin-top:10mm;">
+    <p class="section-label">SUMMARY</p>
+    <h2>グラフの読み取り（自分の言葉で書いてみよう）</h2>
+    <table class="vocab-table">
+      <tr><th>傾きの意味</th><td class="write-line"></td></tr>
+      <tr><th>切片の意味</th><td class="write-line"></td></tr>
+      <tr><th>面積の意味</th><td class="write-line"></td></tr>
+      <tr><th>直線と曲線の違い</th><td class="write-line"></td></tr>
+    </table>
+  </div>
+
+  <div class="callout callout-key">
+    <p class="callout-label">ONE LINE</p>
+    <div class="callout-body" style="text-align:center; font-family:'Noto Serif JP',serif; font-size:11pt;">
+      グラフは、傾き・切片・<span class="blank short"></span>を読めば、数字の裏側が見えてくる。
+    </div>
+  </div>
+
+  <div class="memo-area" style="min-height:16mm;">
+    <p class="memo-label">MEMO — 物理数学シリーズ、6回をふり返って一言</p>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　グラフの読み取り</span>
+    <span>3 / 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ PAGE 4 — QUIZ ═══ -->
+<div class="page">
+
+  <div class="quiz-header">
+    <p class="section-label">CHECK</p>
+    <h2>確認テスト</h2>
+    <p style="font-size:9pt; color:var(--ink-muted);">約10分 · 答えは書き込もう</p>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">01 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">グラフの傾きを求める式はどれか。</p>
+    <ul class="choices">
+      <li data-label="A.">Δy／Δx</li>
+      <li data-label="B.">Δx／Δy</li>
+      <li data-label="C.">x×y</li>
+      <li data-label="D.">y＋x</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">02 <span class="quiz-level">基礎</span></p>
+    <p class="quiz-q">グラフの「切片」とは何か。</p>
+    <ul class="choices">
+      <li data-label="A.">横軸が0のときの縦軸の値</li>
+      <li data-label="B.">縦軸が0のときの横軸の値</li>
+      <li data-label="C.">グラフの最大値</li>
+      <li data-label="D.">グラフの最小値</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">03 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">2点(0, 2)と(4, 10)を通る直線の傾きはいくつか。</p>
+    <ul class="choices">
+      <li data-label="A.">2</li>
+      <li data-label="B.">4</li>
+      <li data-label="C.">8</li>
+      <li data-label="D.">0.5</li>
+    </ul>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">04 <span class="quiz-level">応用 · 記述</span></p>
+    <p class="quiz-q">v-tグラフ（縦軸：速度［m/s］、横軸：時間［s］）で、グラフの面積が何を表すか、単位に注目して説明しなさい。</p>
+    <div class="answer-lines double"></div>
+  </div>
+
+  <div class="quiz-item">
+    <p class="quiz-num">05 <span class="quiz-level">応用</span></p>
+    <p class="quiz-q">一定の速度6m/sで5秒間移動したとき、v-tグラフの面積（＝移動距離）は何mか。</p>
+    <ul class="choices">
+      <li data-label="A.">11m</li>
+      <li data-label="B.">1.2m</li>
+      <li data-label="C.">30m</li>
+      <li data-label="D.">6m</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-tip" style="margin-top:8mm;">
+    <p class="callout-label">COMPLETE</p>
+    <div class="callout-body">
+      <strong>物理数学シリーズ、これで全6回が完成！</strong> 単位・指数・有効数字・ベクトルとスカラー・三角関数・グラフの読み取り——これで力学シリーズを読み解く道具がそろった。
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>第6回　グラフの読み取り</span>
+    <span>4 / 4</span>
+  </div>
+</div>
+
+</body>
+</html>
