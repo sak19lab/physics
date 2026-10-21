@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font:14px/1.5 system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Kimi to Lab 物理ドリル</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+/* Layout: one-screen game on a dark lab-blackboard; four big colored answer tiles in a 2x2 grid (1 column on narrow phones). Single dark look by choice. */
+:root{
+  --board:#16241f;        /* blackboard green-black */
+  --board-2:#1f3029;
+  --chalk:#eef3ea;
+  --chalk-dim:#9fb2a7;
+  --line:#2f4339;
+  --a1:#e5484d;           /* answer tile colors */
+  --a2:#2f7fe0;
+  --a3:#e0a31a;
+  --a4:#2fa66a;
+  --good:#3ccf86;
+  --bad:#ff6b6b;
+  --gold:#ffd166;
+  --f-display:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-num:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{
+  background:var(--board);color:var(--chalk);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  background-image:radial-gradient(ellipse at 20% 0%,#22382f 0%,transparent 55%),radial-gradient(ellipse at 100% 100%,#1b2d27 0%,transparent 50%);
+}
+.wrap{max-width:860px;margin:0 auto;padding-block:20px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:20px;min-height:100%;box-sizing:border-box}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+
+/* ---------- home ---------- */
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,6vw,44px);margin:0;letter-spacing:.02em;text-wrap:balance}
+.brand .tag{font-size:13px;color:var(--chalk-dim);letter-spacing:.12em}
+.lead{margin:0;color:var(--chalk-dim);max-width:60ch}
+.section-label{font-size:12px;letter-spacing:.18em;color:var(--chalk-dim);margin:8px 0 0}
+.units{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.unit{
+  text-align:left;background:var(--board-2);border:2px solid var(--line);border-radius:14px;padding:16px;
+  display:flex;flex-direction:column;gap:6px;transition:transform .15s,border-color .15s;
+}
+.unit:hover:not(:disabled){transform:translateY(-2px);border-color:var(--gold)}
+.unit .ch{font-size:12px;color:var(--chalk-dim);letter-spacing:.08em}
+.unit .nm{font-family:var(--f-display);font-weight:800;font-size:20px}
+.unit .meta{font-size:13px;color:var(--chalk-dim)}
+.unit .meta b{color:var(--gold);font-weight:700}
+.unit:disabled{opacity:.45;cursor:not-allowed}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.toggle{display:flex;align-items:center;gap:8px;background:var(--board-2);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px}
+.toggle input{accent-color:var(--a4);width:18px;height:18px}
+.linkbtn{background:none;border:0;padding:0;color:var(--chalk);text-decoration:underline;text-underline-offset:3px;font-size:14px}
+.linkbtn.danger{color:var(--bad);font-weight:700}
+.toggle select{background:var(--board);color:var(--chalk);border:1px solid var(--line);border-radius:8px;padding:2px 6px;font:inherit}
+
+/* ---------- quiz ---------- */
+.hud{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.hud .unitname{font-size:13px;color:var(--chalk-dim)}
+.pill{background:var(--board-2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;display:inline-flex;gap:6px;align-items:center}
+.pill.streak{color:var(--gold)}
+.timer{height:8px;background:var(--board-2);border-radius:99px;overflow:hidden}
+.timer i{display:block;height:100%;background:var(--gold);width:100%;transform-origin:left}
+.timer.off{visibility:hidden}
+.qcard{
+  background:var(--chalk);color:#1a2420;border-radius:18px;padding:clamp(18px,4vw,30px);
+  min-height:120px;display:flex;flex-direction:column;justify-content:center;gap:8px;
+  box-shadow:0 6px 0 #0c1512;
+}
+.qcard .qno{font-family:var(--f-num);font-size:13px;color:#5c6f66}
+.qcard .qt{font-family:var(--f-display);font-weight:800;font-size:clamp(19px,3.6vw,26px);line-height:1.5;margin:0;text-wrap:pretty}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{
+  border:0;border-radius:14px;padding:18px 16px;min-height:88px;display:flex;align-items:center;gap:14px;text-align:left;
+  font-size:clamp(16px,2.8vw,20px);font-weight:700;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.35);
+  transition:transform .08s,opacity .2s,filter .2s;min-width:0;
+}
+.ans:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.35)}
+.ans .shape{flex:none;width:34px;height:34px;display:grid;place-items:center}
+.ans .shape svg{width:28px;height:28px;fill:#fff}
+.ans .txt{min-width:0;overflow-wrap:anywhere}
+.ans[data-i="0"]{background:var(--a1)}
+.ans[data-i="1"]{background:var(--a2)}
+.ans[data-i="2"]{background:var(--a3)}
+.ans[data-i="3"]{background:var(--a4)}
+.answers.done .ans{cursor:default}
+.answers.done .ans.dim{opacity:.28;filter:grayscale(.6)}
+.answers.done .ans.right{outline:4px solid #fff;outline-offset:-4px}
+.answers.done .ans .mark{margin-left:auto;font-size:22px}
+
+.feedback{border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;border:2px solid}
+.feedback.ok{border-color:var(--good);background:rgba(60,207,134,.1)}
+.feedback.ng{border-color:var(--bad);background:rgba(255,107,107,.1)}
+.feedback .head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.feedback .verdict{font-family:var(--f-display);font-weight:800;font-size:22px}
+.feedback.ok .verdict{color:var(--good)}
+.feedback.ng .verdict{color:var(--bad)}
+.feedback .gain{font-family:var(--f-num);color:var(--gold)}
+.feedback .exp{margin:0}
+.feedback .correct{margin:0;font-size:14px;color:var(--chalk-dim)}
+.feedback .correct b{color:var(--chalk)}
+
+.btn{
+  background:var(--chalk);color:#14201b;border:0;border-radius:12px;padding:12px 22px;font-weight:700;font-size:16px;
+  box-shadow:0 4px 0 #0c1512;align-self:flex-start;
+}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #0c1512}
+.btn.ghost{background:transparent;color:var(--chalk);border:2px solid var(--line);box-shadow:none}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px}
+
+/* ---------- result ---------- */
+.score-hero{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.score-hero .big{font-family:var(--f-num);font-size:clamp(44px,10vw,72px);color:var(--gold);line-height:1}
+.score-hero .msg{font-family:var(--f-display);font-weight:800;font-size:22px}
+.stats{display:flex;flex-wrap:wrap;gap:10px}
+.review{display:flex;flex-direction:column;gap:10px}
+.rv{background:var(--board-2);border:1px solid var(--line);border-left:5px solid var(--bad);border-radius:10px;padding:12px 14px}
+.rv.ok{border-left-color:var(--good)}
+.rv .rq{font-weight:700;margin:0}
+.rv .ra{font-size:14px;color:var(--chalk-dim);margin:4px 0 0}
+.rv .ra b{color:var(--chalk)}
+.rv .re{font-size:14px;margin:6px 0 0}
+details summary{cursor:pointer;color:var(--chalk-dim);font-size:14px}
+
+@media (max-width:520px){
+  .answers{grid-template-columns:1fr}
+  .ans{min-height:64px;padding:14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.pop{animation:pop .35s ease-out}
+@keyframes pop{0%{transform:scale(.96);opacity:.4}100%{transform:none;opacity:1}}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="app"></div>
+
+<script>
+/* =========================================================
+   問題データ
+   choices の「先頭」が正解。表示時にシャッフルされる。
+   単元を足すときは UNITS に { id, chapter, title, questions:[...] } を追加するだけ。
+   ========================================================= */
+const UNITS = [
+  {
+    id: "uniform-accel",
+    chapter: "物理基礎｜運動の表し方",
+    title: "等加速度直線運動",
+    questions: [
+      { q: "v = v₀ + at の「a」は何を表す？", c: ["加速度","速さ","時間","変位"],
+        e: "a は acceleration（加速度）。1秒あたりに速度がどれだけ変わるかを表すよ。" },
+      { q: "v = v₀ + at の「v₀」は何を表す？", c: ["初速度（t = 0 のときの速度）","最後の速度","平均の速度","加速度"],
+        e: "右下の 0 は「時刻 0」の意味。スタートした瞬間の速度＝初速度だね。" },
+      { q: "等加速度直線運動の変位 x を表す正しい式は？", c: ["x = v₀t + ½at²","x = v₀t + at²","x = v₀ + ½at²","x = ½v₀t + at²"],
+        e: "x = v₀t + ½at²。½ と t² の「2乗」をセットで覚えよう。" },
+      { q: "3つの公式のうち、時間 t が入っていない式はどれ？", c: ["v² − v₀² = 2ax","v = v₀ + at","x = v₀t + ½at²","x = vt"],
+        e: "v² − v₀² = 2ax は t がない。「時間が問題文に出てこない」ときの切り札！" },
+      { q: "v² − v₀² = □　□ に入るのは？", c: ["2ax","ax","½ax","2at"],
+        e: "v² − v₀² = 2ax。「2ax（にえーえっくす）」と声に出して覚えるのがおすすめ。" },
+      { q: "加速度の単位はどれ？", c: ["m/s²","m/s","m","s/m"],
+        e: "速度（m/s）が 1 秒（s）あたりどれだけ変わるか → m/s ÷ s = m/s²。" },
+      { q: "v-t グラフの「傾き」が表すものは？", c: ["加速度","変位","速度","時間"],
+        e: "傾き＝縦の変化÷横の変化＝速度の変化÷時間＝加速度。" },
+      { q: "v-t グラフと t 軸で囲まれた「面積」が表すものは？", c: ["変位（移動距離）","加速度","速度","時間"],
+        e: "面積＝速度×時間＝距離。台形や三角形の面積で変位が求まるよ。" },
+      { q: "等速直線運動をしている物体の加速度は？", c: ["0 m/s²","1 m/s²","速さと同じ値","時間とともに大きくなる"],
+        e: "速度が変わらない → 速度の変化が 0 → 加速度も 0。" },
+      { q: "加速度が負（マイナス）のとき、正しいのはどれ？", c: ["加速度が負の向きを向いている","物体は必ず止まりかけている","物体は必ず後ろ向きに進んでいる","速さが 0 である"],
+        e: "符号は「向き」を表すだけ。負の向きに進んでいる物体なら、負の加速度で速くなることもあるよ。" },
+      { q: "x-t グラフが放物線になる運動はどれ？", c: ["等加速度直線運動","等速直線運動","静止","どれでもない"],
+        e: "x = v₀t + ½at² は t の2次式 → グラフは放物線。等速なら直線、静止なら水平線。" },
+      { q: "72 km/h を m/s に直す式はどれ？", c: ["72 × 1000 ÷ 3600","72 × 3600 ÷ 1000","72 ÷ 1000 × 3600","72 × 1000 × 3600"],
+        e: "km → m は ×1000、h → s は 1時間 = 3600秒 で割る。答えは 20 m/s。「÷3.6」と覚えてもOK！" },
+      { q: "静止していた物体が加速度 2.0 m/s² で動き出した。3.0 秒後の速さは？", c: ["6.0 m/s","5.0 m/s","9.0 m/s","1.5 m/s"],
+        e: "v = v₀ + at = 0 + 2.0 × 3.0 = 6.0 m/s。" },
+      { q: "静止していた物体が加速度 2.0 m/s² で動き出した。3.0 秒間に進む距離は？", c: ["9.0 m","6.0 m","18 m","3.0 m"],
+        e: "x = v₀t + ½at² = 0 + ½ × 2.0 × 3.0² = 9.0 m。½ を忘れると 18 m になっちゃう。" },
+      { q: "5.0 m/s で進む物体が、4.0 秒後に 13 m/s になった。加速度は？", c: ["2.0 m/s²","3.25 m/s²","4.5 m/s²","8.0 m/s²"],
+        e: "a = (v − v₀) ÷ t = (13 − 5.0) ÷ 4.0 = 2.0 m/s²。" },
+      { q: "初速度 4.0 m/s、加速度 2.0 m/s² で 2.0 秒間進んだ。変位 x を求める式は？", c: ["x = 4.0 × 2.0 + ½ × 2.0 × 2.0²","x = 4.0 × 2.0 + 2.0 × 2.0²","x = 4.0 + ½ × 2.0 × 2.0²","x = ½ × 4.0 × 2.0 + 2.0 × 2.0²"],
+        e: "x = v₀t + ½at² に v₀ = 4.0、a = 2.0、t = 2.0 を代入。計算すると 8.0 + 4.0 = 12 m。" },
+      { q: "10 m/s で走る車が、加速度 −2.0 m/s² で減速した。止まるまでの時間は？", c: ["5.0 s","20 s","0.20 s","10 s"],
+        e: "止まる → v = 0。0 = 10 + (−2.0)t より t = 5.0 s。" },
+      { q: "10 m/s で走る車が、加速度 −2.0 m/s² で減速した。止まるまでに進む距離 x を求める式は？", c: ["0² − 10² = 2 × (−2.0) × x","10² − 0² = 2 × (−2.0) × x","0 − 10 = 2 × (−2.0) × x","0² − 10² = (−2.0) × x"],
+        e: "止まる → v = 0、初速度 v₀ = 10。v² − v₀² = 2ax に入れる。時間が出てこないから t なしの式！答えは x = 25 m。" },
+      { q: "静止から加速度 4.0 m/s² で動き、速さが 8.0 m/s になった。進んだ距離 x を求める式は？", c: ["8.0² − 0² = 2 × 4.0 × x","8.0 = 4.0 × x","8.0² = 4.0 × x","8.0 − 0 = 2 × 4.0 × x"],
+        e: "静止から → v₀ = 0。v² − v₀² = 2ax に v = 8.0、a = 4.0 を代入。64 = 8x で x = 8.0 m。" },
+      { q: "v-t グラフが「右上がりの直線」。この運動はどれ？", c: ["正の向きに加速する等加速度直線運動","等速直線運動","静止","加速度がだんだん大きくなる運動"],
+        e: "直線＝傾き（加速度）が一定。右上がり＝正の加速度。" },
+    ]
+  },
+  { id:"relative",   chapter:"物理基礎｜運動の表し方", title:"速度の合成・相対速度", questions:[] },
+  { id:"freefall",   chapter:"物理基礎｜運動の表し方", title:"自由落下・鉛直投射",   questions:[] },
+  { id:"projectile", chapter:"物理基礎｜運動の表し方", title:"水平投射・斜方投射",   questions:[] },
+  { id:"force",      chapter:"物理基礎｜運動の法則",   title:"力のつりあい",         questions:[] },
+  {
+    id: "friction",
+    chapter: "物理基礎｜運動の法則",
+    title: "摩擦力",
+    questions: [
+      { q: "あらい床に置いた物体を水平方向に 10 N で押しても動かなかった。このときの静止摩擦力の大きさは？", c: ["10 N","0 N","10 N より大きい","10 N より小さい"],
+        e: "動かない＝力がつりあっている。だから静止摩擦力は押す力と同じ 10 N！" },
+      { q: "押しても動かない物体にはたらく静止摩擦力の向きは？", c: ["押す力と逆向き","押す力と同じ向き","鉛直上向き","鉛直下向き"],
+        e: "摩擦力は「動かされまい」とする向き。押す力とつりあうから逆向きだね。" },
+      { q: "最大摩擦力 F₀ を表す式は？（μ：静止摩擦係数、N：垂直抗力）", c: ["F₀ = μN","F₀ = N ÷ μ","F₀ = μ + N","F₀ = μN²"],
+        e: "最大摩擦力 F₀ = μN。垂直抗力が大きい（強く押しつけられている）ほど大きくなるよ。" },
+      { q: "動摩擦力 F′ を表す式は？（μ′：動摩擦係数、N：垂直抗力）", c: ["F′ = μ′N","F′ = μ′ ÷ N","F′ = μ′ + N","F′ = N ÷ μ′"],
+        e: "形は最大摩擦力と同じ。係数が μ′（ダッシュ付き）に変わるだけ！" },
+      { q: "摩擦力の式 F = μN の「N」は何を表す？", c: ["垂直抗力","重力","押す力","張力"],
+        e: "N は Normal force＝垂直抗力。単位の N（ニュートン）とまぎらわしいので注意！" },
+      { q: "同じ物体を、床との接触面積が大きくなる向きに置きなおした。最大摩擦力はどうなる？", c: ["変わらない","大きくなる","小さくなる","0 になる"],
+        e: "F₀ = μN の式に面積は入っていない！質量が同じなら N も同じだから、摩擦力は変わらないよ。" },
+      { q: "摩擦係数の単位は？", c: ["単位なし","N","N/m","kg"],
+        e: "μ = F₀ ÷ N で、N ÷ N になるから単位は消える。ただの「数」だよ。" },
+      { q: "一般に、静止摩擦係数 μ と動摩擦係数 μ′ の大小関係は？", c: ["μ > μ′","μ < μ′","μ = μ′","決まっていない"],
+        e: "動き出すまでが一番重い！動き出すと少し軽くなる → μ > μ′。" },
+      { q: "止まっている物体を押す力を少しずつ大きくする。動き出すまで、静止摩擦力はどうなる？", c: ["押す力と同じだけ大きくなる","ずっと一定","だんだん小さくなる","最初から最大摩擦力"],
+        e: "静止摩擦力は押す力に合わせて変わる。上限が最大摩擦力で、それを超えると動き出す。" },
+      { q: "物体が動き出す直前の静止摩擦力を何という？", c: ["最大摩擦力","動摩擦力","垂直抗力","慣性力"],
+        e: "静止摩擦力の「限界値」＝最大摩擦力 F₀ = μN。" },
+      { q: "水平な床に置いた質量 m の物体。垂直抗力 N の大きさは？（重力加速度 g）", c: ["mg","m","g","μmg"],
+        e: "鉛直方向は重力 mg と垂直抗力 N がつりあう → N = mg。" },
+      { q: "垂直抗力 20 N、静止摩擦係数 0.50。最大摩擦力は？", c: ["10 N","40 N","20 N","0.025 N"],
+        e: "F₀ = μN = 0.50 × 20 = 10 N。" },
+      { q: "垂直抗力 30 N、動摩擦係数 0.20。動摩擦力は？", c: ["6.0 N","150 N","30 N","0.60 N"],
+        e: "F′ = μ′N = 0.20 × 30 = 6.0 N。" },
+      { q: "最大摩擦力が 10 N の物体を、水平に 6 N で押したが動かなかった。摩擦力は？", c: ["6 N","10 N","4 N","0 N"],
+        e: "ひっかけ注意！動いてないなら摩擦力＝押す力の 6 N。いつも μN になるわけじゃないよ。" },
+      { q: "最大摩擦力が 10 N の物体を、水平に 12 N で押した。どうなる？", c: ["動き出す","動かない","摩擦力が 12 N になって止まったまま","浮き上がる"],
+        e: "押す力 12 N が最大摩擦力 10 N を超えた → 動き出す。" },
+      { q: "質量 2.0 kg の物体が水平な床にある。静止摩擦係数 0.40、g = 9.8 m/s²。最大摩擦力を求める式は？", c: ["0.40 × 2.0 × 9.8","0.40 × 2.0","2.0 × 9.8 ÷ 0.40","0.40 × 9.8"],
+        e: "まず N = mg = 2.0 × 9.8。それに μ をかけて F₀ = 0.40 × 2.0 × 9.8（≒ 7.8 N）。" },
+      { q: "質量 5.0 kg の物体が水平な床をすべっている。動摩擦係数 0.20、g = 9.8 m/s²。動摩擦力を求める式は？", c: ["0.20 × 5.0 × 9.8","0.20 × 5.0","5.0 × 9.8","5.0 × 9.8 ÷ 0.20"],
+        e: "F′ = μ′N = μ′mg = 0.20 × 5.0 × 9.8（= 9.8 N）。質量のまま（kg）でかけないように！" },
+      { q: "動摩擦力の大きさについて正しいのは？", c: ["速さに関係なくほぼ一定","速いほど大きくなる","遅いほど大きくなる","いつも押す力と同じ大きさ"],
+        e: "F′ = μ′N に速さは入っていない。すべっている間はほぼ一定だよ。" },
+      { q: "動摩擦力の向きは？", c: ["物体がすべる向きと逆向き","物体がすべる向きと同じ向き","鉛直上向き","いつも右向き"],
+        e: "動摩擦力は運動をじゃまする向き＝すべる向きと逆。" },
+      { q: "床の上をすべる物体を、8.0 N で押して一定の速さで動かしている。動摩擦力の大きさは？", c: ["8.0 N","0 N","8.0 N より小さい","8.0 N より大きい"],
+        e: "一定の速さ＝加速度 0＝力がつりあっている。だから動摩擦力も 8.0 N。" },
+    ]
+  },
+  {
+    id: "friction-judge",
+    chapter: "物理基礎｜運動の法則",
+    title: "摩擦力の見きわめ",
+    // 選択肢を固定（順番も固定）。c[0] が正解。
+    fixed: ["静止摩擦力","最大摩擦力","動摩擦力","摩擦なし"],
+    questions: [
+      { q: "あらい床に物体を乗せて静止させた（外力なし）。このときはたらく摩擦力は？", c: ["摩擦なし"],
+        e: "水平方向に動かそうとする力がないから、摩擦力もはたらかない。「あらい＝いつも摩擦」じゃないよ！" },
+      { q: "なめらかな床に物体を置いて水平方向に押した。このときはたらく摩擦力は？", c: ["摩擦なし"],
+        e: "「なめらか」＝摩擦がないという意味。押しても摩擦力は 0。" },
+      { q: "あらい床の物体を水平方向に押したが、動かなかった。このときはたらく摩擦力は？", c: ["静止摩擦力"],
+        e: "押しているのに動かない → 静止摩擦力が押す力とつりあっている。" },
+      { q: "あらい床の物体を押す力を少しずつ大きくした。ちょうど動き出す直前にはたらく摩擦力は？", c: ["最大摩擦力"],
+        e: "「動き出す直前」「すべり出す直前」は最大摩擦力の合言葉！" },
+      { q: "あらい床の上を物体がすべっている。このときはたらく摩擦力は？", c: ["動摩擦力"],
+        e: "あらい面の上で動いている → 動摩擦力。" },
+      { q: "あらい斜面の上に物体が静止している。このときはたらく摩擦力は？", c: ["静止摩擦力"],
+        e: "重力の斜面方向の成分が「すべり落とそうとする力」になる。それと静止摩擦力がつりあっているよ。" },
+      { q: "なめらかな斜面を物体がすべり下りている。このときはたらく摩擦力は？", c: ["摩擦なし"],
+        e: "動いていても、なめらかなら摩擦なし。" },
+      { q: "あらい斜面を物体がすべり下りている。このときはたらく摩擦力は？", c: ["動摩擦力"],
+        e: "あらい面 ＋ すべっている → 動摩擦力。向きは斜面に沿って上向き。" },
+      { q: "あらい斜面の傾きを少しずつ大きくした。物体がすべり出す直前にはたらく摩擦力は？", c: ["最大摩擦力"],
+        e: "「すべり出す直前」→ 最大摩擦力。このときの角度を「摩擦角」というよ。" },
+      { q: "あらい床の物体を、ひもで水平に引いたが動かなかった。このときはたらく摩擦力は？", c: ["静止摩擦力"],
+        e: "「押す」でも「引く」でも同じ。力を加えているのに動かない → 静止摩擦力。" },
+      { q: "あらい床の物体を押して動かし、手をはなした。物体がすべって止まるまでの間にはたらく摩擦力は？", c: ["動摩擦力"],
+        e: "手をはなしても、すべっている間は動摩擦力。この力で減速して止まるよ。" },
+      { q: "あらい床の上をすべっていた物体が、やがて止まった。止まった後にはたらく摩擦力は？（外力なし）", c: ["摩擦なし"],
+        e: "止まった後は動かそうとする力がない → 摩擦なし。「止まってる＝静止摩擦力」とは限らない！" },
+      { q: "あらい床の上で、物体を押し続けて一定の速さで動かしている。このときはたらく摩擦力は？", c: ["動摩擦力"],
+        e: "力がつりあっていても、動いていれば動摩擦力。「つりあい＝静止摩擦力」じゃないよ。" },
+      { q: "あらい床の物体を、斜め下向きに押したが動かなかった。このときはたらく摩擦力は？", c: ["静止摩擦力"],
+        e: "斜めに押すと水平方向の成分がある。それでも動かない → 静止摩擦力。" },
+      { q: "あらい床の物体を、真上に引っぱったが床からはなれなかった。このときはたらく摩擦力は？", c: ["摩擦なし"],
+        e: "真上に引いても水平方向の力は 0。摩擦力は「面に沿った向き」の力だからはたらかない。" },
+      { q: "なめらかとみなせる氷の上を、カーリングのストーンがすべっている。このときはたらく摩擦力は？", c: ["摩擦なし"],
+        e: "「なめらかとみなす」と書いてあれば摩擦なし。問題文のこの一言を見逃さないで！" },
+      { q: "あらい水平な台の物体をばねで引く。ばねの伸びを少しずつ大きくしていき、物体が動き出す直前にはたらく摩擦力は？", c: ["最大摩擦力"],
+        e: "ばねでも手でも同じ。「動き出す直前」→ 最大摩擦力。" },
+      { q: "トラックの荷台に荷物があり、トラックが加速しても荷物は荷台の上ですべらず一緒に動いている。荷物にはたらく摩擦力は？", c: ["静止摩擦力"],
+        e: "地面から見ると動いているけど、荷台に対してはすべっていない → 静止摩擦力。この力で荷物が加速しているよ。" },
+      { q: "あらい床の物体に、最大摩擦力より大きい力を水平に加え続けている。このときはたらく摩擦力は？", c: ["動摩擦力"],
+        e: "最大摩擦力を超えた → 動き出している → 動摩擦力。" },
+      { q: "あらい床の物体を押しているが動かない。そこで押す力を弱めた。このときはたらく摩擦力は？", c: ["静止摩擦力"],
+        e: "まだ押していて、動いていない → 静止摩擦力。押す力を弱めたぶん、摩擦力も小さくなるよ。" },
+    ]
+  },
+  { id:"eom",        chapter:"物理基礎｜運動の法則",   title:"運動方程式",           questions:[] },
+];
+
+/* ========================================================= */
+const TIME_OPTIONS = [20, 40, 0]; // 秒（0 = なし）
+const SHAPES = [
+  '<svg viewBox="0 0 24 24"><path d="M12 3 22 20H2z"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12z"/></svg>',
+  '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>',
+  '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>',
+];
+const app = document.getElementById("app");
+const esc = s => String(s).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v==null ? d : JSON.parse(v); }catch(_){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){} }
+};
+let settings = Object.assign({ time: 20, shuffleQ: false }, store.get("drill-settings", {}));
+if (!TIME_OPTIONS.includes(settings.time)) settings.time = 20;
+
+let S = null;     // 現在のゲーム状態
+let tick = null;  // タイマー
+
+/* ---------- ホーム ---------- */
+function home(){
+  clearInterval(tick);
+  const best = store.get("drill-best", {});
+  app.innerHTML = `
+    <header class="brand"><h1>Kimi to Lab 物理ドリル</h1><span class="tag">4択・20問</span></header>
+    <p class="lead">単元を選んでスタート。早く答えるほど高得点、連続正解でボーナス。1〜4キーでも答えられるよ。</p>
+    <p class="section-label">単元</p>
+    <div class="units">
+      ${UNITS.map(u => {
+        const ready = u.questions.length > 0;
+        const b = best[u.id];
+        return `<button class="unit" data-id="${u.id}" ${ready?"":"disabled"}>
+          <span class="ch">${esc(u.chapter)}</span>
+          <span class="nm">${esc(u.title)}</span>
+          <span class="meta">${ready ? `${u.questions.length}問${b ? `　ベスト <b class="num">${b}</b> 点` : ""}` : "準備中"}</span>
+        </button>`;
+      }).join("")}
+    </div>
+    <p class="section-label">設定</p>
+    <div class="opts">
+      <label class="toggle">制限時間 <select id="opt-timer">${TIME_OPTIONS.map(t => `<option value="${t}" ${settings.time===t?"selected":""}>${t ? t+"秒" : "なし"}</option>`).join("")}</select></label>
+      <label class="toggle"><input type="checkbox" id="opt-shuffle" ${settings.shuffleQ?"checked":""}> 問題の順番をシャッフル</label>
+      <span class="toggle" id="reset-box">
+        <button class="linkbtn" id="reset">ベストスコアをリセット</button>
+      </span>
+    </div>`;
+  app.querySelectorAll(".unit:not(:disabled)").forEach(b => b.onclick = () => start(UNITS.find(u => u.id === b.dataset.id)));
+  app.querySelector("#opt-timer").onchange = e => { settings.time = +e.target.value; store.set("drill-settings", settings); };
+  app.querySelector("#opt-shuffle").onchange = e => { settings.shuffleQ = e.target.checked; store.set("drill-settings", settings); };
+  const box = app.querySelector("#reset-box");
+  app.querySelector("#reset").onclick = () => {
+    box.innerHTML = `全部の単元のベストを消す？
+      <button class="linkbtn danger" id="reset-yes">消す</button>
+      <button class="linkbtn" id="reset-no">やめる</button>`;
+    box.querySelector("#reset-yes").onclick = () => { store.set("drill-best", {}); home(); };
+    box.querySelector("#reset-no").onclick = home;
+    box.querySelector("#reset-no").focus();
+  };
+}
+
+/* ---------- ゲーム ---------- */
+function start(unit, onlyList){
+  let qs = onlyList || unit.questions;
+  if (settings.shuffleQ) qs = shuffle(qs);
+  S = { unit, qs, i: 0, score: 0, streak: 0, bestStreak: 0, log: [], retry: !!onlyList };
+  showQ();
+}
+
+function showQ(){
+  const q = S.qs[S.i];
+  const order = S.unit.fixed
+    ? S.unit.fixed.map(t => ({ t, right: t === q.c[0] }))
+    : shuffle(q.c.map((t, k) => ({ t, right: k === 0 })));
+  S.cur = { q, order, answered: false, t0: performance.now() };
+  app.innerHTML = `
+    <div class="hud">
+      <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+        <span class="unitname">${esc(S.unit.title)}${S.retry ? "（復習）" : ""}</span>
+        <span class="num">${S.i+1} / ${S.qs.length}</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="pill streak" id="streak" ${S.streak>=2?"":"hidden"}>🔥 <span class="num">${S.streak}</span>連続</span>
+        <span class="pill"><span class="num" id="score">${S.score}</span>点</span>
+      </div>
+    </div>
+    <div class="timer ${settings.time?"":"off"}"><i id="bar"></i></div>
+    <div class="qcard pop">
+      <span class="qno">Q${S.i+1}</span>
+      <p class="qt">${esc(q.q)}</p>
+    </div>
+    <div class="answers" id="answers">
+      ${order.map((o, k) => `<button class="ans" data-i="${k}"><span class="shape">${SHAPES[k]}</span><span class="txt">${esc(o.t)}</span></button>`).join("")}
+    </div>
+    <div id="fb"></div>`;
+  app.querySelectorAll(".ans").forEach(b => b.onclick = () => answer(+b.dataset.i));
+  clearInterval(tick);
+  if (settings.time){
+    const bar = document.getElementById("bar");
+    tick = setInterval(() => {
+      const left = 1 - (performance.now() - S.cur.t0) / (settings.time*1000);
+      bar.style.transform = `scaleX(${Math.max(0,left)})`;
+      bar.style.background = left < .25 ? "var(--bad)" : "var(--gold)";
+      if (left <= 0) answer(-1);
+    }, 50);
+  }
+}
+
+function answer(k){
+  if (!S.cur || S.cur.answered) return;
+  S.cur.answered = true;
+  clearInterval(tick);
+  const { q, order, t0 } = S.cur;
+  const sec = (performance.now() - t0) / 1000;
+  const ok = k >= 0 && order[k].right;
+  let gain = 0;
+  if (ok){
+    S.streak++; S.bestStreak = Math.max(S.bestStreak, S.streak);
+    const speed = settings.time ? Math.max(0, 1 - sec / settings.time) : 1;
+    gain = Math.round(500 + 500 * speed) + Math.min(S.streak - 1, 5) * 100;
+    S.score += gain;
+  } else {
+    S.streak = 0;
+  }
+  S.log.push({ q, ok, picked: k >= 0 ? order[k].t : null });
+
+  const box = document.getElementById("answers");
+  box.classList.add("done");
+  box.querySelectorAll(".ans").forEach((b, i) => {
+    b.disabled = true;
+    if (order[i].right){ b.classList.add("right"); b.insertAdjacentHTML("beforeend", '<span class="mark">✔</span>'); }
+    else if (i === k){ b.insertAdjacentHTML("beforeend", '<span class="mark">✖</span>'); }
+    else b.classList.add("dim");
+  });
+  document.getElementById("score").textContent = S.score;
+  const st = document.getElementById("streak");
+  st.hidden = S.streak < 2; st.querySelector(".num").textContent = S.streak;
+
+  const last = S.i === S.qs.length - 1;
+  const verdict = ok ? (S.streak >= 3 ? `正解！ ${S.streak}連続🔥` : "正解！") : (k < 0 ? "時間切れ…" : "ざんねん！");
+  document.getElementById("fb").innerHTML = `
+    <div class="feedback ${ok?"ok":"ng"} pop">
+      <div class="head"><span class="verdict">${verdict}</span>${ok?`<span class="gain">+${gain}</span>`:""}</div>
+      ${ok ? "" : `<p class="correct">正解：<b>${esc(q.c[0])}</b></p>`}
+      <p class="exp">${esc(q.e)}</p>
+      <button class="btn" id="next">${last ? "結果を見る" : "次の問題へ"}</button>
+    </div>`;
+  const nx = document.getElementById("next");
+  nx.onclick = () => { if (last) result(); else { S.i++; showQ(); } };
+  nx.focus({ preventScroll: true });
+  document.getElementById("fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+/* ---------- 結果 ---------- */
+function result(){
+  const right = S.log.filter(l => l.ok).length;
+  const n = S.log.length;
+  const rate = right / n;
+  const msg = rate === 1 ? "パーフェクト！完璧だね👑" : rate >= .8 ? "すごい！あと少しで満点✨" : rate >= .5 ? "いい感じ！間違えた所を復習しよう💪" : "まずは公式の意味から確認しよう📘";
+  let newBest = false;
+  if (!S.retry){
+    const best = store.get("drill-best", {});
+    if (!best[S.unit.id] || S.score > best[S.unit.id]){ best[S.unit.id] = S.score; store.set("drill-best", best); newBest = true; }
+  }
+  const wrong = S.log.filter(l => !l.ok);
+  app.innerHTML = `
+    <div class="score-hero pop">
+      <span class="unitname" style="color:var(--chalk-dim);font-size:13px">${esc(S.unit.title)}${S.retry?"（復習）":""}　結果</span>
+      <span class="big">${S.score}</span>
+      <span class="msg">${msg}</span>
+    </div>
+    <div class="stats">
+      <span class="pill">正解 <span class="num">${right} / ${n}</span></span>
+      <span class="pill">最大連続 <span class="num">${S.bestStreak}</span></span>
+      ${newBest ? '<span class="pill streak">ベスト更新！</span>' : ""}
+    </div>
+    <div class="btn-row">
+      ${wrong.length ? '<button class="btn" id="retry-wrong">間違えた問題だけもう一度</button>' : ""}
+      <button class="btn ${wrong.length?"ghost":""}" id="again">最初からもう一度</button>
+      <button class="btn ghost" id="back">単元を選ぶ</button>
+    </div>
+    <p class="section-label">ふりかえり</p>
+    <div class="review">
+      ${wrong.length ? wrong.map(rv).join("") : '<p style="margin:0">全問正解！言うことなし🎉</p>'}
+      ${right ? `<details><summary>正解した問題も見る（${right}問）</summary><div class="review" style="margin-top:10px">${S.log.filter(l=>l.ok).map(rv).join("")}</div></details>` : ""}
+    </div>`;
+  const retry = document.getElementById("retry-wrong");
+  if (retry) retry.onclick = () => start(S.unit, wrong.map(w => w.q));
+  document.getElementById("again").onclick = () => start(S.unit);
+  document.getElementById("back").onclick = home;
+  window.scrollTo({ top: 0 });
+}
+function rv(l){
+  return `<div class="rv ${l.ok?"ok":""}">
+    <p class="rq">${esc(l.q.q)}</p>
+    <p class="ra">正解：<b>${esc(l.q.c[0])}</b>${l.ok ? "" : `　あなた：${l.picked ? esc(l.picked) : "時間切れ"}`}</p>
+    <p class="re">${esc(l.q.e)}</p>
+  </div>`;
+}
+
+/* キーボード 1〜4 / Enter */
+document.addEventListener("keydown", e => {
+  if (!S || !S.cur || !document.getElementById("answers")) return;
+  if (!S.cur.answered && ["1","2","3","4"].includes(e.key)) answer(+e.key - 1);
+});
+
+home();
+</script>
+</body>
+</html>
