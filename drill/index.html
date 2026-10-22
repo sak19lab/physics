@@ -140,6 +140,31 @@ details summary{cursor:pointer;color:var(--chalk-dim);font-size:14px}
 
 .answers.tf .ans{justify-content:center;min-height:150px;font-size:72px;line-height:1;font-weight:800}
 .answers.tf .ans .mark{margin-left:0;font-size:28px}
+/* 分野 → 単元 → モード */
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--chalk-dim)}
+.legend b{color:var(--chalk);margin-right:6px}
+.legend b.gold{color:var(--gold)}
+.field{display:flex;flex-direction:column;gap:10px}
+.field-h{margin:8px 0 0;font-family:var(--f-display);font-weight:800;font-size:15px;letter-spacing:.12em;color:var(--chalk-dim);display:flex;align-items:center;gap:10px}
+.field-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.topic{background:var(--board-2);border:2px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.topic .nm{font-family:var(--f-display);font-weight:800;font-size:19px}
+.topic.soon{opacity:.45}
+.topic.soon .meta{font-size:13px;color:var(--chalk-dim)}
+.modes{display:flex;flex-wrap:wrap;gap:8px}
+.mode{background:var(--board);border:2px solid var(--line);border-radius:10px;padding:8px 12px;display:flex;flex-direction:column;align-items:flex-start;gap:0;min-width:84px;transition:border-color .15s,transform .15s}
+.mode:hover{border-color:var(--chalk);transform:translateY(-1px)}
+.mode-nm{font-weight:700;font-size:15px}
+.mode-meta{font-size:11px;color:var(--chalk-dim)}
+.mode-meta b{color:var(--gold)}
+.mode.test{border-color:#6b5f2c}
+.mode.test .mode-nm{color:var(--gold)}
+.mode.test:hover{border-color:var(--gold)}
+.intro{display:flex;flex-direction:column;gap:14px;max-width:560px}
+.intro-title{margin:0;font-family:var(--f-display);font-weight:800;font-size:clamp(24px,5vw,32px)}
+.intro-meta{margin:0;color:var(--chalk-dim);font-size:14px}
+.ans .frac>span:first-child{border-bottom-color:#fff}
 /* 一時停止 */
 .pausebtn{background:var(--board-2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;color:var(--chalk)}
 .pausebtn:hover{border-color:var(--gold)}
@@ -617,6 +642,139 @@ UNITS.push({
   ]
 });
 
+
+/* ===== 物理数学：三角比 ===== */
+const S3 = F("√3","2"), S2 = F("√2","2"), H1 = F("1","2"), R3 = F("1","√3");
+UNITS.push({
+  id: "trig", chapter: "物理数学", title: "三角比", html: true,
+  questions: [
+    { q: "直角三角形の「斜辺」とは？", c: ["直角の向かいにある、いちばん長い辺","角θの向かいにある辺","角θのとなりにある辺（斜辺以外）","いちばん短い辺"],
+      e: "斜辺は直角の向かいにある辺。いつもいちばん長いよ。" },
+    { q: "直角三角形の「対辺」とは？", c: ["角θの向かいにある辺","直角の向かいにある辺","角θのとなりにある辺（斜辺以外）","いちばん長い辺"],
+      e: "対辺は「角θと向かい合う辺」。θの位置が変わると対辺も変わるよ。" },
+    { q: "直角三角形の「隣辺」とは？", c: ["角θのとなりにある辺（斜辺以外）","角θの向かいにある辺","直角の向かいにある辺","いちばん長い辺"],
+      e: "隣辺は角θをはさむ2辺のうち、斜辺じゃないほう。" },
+    { q: "sinθ の定義は？", c: ["sinθ = " + F("対辺","斜辺"),"sinθ = " + F("隣辺","斜辺"),"sinθ = " + F("対辺","隣辺"),"sinθ = " + F("斜辺","対辺")],
+      e: "sinθ = " + F("対辺","斜辺") + "。" },
+    { q: "cosθ の定義は？", c: ["cosθ = " + F("隣辺","斜辺"),"cosθ = " + F("対辺","斜辺"),"cosθ = " + F("対辺","隣辺"),"cosθ = " + F("斜辺","隣辺")],
+      e: "cosθ = " + F("隣辺","斜辺") + "。" },
+    { q: "tanθ の定義は？", c: ["tanθ = " + F("対辺","隣辺"),"tanθ = " + F("隣辺","対辺"),"tanθ = " + F("対辺","斜辺"),"tanθ = " + F("隣辺","斜辺")],
+      e: "tanθ = " + F("対辺","隣辺") + "。斜辺を使わないのが tan！" },
+    { q: "sin30° の値は？", c: [H1, S3, S2, "√3"], e: "sin30° = " + H1 + "。" },
+    { q: "cos30° の値は？", c: [S3, H1, R3, S2], e: "cos30° = " + S3 + "。" },
+    { q: "sin45° の値は？", c: [S2, H1, "1", S3], e: "sin45° = " + S2 + "。45° は sin と cos が同じ値だよ。" },
+    { q: "tan45° の値は？", c: ["1", S2, "√3", H1], e: "45° の直角三角形は対辺 = 隣辺だから tan45° = 1。" },
+    { q: "cos60° の値は？", c: [H1, S3, "√3", "1"], e: "cos60° = " + H1 + "。" },
+    { q: "sin60° の値は？", c: [S3, H1, S2, R3], e: "sin60° = " + S3 + "。" },
+    { q: "tan60° の値は？", c: ["√3", R3, "1", S3], e: "tan60° = √3。tan30° = " + R3 + " と逆になってるよ。" },
+    { q: "sin30° と同じ値になるのはどれ？", c: ["cos60°","sin60°","tan30°","cos30°"],
+      e: "sin30° = cos60° = " + H1 + "。30° と 60° は sin と cos が入れかわるだけ！" },
+    { q: "斜辺 5、角θの対辺 3、隣辺 4 の直角三角形。sinθ は？", c: [F("3","5"), F("4","5"), F("3","4"), F("5","3")],
+      e: "sinθ = " + F("対辺","斜辺") + " = " + F("3","5") + "。" },
+    { q: "斜辺 5、角θの対辺 3、隣辺 4 の直角三角形。cosθ は？", c: [F("4","5"), F("3","5"), F("4","3"), F("5","4")],
+      e: "cosθ = " + F("隣辺","斜辺") + " = " + F("4","5") + "。" },
+    { q: "斜辺 5、角θの対辺 3、隣辺 4 の直角三角形。tanθ は？", c: [F("3","4"), F("4","3"), F("3","5"), F("4","5")],
+      e: "tanθ = " + F("対辺","隣辺") + " = " + F("3","4") + "。" },
+    { q: "大きさ F の力を、水平から角θ上向きに引く。水平成分は？", c: ["F cosθ","F sinθ","F tanθ","F"],
+      e: "水平から測るとき、水平成分は隣辺 → F cosθ。" },
+    { q: "大きさ F の力を、水平から角θ上向きに引く。垂直成分は？", c: ["F sinθ","F cosθ","F tanθ","F"],
+      e: "水平から測るとき、垂直成分は対辺 → F sinθ。" },
+    { q: "10 N の力を水平から 30° 上向きに引く。垂直成分の大きさは？（sin30° = " + H1 + "）", c: ["5 N","8.7 N","10 N","2.5 N"],
+      e: "垂直成分 = 10 × sin30° = 10 × " + H1 + " = 5 N。" },
+  ]
+});
+UNITS.push({
+  id: "trig-tf", chapter: "物理数学", title: "三角比 ○×", tf: true, html: true,
+  questions: [
+    { q: "斜辺は、直角三角形でいちばん長い辺である。", a: true, e: "直角の向かいの斜辺がいちばん長いよ。" },
+    { q: "対辺とは、角θのとなりにある辺のことである。", a: false, e: "となりにあるのは隣辺。対辺は角θの「向かい」の辺。" },
+    { q: "sinθ = " + F("対辺","斜辺") + " である。", a: true, e: "そのとおり！" },
+    { q: "cosθ = " + F("対辺","斜辺") + " である。", a: false, e: "cosθ = " + F("隣辺","斜辺") + "。対辺/斜辺は sinθ だよ。" },
+    { q: "tanθ = " + F("対辺","隣辺") + " である。", a: true, e: "tan は斜辺を使わない比。" },
+    { q: "sin30° = " + H1 + " である。", a: true, e: "sin30° = " + H1 + "。" },
+    { q: "cos30° = " + H1 + " である。", a: false, e: "cos30° = " + S3 + "。" + H1 + " になるのは cos60°。" },
+    { q: "sin45° と cos45° は等しい。", a: true, e: "どちらも " + S2 + "。" },
+    { q: "tan45° = 1 である。", a: true, e: "対辺 = 隣辺だから 1。" },
+    { q: "sin60° = " + H1 + " である。", a: false, e: "sin60° = " + S3 + "。" },
+    { q: "tan60° = √3 である。", a: true, e: "tan60° = √3。" },
+    { q: "sin30° と cos60° は等しい。", a: true, e: "どちらも " + H1 + "。30° と 60° は sin と cos が入れかわる。" },
+    { q: "tan30° = √3 である。", a: false, e: "tan30° = " + R3 + "。√3 になるのは tan60°。" },
+    { q: "0° から 90° の範囲で θ が大きくなるほど、sinθ は大きくなる。", a: true, e: "sin30° = " + H1 + " → sin60° = " + S3 + " と大きくなっていくね。" },
+    { q: "0° から 90° の範囲で θ が大きくなるほど、cosθ は大きくなる。", a: false, e: "cos は逆に小さくなる。cos30° = " + S3 + " → cos60° = " + H1 + "。" },
+    { q: "直角三角形では、sinθ の値が 1 より大きくなることがある。", a: false, e: "対辺は斜辺より短いから、" + F("対辺","斜辺") + " は 1 より小さいよ。" },
+    { q: "角度を水平から測るとき、力の水平成分は F cosθ である。", a: true, e: "水平成分は隣辺 → F cosθ。" },
+    { q: "角度を水平から測るとき、力の垂直成分は F cosθ である。", a: false, e: "垂直成分は対辺 → F sinθ。" },
+    { q: "角度を鉛直方向から測ると、力の水平成分は F sinθ になる。", a: true, e: "角度を測る場所が変わると、対辺と隣辺が入れかわる。図をかいて確認しよう！" },
+    { q: "sin はいつも「垂直」、cos はいつも「水平」を表す記号である。", a: false, e: "角度をどこから測るかで入れかわる。sin・cos は「辺の比」だよ。" },
+  ]
+});
+UNITS.push({
+  id: "trig-test", chapter: "物理数学", title: "三角比 文章題", test: true, html: true,
+  questions: [
+    { q: "20 N の力を水平から 30° 上向きに引く。水平成分の大きさは？（√3 = 1.73、答えは有効数字2桁）",
+      c: ["17 N","10 N","12 N","35 N"], e: "20 cos30° ≒ 17 N",
+      steps: [ K("考え方") + "水平から測る角度 → 水平成分 = F cosθ", K("代入") + "20 × cos30° = 20 × " + S3,
+        K("計算") + "10√3 = 10 × 1.73 = 17.3 ≒ " + A("17 N"), "⚠ 10 N は sin を使った垂直成分。sin と cos を取りちがえないで！" ] },
+    { q: "50 N の力を水平から 60° 上向きに引く。垂直成分の大きさは？（√3 = 1.73、答えは有効数字2桁）",
+      c: ["43 N","25 N","87 N","29 N"], e: "50 sin60° ≒ 43 N",
+      steps: [ K("考え方") + "水平から測る角度 → 垂直成分 = F sinθ", K("代入") + "50 × sin60° = 50 × " + S3,
+        K("計算") + "25√3 = 25 × 1.73 = 43.25 ≒ " + A("43 N"), "⚠ 25 N は cos60° を使った水平成分。" ] },
+    { q: "8.0 N の力を水平から 45° 上向きに引く。水平成分の大きさは？（√2 = 1.41、答えは有効数字2桁）",
+      c: ["5.6 N","4.0 N","11 N","8.0 N"], e: "8.0 cos45° ≒ 5.6 N",
+      steps: [ K("考え方") + "水平成分 = F cosθ", K("代入") + "8.0 × cos45° = 8.0 × " + S2,
+        K("計算") + "4.0√2 = 4.0 × 1.41 = 5.64 ≒ " + A("5.6 N"), "⚠ 4.0 N は √2 をかけ忘れた答え。" ] },
+    { q: "斜辺が 14 cm、θ = 60° の直角三角形。角θの対辺の長さは？（√3 = 1.73、答えは有効数字2桁）",
+      c: ["12 cm","7.0 cm","24 cm","8.1 cm"], e: "14 sin60° ≒ 12 cm",
+      steps: [ K("使う式") + "sinθ = " + F("対辺","斜辺") + " → 対辺 = 斜辺 × sinθ", K("代入") + "14 × sin60° = 14 × " + S3,
+        K("計算") + "7√3 = 7 × 1.73 = 12.1 ≒ " + A("12 cm"), "⚠ 7.0 cm は隣辺（cos60° を使ったとき）。" ] },
+    { q: "長さ 6.0 m のはしごを壁に立てかけた。はしごと床のなす角は 60°。はしごの上端の高さは？（√3 = 1.73、答えは有効数字2桁）",
+      c: ["5.2 m","3.0 m","10 m","3.5 m"], e: "6.0 sin60° ≒ 5.2 m",
+      steps: [ K("図にする") + "はしご = 斜辺、高さ = 60° の対辺、床の部分 = 隣辺", K("使う式") + "対辺 = 斜辺 × sinθ",
+        K("代入") + "6.0 × sin60° = 6.0 × " + S3, K("計算") + "3.0√3 = 3.0 × 1.73 = 5.19 ≒ " + A("5.2 m") ] },
+    { q: "長さ 6.0 m のはしごを壁に立てかけた。はしごと床のなす角は 60°。はしごの下端から壁までの距離は？",
+      c: ["3.0 m","5.2 m","6.0 m","12 m"], e: "6.0 cos60° = 3.0 m",
+      steps: [ K("図にする") + "壁までの距離 = 60° の隣辺", K("使う式") + "隣辺 = 斜辺 × cosθ",
+        K("計算") + "6.0 × cos60° = 6.0 × " + H1 + " = " + A("3.0 m"), "⚠ 12 m は ÷ と × を逆にした答え。" ] },
+    { q: "直角三角形で、角θの隣辺が 3.0 cm、対辺が 4.0 cm。cosθ の値は？",
+      c: ["0.60","0.80","0.75","1.3"], e: "斜辺 5.0 cm → cosθ = 3.0/5.0 = 0.60",
+      steps: [ K("① 斜辺") + "三平方の定理：斜辺² = 3.0² + 4.0² = 9.0 + 16 = 25 → 斜辺 = 5.0 cm",
+        K("② cosθ") + "cosθ = " + F("隣辺","斜辺") + " = " + F("3.0","5.0") + " = " + A("0.60"), "⚠ 0.75 は " + F("3.0","4.0") + "（隣辺/対辺）。斜辺を先に求めよう！" ] },
+    { q: "直角三角形で、斜辺が 13 cm、角θの対辺が 5.0 cm。tanθ の値は？（答えは有効数字2桁）",
+      c: ["0.42","0.38","2.4","0.92"], e: "隣辺 12 cm → tanθ = 5.0/12 ≒ 0.42",
+      steps: [ K("① 隣辺") + "三平方の定理：隣辺² = 13² − 5.0² = 169 − 25 = 144 → 隣辺 = 12 cm",
+        K("② tanθ") + "tanθ = " + F("対辺","隣辺") + " = " + F("5.0","12") + " = 0.416… ≒ " + A("0.42"), "⚠ 0.38 は " + F("5.0","13") + "（sinθ）だよ。" ] },
+    { q: "水平と 30° をなす坂道を、坂に沿って 50 m 進んだ。水平方向に進んだ距離は？（√3 = 1.73、答えは有効数字2桁）",
+      c: ["43 m","25 m","58 m","87 m"], e: "50 cos30° ≒ 43 m",
+      steps: [ K("図にする") + "坂道 = 斜辺、水平距離 = 隣辺、高さ = 対辺", K("使う式") + "隣辺 = 斜辺 × cosθ",
+        K("代入") + "50 × cos30° = 50 × " + S3, K("計算") + "25√3 = 25 × 1.73 = 43.25 ≒ " + A("43 m"), "⚠ 25 m は高さ（sin30° を使ったとき）。" ] },
+    { q: "ある力の水平成分が 15 N、垂直成分が 20 N だった。もとの力の大きさは？",
+      c: ["25 N","35 N","5.0 N","18 N"], e: "√(15² + 20²) = 25 N",
+      steps: [ K("考え方") + "もとの力 = 斜辺、水平成分と垂直成分 = 残りの2辺", K("三平方") + "F² = 15² + 20² = 225 + 400 = 625",
+        K("計算") + "F = √625 = " + A("25 N"), "⚠ 15 + 20 = 35 N とたし算しちゃダメ！向きがちがう力はそのままたせないよ。" ] },
+    { q: "水平から 60° 上向きに力を加えたところ、水平成分が 12 N だった。もとの力の大きさは？",
+      c: ["24 N","6.0 N","14 N","21 N"], e: "F cos60° = 12 → F = 24 N",
+      steps: [ K("使う式") + "水平成分 = F cosθ", K("代入") + "12 = F × cos60° = F × " + H1,
+        K("計算") + "F = 12 × 2 = " + A("24 N"), "⚠ 6.0 N は 12 × " + H1 + " としてしまった答え。もとの力は成分より大きくなるはず！" ] },
+    { q: "30 N の力が、鉛直方向から 30° 傾いた向きにはたらいている。この力の水平成分は？",
+      c: ["15 N","26 N","30 N","17 N"], e: "鉛直から測る → 水平成分 = F sin30° = 15 N",
+      steps: [ K("図にする") + "角度は鉛直方向から測っている → 鉛直成分が隣辺、水平成分が対辺",
+        K("使う式") + "水平成分 = F sinθ（cos じゃない！）", K("計算") + "30 × sin30° = 30 × " + H1 + " = " + A("15 N"),
+        "⚠ 26 N は「水平はいつも cos」と思いこんだ答え。角度をどこから測っているか、必ず図で確認しよう。" ] },
+  ]
+});
+
+/* トップ画面の並び：分野 → 単元 → モード */
+const LAYOUT = [
+  { field: "物理数学", topics: [ { name: "三角比", sets: ["trig","trig-tf","trig-test"] } ] },
+  { field: "運動の表し方", topics: [
+    { name: "等加速度直線運動", sets: ["uniform-accel","uniform-accel-tf","uniform-accel-test"] },
+    { name: "速度の合成・相対速度" }, { name: "自由落下・鉛直投射" }, { name: "水平投射・斜方投射" } ] },
+  { field: "運動の法則", topics: [
+    { name: "力のつりあい" }, { name: "摩擦力", sets: ["friction","friction-judge"] }, { name: "運動方程式" } ] },
+  { field: "いろいろな力", topics: [
+    { name: "圧力・水圧・浮力・空気抵抗力", sets: ["pressure-fluids","pressure-fluids-tf"] } ] },
+];
+
 const TIME_OPTIONS = [20, 40, 0]; // 秒（0 = なし）
 const TEST_TIME_OPTIONS = [180, 300, 0]; // テスト対策特訓用
 const SHAPES = [
@@ -637,50 +795,51 @@ let settings = Object.assign({ time: 20, shuffleQ: false }, store.get("drill-set
 if (!TIME_OPTIONS.includes(settings.time)) settings.time = 20;
 if (!TEST_TIME_OPTIONS.includes(settings.testTime)) settings.testTime = 300;
 const fmtTime = t => t ? (t >= 60 ? t/60 + "分" : t + "秒") : "なし";
-function unitCard(u, best){
-  const ready = u.questions.length > 0;
-  const b = best[u.id];
-  const kind = u.tf ? "○×・" : u.test ? "文章題・" : "";
-  return `<button class="unit ${u.test ? "test" : ""}" data-id="${u.id}" ${ready?"":"disabled"}>
-    <span class="ch">${esc(u.chapter)}</span>
-    <span class="nm">${esc(u.title)}</span>
-    <span class="meta">${ready ? `${kind}${u.questions.length}問${b ? `　ベスト <b class="num">${b}</b> 点` : ""}` : "準備中"}</span>
-  </button>`;
-}
-
 let S = null;     // 現在のゲーム状態
 let tick = null;  // タイマー
+const T = s => (S && S.unit.html) ? String(s) : esc(s);
+
+const modeOf = u => u.tf ? "○×" : u.test ? "特訓✏️" : u.fixed ? "見きわめ" : "4択";
+const byId = id => UNITS.find(u => u.id === id);
+function topicCard(t, best){
+  const sets = (t.sets || []).map(byId).filter(u => u && u.questions.length);
+  if (!sets.length) return `<div class="topic soon"><span class="nm">${esc(t.name)}</span><span class="meta">準備中</span></div>`;
+  return `<div class="topic">
+    <span class="nm">${esc(t.name)}</span>
+    <div class="modes">${sets.map(u => `<button class="mode ${u.test ? "test" : ""}" data-id="${u.id}">
+      <span class="mode-nm">${modeOf(u)}</span>
+      <span class="mode-meta">${u.questions.length}問${best[u.id] ? ` · <b class="num">${best[u.id]}</b>` : ""}</span>
+    </button>`).join("")}</div>
+  </div>`;
+}
 
 /* ---------- ホーム ---------- */
 function home(){
   clearInterval(tick);
+  S = null;
   const best = store.get("drill-best", {});
   app.innerHTML = `
-    <header class="brand"><h1>Kimi to Lab 物理ドリル</h1><span class="tag">4択・20問</span></header>
-    <p class="lead">単元を選んでスタート。早く答えるほど高得点、連続正解でボーナス。1〜4キーでも答えられるよ。</p>
-    <p class="section-label">単元</p>
-    <div class="units">
-      ${UNITS.filter(u => !u.test).map(u => unitCard(u, best)).join("")}
+    <header class="brand"><h1>Kimi to Lab 物理ドリル</h1><span class="tag">物理基礎</span></header>
+    <p class="lead">分野の中から単元を選んで、モードをタップしてスタート！</p>
+    <div class="legend">
+      <span><b>4択</b>基本チェック</span>
+      <span><b>○×</b>正しい？まちがい？</span>
+      <span><b class="gold">特訓✏️</b>テスト対策の文章題（ノートと計算用紙を用意）</span>
     </div>
-    <section class="test-zone">
-      <div class="test-head">
-        <h2>テスト対策特訓</h2>
-        <label class="toggle">制限時間 <select id="opt-testtimer">${TEST_TIME_OPTIONS.map(t => `<option value="${t}" ${settings.testTime===t?"selected":""}>${fmtTime(t)}</option>`).join("")}</select></label>
-      </div>
-      <p class="notice">✏️ 暗算では解けない問題ばかりです。<b>ノートや計算用紙を用意して</b>、式を書いてから答えよう。答えたあとは、ていねいな解説で自分の式といっしょか確かめてね。</p>
-      <div class="units">
-        ${UNITS.filter(u => u.test).map(u => unitCard(u, best)).join("")}
-      </div>
-    </section>
+    ${LAYOUT.map(f => `<section class="field">
+      <h2 class="field-h">${esc(f.field)}</h2>
+      <div class="topics">${f.topics.map(t => topicCard(t, best)).join("")}</div>
+    </section>`).join("")}
     <p class="section-label">設定</p>
     <div class="opts">
-      <label class="toggle">制限時間 <select id="opt-timer">${TIME_OPTIONS.map(t => `<option value="${t}" ${settings.time===t?"selected":""}>${t ? t+"秒" : "なし"}</option>`).join("")}</select></label>
+      <label class="toggle">制限時間（4択・○×） <select id="opt-timer">${TIME_OPTIONS.map(t => `<option value="${t}" ${settings.time===t?"selected":""}>${fmtTime(t)}</option>`).join("")}</select></label>
+      <label class="toggle">制限時間（特訓） <select id="opt-testtimer">${TEST_TIME_OPTIONS.map(t => `<option value="${t}" ${settings.testTime===t?"selected":""}>${fmtTime(t)}</option>`).join("")}</select></label>
       <label class="toggle"><input type="checkbox" id="opt-shuffle" ${settings.shuffleQ?"checked":""}> 問題の順番をシャッフル</label>
       <span class="toggle" id="reset-box">
         <button class="linkbtn" id="reset">ベストスコアをリセット</button>
       </span>
     </div>`;
-  app.querySelectorAll(".unit:not(:disabled)").forEach(b => b.onclick = () => start(UNITS.find(u => u.id === b.dataset.id)));
+  app.querySelectorAll(".mode").forEach(b => b.onclick = () => { const u = byId(b.dataset.id); u.test ? testIntro(u) : start(u); });
   app.querySelector("#opt-timer").onchange = e => { settings.time = +e.target.value; store.set("drill-settings", settings); };
   app.querySelector("#opt-testtimer").onchange = e => { settings.testTime = +e.target.value; store.set("drill-settings", settings); };
   app.querySelector("#opt-shuffle").onchange = e => { settings.shuffleQ = e.target.checked; store.set("drill-settings", settings); };
@@ -693,6 +852,25 @@ function home(){
     box.querySelector("#reset-no").onclick = home;
     box.querySelector("#reset-no").focus();
   };
+}
+
+/* 特訓の前の確認画面 */
+function testIntro(u){
+  app.innerHTML = `
+    <div class="intro pop">
+      <span class="field-h" style="margin:0">テスト対策特訓</span>
+      <h2 class="intro-title">${esc(u.title)}</h2>
+      <p class="notice">✏️ 暗算では解けない問題ばかりです。<b>ノートや計算用紙を用意して</b>、式を書いてから答えよう。答えたあとは、ていねいな解説で自分の式といっしょか確かめてね。</p>
+      <p class="intro-meta">${u.questions.length}問　制限時間：1問 ${fmtTime(settings.testTime)}</p>
+      <div class="btn-row">
+        <button class="btn" id="go">準備できた！スタート</button>
+        <button class="btn ghost" id="back">もどる</button>
+      </div>
+    </div>`;
+  app.querySelector("#go").onclick = () => start(u);
+  app.querySelector("#back").onclick = home;
+  app.querySelector("#go").focus();
+  window.scrollTo({ top: 0 });
 }
 
 /* ---------- ゲーム ---------- */
@@ -728,12 +906,12 @@ function showQ(){
     <div class="timer ${S.time?"":"off"}"><i id="bar"></i></div>
     <div class="qcard pop">
       <span class="qno">Q${S.i+1}</span>
-      <p class="qt">${esc(q.q)}</p>
+      <p class="qt">${T(q.q)}</p>
     </div>
     <div class="answers ${S.unit.tf ? "tf" : ""}" id="answers">
       ${order.map((o, k) => S.unit.tf
-        ? `<button class="ans" data-i="${k}"><span class="txt">${esc(o.t)}</span></button>`
-        : `<button class="ans" data-i="${k}"><span class="shape">${SHAPES[k]}</span><span class="txt">${esc(o.t)}</span></button>`).join("")}
+        ? `<button class="ans" data-i="${k}"><span class="txt">${T(o.t)}</span></button>`
+        : `<button class="ans" data-i="${k}"><span class="shape">${SHAPES[k]}</span><span class="txt">${T(o.t)}</span></button>`).join("")}
     </div>
     <div id="fb"></div>`;
   app.querySelectorAll(".ans").forEach(b => b.onclick = () => answer(+b.dataset.i));
@@ -789,8 +967,8 @@ function answer(k){
   document.getElementById("fb").innerHTML = `
     <div class="feedback ${ok?"ok":"ng"} pop">
       <div class="head"><span class="verdict">${verdict}</span>${ok?`<span class="gain">+${gain}</span>`:""}</div>
-      ${ok ? "" : `<p class="correct">正解：<b>${esc(q.c[0])}</b></p>`}
-      ${q.steps ? `<div class="steps">${q.steps.map(s => `<p>${s}</p>`).join("")}</div>` : `<p class="exp">${esc(q.e)}</p>`}
+      ${ok ? "" : `<p class="correct">正解：<b>${T(q.c[0])}</b></p>`}
+      ${q.steps ? `<div class="steps">${q.steps.map(s => `<p>${s}</p>`).join("")}</div>` : `<p class="exp">${T(q.e)}</p>`}
       <button class="btn" id="next">${last ? "結果を見る" : "次の問題へ"}</button>
     </div>`;
   const nx = document.getElementById("next");
@@ -840,9 +1018,9 @@ function result(){
 }
 function rv(l){
   return `<div class="rv ${l.ok?"ok":""}">
-    <p class="rq">${esc(l.q.q)}</p>
-    <p class="ra">正解：<b>${esc(l.q.c[0])}</b>${l.ok ? "" : `　あなた：${l.picked ? esc(l.picked) : "時間切れ"}`}</p>
-    ${l.q.steps ? `<details class="re"><summary>解説を見る</summary><div class="steps">${l.q.steps.map(s => `<p>${s}</p>`).join("")}</div></details>` : `<p class="re">${esc(l.q.e)}</p>`}
+    <p class="rq">${T(l.q.q)}</p>
+    <p class="ra">正解：<b>${T(l.q.c[0])}</b>${l.ok ? "" : `　あなた：${l.picked ? T(l.picked) : "時間切れ"}`}</p>
+    ${l.q.steps ? `<details class="re"><summary>解説を見る</summary><div class="steps">${l.q.steps.map(s => `<p>${s}</p>`).join("")}</div></details>` : `<p class="re">${T(l.q.e)}</p>`}
   </div>`;
 }
 
