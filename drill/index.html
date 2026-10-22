@@ -140,6 +140,23 @@ details summary{cursor:pointer;color:var(--chalk-dim);font-size:14px}
 
 .answers.tf .ans{justify-content:center;min-height:150px;font-size:72px;line-height:1;font-weight:800}
 .answers.tf .ans .mark{margin-left:0;font-size:28px}
+/* テスト対策特訓 */
+.test-zone{border:2px dashed var(--gold);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.test-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.test-head h2{margin:0;font-family:var(--f-display);font-weight:800;font-size:22px;color:var(--gold)}
+.notice{margin:0;font-size:14px;color:var(--chalk);background:rgba(255,209,102,.08);border-radius:10px;padding:10px 12px}
+.notice b{color:var(--gold)}
+.unit.test{border-color:#5a5230}
+/* ていねい解説 */
+.steps{display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.9}
+.steps p{margin:0;overflow-x:auto}
+.steps .lbl{display:inline-block;font-size:12px;letter-spacing:.06em;color:var(--board);background:var(--chalk-dim);border-radius:6px;padding:0 6px;margin-right:8px;line-height:1.7;vertical-align:middle}
+.steps .ans-line{color:var(--gold);font-weight:700;font-size:1.1em}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.25;margin:0 .2em;font-size:.95em}
+.frac>span{padding:0 .25em;white-space:nowrap}
+.frac>span:first-child{border-bottom:1.5px solid currentColor}
+details.re{margin-top:6px}
+details.re .steps{margin-top:8px;font-size:14px}
 @media (max-width:520px){
   .answers.tf{grid-template-columns:1fr 1fr}
   .answers.tf .ans{min-height:120px;font-size:60px}
@@ -161,6 +178,12 @@ details summary{cursor:pointer;color:var(--chalk-dim);font-size:14px}
    choices の「先頭」が正解。表示時にシャッフルされる。
    単元を足すときは UNITS に { id, chapter, title, questions:[...] } を追加するだけ。
    ========================================================= */
+/* 解説用ヘルパー：F(分子, 分母) で上下段の分数、A(...) で答えの行、K(ラベル) で見出し */
+const F = (n, d) => `<span class="frac"><span>${n}</span><span>${d}</span></span>`;
+const A = s => `<span class="ans-line">${s}</span>`;
+const K = s => `<span class="lbl">${s}</span>`;
+const HALF = F("1","2");
+
 const UNITS = [
   {
     id: "uniform-accel",
@@ -361,7 +384,136 @@ const UNITS = [
 ];
 
 /* ========================================================= */
+UNITS.push({
+  id: "uniform-accel-test",
+  chapter: "物理基礎｜運動の表し方",
+  title: "等加速度直線運動 文章題",
+  test: true, // テスト対策特訓に表示。steps は丁寧な解説（HTML）
+  questions: [
+    { q: "一直線上を 4.0 m/s で進んでいた自動車が一定の加速度で加速し、6.0 s 後に速さが 19 m/s になった。加速度の大きさは？",
+      c: ["2.5 m/s²","3.2 m/s²","3.8 m/s²","0.40 m/s²"], e: "v = v₀ + at より a = 2.5 m/s²",
+      steps: [ K("わかっている量") + "v₀ = 4.0 m/s、v = 19 m/s、t = 6.0 s", K("使う式") + "v = v₀ + at",
+        K("代入") + "19 = 4.0 + a × 6.0", K("変形") + "6.0a = 15", K("計算") + "a = " + F("15","6.0") + " = " + A("2.5 m/s²"),
+        "⚠ 19 ÷ 6.0 = 3.2 は初速度を引き忘れた答え。" ] },
+
+    { q: "静止していた電車が 0.80 m/s² の加速度で動き出した。動き出してから 15 s 間に進む距離は？",
+      c: ["90 m","180 m","12 m","6.0 m"], e: "x = ½at² = 90 m",
+      steps: [ K("わかっている量") + "v₀ = 0（静止から）、a = 0.80 m/s²、t = 15 s", K("使う式") + "x = v₀t + " + HALF + "at²",
+        K("代入") + "x = 0 + " + HALF + " × 0.80 × 15²", K("計算") + "x = 0.40 × 225 = " + A("90 m"),
+        "⚠ " + HALF + " を忘れると 180 m。12 m は 15 s 後の速さ（m/s）だよ。" ] },
+
+    { q: "初速度 3.0 m/s で動いていた台車が、加速度 1.5 m/s² で 4.0 s 間加速した。この間の変位は？",
+      c: ["24 m","36 m","12 m","18 m"], e: "x = v₀t + ½at² = 24 m",
+      steps: [ K("わかっている量") + "v₀ = 3.0 m/s、a = 1.5 m/s²、t = 4.0 s", K("使う式") + "x = v₀t + " + HALF + "at²",
+        K("代入") + "x = 3.0 × 4.0 + " + HALF + " × 1.5 × 4.0²", K("計算") + "x = 12 + 12 = " + A("24 m"),
+        "⚠ " + HALF + " を忘れると 12 + 24 = 36 m になるよ。" ] },
+
+    { q: "20 m/s で走っていた自動車がブレーキをかけ、一定の加速度で減速して 50 m 進んで止まった。加速度は？（進む向きを正）",
+      c: ["−4.0 m/s²","4.0 m/s²","−8.0 m/s²","−0.40 m/s²"], e: "v² − v₀² = 2ax より a = −4.0 m/s²",
+      steps: [ K("わかっている量") + "v₀ = 20 m/s、v = 0（止まった）、x = 50 m", K("使う式") + "時間がないので v² − v₀² = 2ax",
+        K("代入") + "0² − 20² = 2 × a × 50", K("変形") + "−400 = 100a", K("計算") + "a = " + F("−400","100") + " = " + A("−4.0 m/s²"),
+        "⚠ 減速しているので負の値。符号までちゃんと答えよう。" ] },
+
+    { q: "15 m/s で走っていた自動車が、加速度 −2.4 m/s² で減速した。止まるまでの時間は？",
+      c: ["6.3 s","0.16 s","36 s","3.1 s"], e: "0 = v₀ + at より t ≒ 6.3 s",
+      steps: [ K("わかっている量") + "v₀ = 15 m/s、v = 0（止まる）、a = −2.4 m/s²", K("使う式") + "v = v₀ + at",
+        K("代入") + "0 = 15 + (−2.4) × t", K("変形") + "2.4t = 15", K("計算") + "t = " + F("15","2.4") + " = 6.25 ≒ " + A("6.3 s"),
+        "⚠ 分数をひっくり返すと 0.16 s になっちゃう。" ] },
+
+    { q: "静止していた物体が一定の加速度で動き出し、10 s 間に 75 m 進んだ。加速度の大きさは？",
+      c: ["1.5 m/s²","0.75 m/s²","7.5 m/s²","15 m/s²"], e: "x = ½at² より a = 1.5 m/s²",
+      steps: [ K("わかっている量") + "v₀ = 0、t = 10 s、x = 75 m", K("使う式") + "x = v₀t + " + HALF + "at²",
+        K("代入") + "75 = 0 + " + HALF + " × a × 10²", K("変形") + "75 = 50a", K("計算") + "a = " + F("75","50") + " = " + A("1.5 m/s²"),
+        "⚠ 75 ÷ 10 = 7.5 は「平均の速さ」。加速度じゃないよ。" ] },
+
+    { q: "静止から 2.5 m/s² の加速度で動き出した物体が、速さ 15 m/s になるまでに進む距離は？",
+      c: ["45 m","90 m","6.0 m","23 m"], e: "v² − v₀² = 2ax より x = 45 m",
+      steps: [ K("わかっている量") + "v₀ = 0、v = 15 m/s、a = 2.5 m/s²", K("使う式") + "時間がないので v² − v₀² = 2ax",
+        K("代入") + "15² − 0² = 2 × 2.5 × x", K("変形") + "225 = 5.0x", K("計算") + "x = " + F("225","5.0") + " = " + A("45 m"),
+        "⚠ 2 を忘れると 90 m。6.0 はかかった時間（s）だよ。" ] },
+
+    { q: "5.0 m/s で進んでいた物体が加速度 2.0 m/s² で加速し、速さが 13 m/s になった。この間の変位は？",
+      c: ["36 m","72 m","4.0 m","18 m"], e: "v² − v₀² = 2ax より x = 36 m",
+      steps: [ K("わかっている量") + "v₀ = 5.0 m/s、v = 13 m/s、a = 2.0 m/s²", K("使う式") + "v² − v₀² = 2ax",
+        K("代入") + "13² − 5.0² = 2 × 2.0 × x", K("変形") + "169 − 25 = 4.0x 　→　144 = 4.0x", K("計算") + "x = " + F("144","4.0") + " = " + A("36 m"),
+        "⚠ (13 − 5)² = 64 としないように！それぞれ2乗してから引く。" ] },
+
+    { q: "斜面に沿って上向きに 12 m/s で滑らせた物体が、斜面に沿って下向きで大きさ 3.0 m/s² の加速度で運動した。最高点までに斜面を上る距離は？",
+      c: ["24 m","48 m","4.0 m","12 m"], e: "上向きを正として v² − v₀² = 2ax より x = 24 m",
+      steps: [ K("向きを決める") + "斜面上向きを正とする → a = −3.0 m/s²", K("わかっている量") + "v₀ = 12 m/s、v = 0（最高点で一瞬止まる）",
+        K("使う式") + "v² − v₀² = 2ax", K("代入") + "0² − 12² = 2 × (−3.0) × x", K("変形") + "−144 = −6.0x",
+        K("計算") + "x = " + F("−144","−6.0") + " = " + A("24 m"), "⚠ 最高点＝速度 0。この合言葉はよく出るよ！" ] },
+
+    { q: "斜面に沿って上向きに 12 m/s で滑らせた物体が、斜面に沿って下向きで大きさ 3.0 m/s² の加速度で運動した。滑らせてから 6.0 s 後の速度は？",
+      c: ["斜面下向きに 6.0 m/s","斜面上向きに 6.0 m/s","斜面上向きに 30 m/s","0 m/s"], e: "v = 12 − 3.0 × 6.0 = −6.0 m/s（下向き）",
+      steps: [ K("向きを決める") + "斜面上向きを正とする → a = −3.0 m/s²", K("使う式") + "v = v₀ + at",
+        K("代入") + "v = 12 + (−3.0) × 6.0", K("計算") + "v = 12 − 18 = −6.0 m/s",
+        K("答え") + "マイナス＝負の向き → " + A("斜面下向きに 6.0 m/s"), "⚠ 4.0 s で最高点に着いて、その後は下り始めているよ。" ] },
+
+    { q: "時速 54 km で走っていた自動車が一定の加速度で加速し、10 s 後に時速 90 km になった。加速度の大きさは？",
+      c: ["1.0 m/s²","3.6 m/s²","2.5 m/s²","1.5 m/s²"], e: "m/s に直して 15 → 25 m/s、a = 1.0 m/s²",
+      steps: [ K("単位を直す") + "54 km/h = " + F("54","3.6") + " = 15 m/s、90 km/h = " + F("90","3.6") + " = 25 m/s",
+        K("使う式") + "v = v₀ + at", K("代入") + "25 = 15 + a × 10", K("計算") + "a = " + F("25 − 15","10") + " = " + A("1.0 m/s²"),
+        "⚠ km/h のまま計算すると 3.6 になっちゃう。まず m/s に直す！" ] },
+
+    { q: "時速 72 km で走っていた自動車が急ブレーキをかけ、一定の加速度で 40 m 進んで止まった。加速度の大きさは？",
+      c: ["5.0 m/s²","65 m/s²","10 m/s²","0.50 m/s²"], e: "20 m/s に直して v² − v₀² = 2ax、大きさ 5.0 m/s²",
+      steps: [ K("単位を直す") + "72 km/h = " + F("72","3.6") + " = 20 m/s", K("わかっている量") + "v₀ = 20 m/s、v = 0、x = 40 m",
+        K("使う式") + "v² − v₀² = 2ax", K("代入") + "0² − 20² = 2 × a × 40", K("変形") + "−400 = 80a",
+        K("計算") + "a = " + F("−400","80") + " = −5.0 m/s² 　→　大きさは " + A("5.0 m/s²"), "⚠ 72 のまま計算すると 65 m/s² というありえない値に！" ] },
+
+    { q: "初速度 6.0 m/s、加速度 −1.2 m/s² で運動する物体が、出発点に戻ってくるのは何秒後？",
+      c: ["10 s","5.0 s","20 s","2.5 s"], e: "x = 0 として t = 10 s",
+      steps: [ K("考え方") + "出発点に戻る＝変位 x = 0", K("使う式") + "x = v₀t + " + HALF + "at²",
+        K("代入") + "0 = 6.0t + " + HALF + " × (−1.2) × t²", K("変形") + "0 = 6.0t − 0.60t² = t(6.0 − 0.60t)",
+        K("計算") + "t = 0（出発の瞬間）、t = " + F("6.0","0.60") + " = " + A("10 s"), "⚠ 5.0 s は一瞬止まる時刻。戻ってくるのはその2倍！" ] },
+
+    { q: "初速度 6.0 m/s、加速度 −1.2 m/s² で運動する物体が、出発点からいちばん遠ざかるときの距離は？",
+      c: ["15 m","30 m","5.0 m","3.0 m"], e: "v = 0 として v² − v₀² = 2ax、x = 15 m",
+      steps: [ K("考え方") + "いちばん遠い＝向きが変わる瞬間＝速度 v = 0", K("使う式") + "v² − v₀² = 2ax",
+        K("代入") + "0² − 6.0² = 2 × (−1.2) × x", K("変形") + "−36 = −2.4x", K("計算") + "x = " + F("−36","−2.4") + " = " + A("15 m"),
+        "⚠ 2 を忘れると 30 m。5.0 は止まるまでの時間（s）だよ。" ] },
+
+    { q: "静止していた物体が、一定の加速度で 4.0 s 間に 8.0 m/s まで加速し、その後 6.0 s 間等速で進み、最後に一定の加速度で 2.0 s かけて止まった。全体の移動距離は？",
+      c: ["72 m","96 m","56 m","64 m"], e: "v-t グラフの面積 16 + 48 + 8 = 72 m",
+      steps: [ K("考え方") + "v-t グラフをかくと台形。面積＝移動距離", K("加速") + HALF + " × 4.0 × 8.0 = 16 m（三角形）",
+        K("等速") + "8.0 × 6.0 = 48 m（長方形）", K("減速") + HALF + " × 2.0 × 8.0 = 8.0 m（三角形）",
+        K("合計") + "16 + 48 + 8.0 = " + A("72 m"), "⚠ 8.0 × 12 = 96 m はずっと 8.0 m/s だと思った答え。" ] },
+
+    { q: "一直線上を進む物体が、一定の加速度で 3.0 s 間に 4.0 m/s から 10 m/s になった。この間に進んだ距離は？",
+      c: ["21 m","30 m","42 m","9.0 m"], e: "a = 2.0 m/s²、x = v₀t + ½at² = 21 m",
+      steps: [ K("加速度") + "a = " + F("10 − 4.0","3.0") + " = 2.0 m/s²", K("使う式") + "x = v₀t + " + HALF + "at²",
+        K("代入") + "x = 4.0 × 3.0 + " + HALF + " × 2.0 × 3.0²", K("計算") + "x = 12 + 9.0 = " + A("21 m"),
+        "💡 別解：v-t グラフの台形で " + F("(4.0 + 10) × 3.0","2") + " = 21 m でもOK！" ] },
+
+    { q: "静止していた物体が一定の加速度で動き出し、はじめの 2.0 s 間に 3.0 m 進んだ。動き出してから 6.0 s 間に進む距離は？",
+      c: ["27 m","9.0 m","54 m","18 m"], e: "a = 1.5 m/s² を求めて x = 27 m",
+      steps: [ K("① a を求める") + "3.0 = " + HALF + " × a × 2.0² 　→　 3.0 = 2.0a 　→　 a = " + F("3.0","2.0") + " = 1.5 m/s²",
+        K("② 6.0 s 間") + "x = " + HALF + " × 1.5 × 6.0²", K("計算") + "x = 0.75 × 36 = " + A("27 m"),
+        "⚠ 時間が3倍だから距離も3倍（9.0 m）…はまちがい。x は t² に比例するから 9倍になるよ！" ] },
+
+    { q: "一直線上を 10 m/s で進む物体が、一定の加速度で 25 m 進む間に速さが 15 m/s になった。加速度の大きさは？",
+      c: ["2.5 m/s²","5.0 m/s²","0.20 m/s²","1.0 m/s²"], e: "v² − v₀² = 2ax より a = 2.5 m/s²",
+      steps: [ K("わかっている量") + "v₀ = 10 m/s、v = 15 m/s、x = 25 m", K("使う式") + "時間がないので v² − v₀² = 2ax",
+        K("代入") + "15² − 10² = 2 × a × 25", K("変形") + "225 − 100 = 50a 　→　125 = 50a", K("計算") + "a = " + F("125","50") + " = " + A("2.5 m/s²"),
+        "⚠ 2 を忘れると 5.0 m/s² になるよ。" ] },
+
+    { q: "8.0 m/s で進んでいた自転車が一定の加速度で運動し、その後の 2.0 s 間に 12 m 進んだ。加速度は？（進む向きを正）",
+      c: ["−2.0 m/s²","2.0 m/s²","−1.0 m/s²","6.0 m/s²"], e: "x = v₀t + ½at² より a = −2.0 m/s²",
+      steps: [ K("わかっている量") + "v₀ = 8.0 m/s、t = 2.0 s、x = 12 m", K("使う式") + "x = v₀t + " + HALF + "at²",
+        K("代入") + "12 = 8.0 × 2.0 + " + HALF + " × a × 2.0²", K("変形") + "12 = 16 + 2.0a 　→　 2.0a = −4.0",
+        K("計算") + "a = " + F("−4.0","2.0") + " = " + A("−2.0 m/s²"), "💡 等速なら 16 m 進むはずなのに 12 m しか進んでない → 減速してる！" ] },
+
+    { q: "時速 36 km で走っていた自動車がブレーキをかけ、加速度 −2.5 m/s² で減速した。止まるまでに進む距離は？",
+      c: ["20 m","260 m","40 m","4.0 m"], e: "10 m/s に直して v² − v₀² = 2ax、x = 20 m",
+      steps: [ K("単位を直す") + "36 km/h = " + F("36","3.6") + " = 10 m/s", K("わかっている量") + "v₀ = 10 m/s、v = 0、a = −2.5 m/s²",
+        K("使う式") + "v² − v₀² = 2ax", K("代入") + "0² − 10² = 2 × (−2.5) × x", K("変形") + "−100 = −5.0x",
+        K("計算") + "x = " + F("−100","−5.0") + " = " + A("20 m"), "⚠ km/h のままだと 260 m。単位をそろえるのが最初の一歩！" ] },
+  ]
+});
+
 const TIME_OPTIONS = [20, 40, 0]; // 秒（0 = なし）
+const TEST_TIME_OPTIONS = [180, 300, 0]; // テスト対策特訓用
 const SHAPES = [
   '<svg viewBox="0 0 24 24"><path d="M12 3 22 20H2z"/></svg>',
   '<svg viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12z"/></svg>',
@@ -378,6 +530,18 @@ const store = {
 };
 let settings = Object.assign({ time: 20, shuffleQ: false }, store.get("drill-settings", {}));
 if (!TIME_OPTIONS.includes(settings.time)) settings.time = 20;
+if (!TEST_TIME_OPTIONS.includes(settings.testTime)) settings.testTime = 300;
+const fmtTime = t => t ? (t >= 60 ? t/60 + "分" : t + "秒") : "なし";
+function unitCard(u, best){
+  const ready = u.questions.length > 0;
+  const b = best[u.id];
+  const kind = u.tf ? "○×・" : u.test ? "文章題・" : "";
+  return `<button class="unit ${u.test ? "test" : ""}" data-id="${u.id}" ${ready?"":"disabled"}>
+    <span class="ch">${esc(u.chapter)}</span>
+    <span class="nm">${esc(u.title)}</span>
+    <span class="meta">${ready ? `${kind}${u.questions.length}問${b ? `　ベスト <b class="num">${b}</b> 点` : ""}` : "準備中"}</span>
+  </button>`;
+}
 
 let S = null;     // 現在のゲーム状態
 let tick = null;  // タイマー
@@ -391,16 +555,18 @@ function home(){
     <p class="lead">単元を選んでスタート。早く答えるほど高得点、連続正解でボーナス。1〜4キーでも答えられるよ。</p>
     <p class="section-label">単元</p>
     <div class="units">
-      ${UNITS.map(u => {
-        const ready = u.questions.length > 0;
-        const b = best[u.id];
-        return `<button class="unit" data-id="${u.id}" ${ready?"":"disabled"}>
-          <span class="ch">${esc(u.chapter)}</span>
-          <span class="nm">${esc(u.title)}</span>
-          <span class="meta">${ready ? `${u.tf ? "○×・" : ""}${u.questions.length}問${b ? `　ベスト <b class="num">${b}</b> 点` : ""}` : "準備中"}</span>
-        </button>`;
-      }).join("")}
+      ${UNITS.filter(u => !u.test).map(u => unitCard(u, best)).join("")}
     </div>
+    <section class="test-zone">
+      <div class="test-head">
+        <h2>テスト対策特訓</h2>
+        <label class="toggle">制限時間 <select id="opt-testtimer">${TEST_TIME_OPTIONS.map(t => `<option value="${t}" ${settings.testTime===t?"selected":""}>${fmtTime(t)}</option>`).join("")}</select></label>
+      </div>
+      <p class="notice">✏️ 暗算では解けない問題ばかりです。<b>ノートや計算用紙を用意して</b>、式を書いてから答えよう。答えたあとは、ていねいな解説で自分の式といっしょか確かめてね。</p>
+      <div class="units">
+        ${UNITS.filter(u => u.test).map(u => unitCard(u, best)).join("")}
+      </div>
+    </section>
     <p class="section-label">設定</p>
     <div class="opts">
       <label class="toggle">制限時間 <select id="opt-timer">${TIME_OPTIONS.map(t => `<option value="${t}" ${settings.time===t?"selected":""}>${t ? t+"秒" : "なし"}</option>`).join("")}</select></label>
@@ -411,6 +577,7 @@ function home(){
     </div>`;
   app.querySelectorAll(".unit:not(:disabled)").forEach(b => b.onclick = () => start(UNITS.find(u => u.id === b.dataset.id)));
   app.querySelector("#opt-timer").onchange = e => { settings.time = +e.target.value; store.set("drill-settings", settings); };
+  app.querySelector("#opt-testtimer").onchange = e => { settings.testTime = +e.target.value; store.set("drill-settings", settings); };
   app.querySelector("#opt-shuffle").onchange = e => { settings.shuffleQ = e.target.checked; store.set("drill-settings", settings); };
   const box = app.querySelector("#reset-box");
   app.querySelector("#reset").onclick = () => {
@@ -427,7 +594,8 @@ function home(){
 function start(unit, onlyList){
   let qs = onlyList || unit.questions;
   if (settings.shuffleQ) qs = shuffle(qs);
-  S = { unit, qs, i: 0, score: 0, streak: 0, bestStreak: 0, log: [], retry: !!onlyList };
+  S = { unit, qs, i: 0, score: 0, streak: 0, bestStreak: 0, log: [], retry: !!onlyList,
+        time: unit.test ? settings.testTime : settings.time };
   showQ();
 }
 
@@ -451,7 +619,7 @@ function showQ(){
         <span class="pill"><span class="num" id="score">${S.score}</span>点</span>
       </div>
     </div>
-    <div class="timer ${settings.time?"":"off"}"><i id="bar"></i></div>
+    <div class="timer ${S.time?"":"off"}"><i id="bar"></i></div>
     <div class="qcard pop">
       <span class="qno">Q${S.i+1}</span>
       <p class="qt">${esc(q.q)}</p>
@@ -464,10 +632,10 @@ function showQ(){
     <div id="fb"></div>`;
   app.querySelectorAll(".ans").forEach(b => b.onclick = () => answer(+b.dataset.i));
   clearInterval(tick);
-  if (settings.time){
+  if (S.time){
     const bar = document.getElementById("bar");
     tick = setInterval(() => {
-      const left = 1 - (performance.now() - S.cur.t0) / (settings.time*1000);
+      const left = 1 - (performance.now() - S.cur.t0) / (S.time*1000);
       bar.style.transform = `scaleX(${Math.max(0,left)})`;
       bar.style.background = left < .25 ? "var(--bad)" : "var(--gold)";
       if (left <= 0) answer(-1);
@@ -485,7 +653,7 @@ function answer(k){
   let gain = 0;
   if (ok){
     S.streak++; S.bestStreak = Math.max(S.bestStreak, S.streak);
-    const speed = settings.time ? Math.max(0, 1 - sec / settings.time) : 1;
+    const speed = S.time ? Math.max(0, 1 - sec / S.time) : 1;
     gain = Math.round(500 + 500 * speed) + Math.min(S.streak - 1, 5) * 100;
     S.score += gain;
   } else {
@@ -511,7 +679,7 @@ function answer(k){
     <div class="feedback ${ok?"ok":"ng"} pop">
       <div class="head"><span class="verdict">${verdict}</span>${ok?`<span class="gain">+${gain}</span>`:""}</div>
       ${ok ? "" : `<p class="correct">正解：<b>${esc(q.c[0])}</b></p>`}
-      <p class="exp">${esc(q.e)}</p>
+      ${q.steps ? `<div class="steps">${q.steps.map(s => `<p>${s}</p>`).join("")}</div>` : `<p class="exp">${esc(q.e)}</p>`}
       <button class="btn" id="next">${last ? "結果を見る" : "次の問題へ"}</button>
     </div>`;
   const nx = document.getElementById("next");
@@ -563,7 +731,7 @@ function rv(l){
   return `<div class="rv ${l.ok?"ok":""}">
     <p class="rq">${esc(l.q.q)}</p>
     <p class="ra">正解：<b>${esc(l.q.c[0])}</b>${l.ok ? "" : `　あなた：${l.picked ? esc(l.picked) : "時間切れ"}`}</p>
-    <p class="re">${esc(l.q.e)}</p>
+    ${l.q.steps ? `<details class="re"><summary>解説を見る</summary><div class="steps">${l.q.steps.map(s => `<p>${s}</p>`).join("")}</div></details>` : `<p class="re">${esc(l.q.e)}</p>`}
   </div>`;
 }
 
