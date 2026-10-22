@@ -763,9 +763,56 @@ UNITS.push({
   ]
 });
 
+/* ===== 三角比の値ドリル（毎回ランダムに20問） ===== */
+const TRIG_VALS = [
+  { k:"0",     v:0,                html:"0" },
+  { k:"1/2",   v:0.5,              html:F("1","2") },
+  { k:"r2/2",  v:Math.SQRT2/2,     html:F("√2","2") },
+  { k:"r3/2",  v:Math.sqrt(3)/2,   html:F("√3","2") },
+  { k:"1",     v:1,                html:"1" },
+  { k:"1/r3",  v:1/Math.sqrt(3),   html:F("1","√3") },
+  { k:"r3",    v:Math.sqrt(3),     html:"√3" },
+];
+const TV = [];
+TRIG_VALS.forEach(o => { TV.push(o); if (o.v) TV.push({ k:"-"+o.k, v:-o.v, html:"−"+o.html }); });
+const UNDEF = { k:"undef", v:NaN, html:"なし（定義されない）" };
+const ANGLES = [0,30,45,60,90,120,135,150,180,210,225,240,270,300,315,330];
+const radHTML = d => {
+  if (d === 0) return "0";
+  const g = (a,b) => b ? g(b, a % b) : a, n = d / g(d,180), m = 180 / g(d,180);
+  const top = (n === 1 ? "" : n) + "π";
+  return m === 1 ? top : F(top, String(m));
+};
+const valOf = x => TV.find(o => Math.abs(o.v - x) < 1e-9);
+function trigVal(fn, d){
+  const r = d * Math.PI / 180, s = Math.sin(r), c = Math.cos(r);
+  if (fn === "sin") return valOf(s);
+  if (fn === "cos") return valOf(c);
+  return Math.abs(c) < 1e-9 ? UNDEF : valOf(s / c);
+}
+function genTrigVals(rad){
+  const pool = [];
+  ANGLES.forEach(d => ["sin","cos","tan"].forEach(fn => pool.push([fn, d])));
+  return shuffle(pool).slice(0, 20).map(([fn, d]) => {
+    const ans = trigVal(fn, d);
+    const others = fn === "tan" ? TV.concat([UNDEF]) : TV.filter(o => Math.abs(o.v) <= 1);
+    const opp = others.find(o => ans.v && o.v === -ans.v);
+    const pick = [ans];
+    if (opp) pick.push(opp);
+    shuffle(others).forEach(o => { if (pick.length < 4 && !pick.includes(o)) pick.push(o); });
+    const ang = rad ? radHTML(d) : d + "°";
+    const sv = trigVal("sin", d).html, cv = trigVal("cos", d).html;
+    let e = `${rad ? ang + "（= " + d + "°）" : ang} の単位円の点は (cos, sin) = (${cv}, ${sv})。`;
+    if (fn === "tan") e += ans === UNDEF ? " cos = 0 だから tan = sin ÷ cos は定義されない。" : " tan = sin ÷ cos で求めよう。";
+    return { q: `${fn} ${ang} = ？`, c: pick.map(o => o.html), e };
+  });
+}
+UNITS.push({ id:"trig-val-deg", chapter:"物理数学", title:"三角比の値（度）", label:"値⚡度", html:true, gen:() => genTrigVals(false), questions: Array(20).fill(null) });
+UNITS.push({ id:"trig-val-rad", chapter:"物理数学", title:"三角比の値（ラジアン）", label:"値⚡π", html:true, gen:() => genTrigVals(true), questions: Array(20).fill(null) });
+
 /* トップ画面の並び：分野 → 単元 → モード */
 const LAYOUT = [
-  { field: "物理数学", topics: [ { name: "三角比", sets: ["trig","trig-tf","trig-test"] } ] },
+  { field: "物理数学", topics: [ { name: "三角比", sets: ["trig","trig-tf","trig-val-deg","trig-val-rad","trig-test"] } ] },
   { field: "運動の表し方", topics: [
     { name: "等加速度直線運動", sets: ["uniform-accel","uniform-accel-tf","uniform-accel-test"] },
     { name: "速度の合成・相対速度" }, { name: "自由落下・鉛直投射" }, { name: "水平投射・斜方投射" } ] },
@@ -799,7 +846,7 @@ let S = null;     // 現在のゲーム状態
 let tick = null;  // タイマー
 const T = s => (S && S.unit.html) ? String(s) : esc(s);
 
-const modeOf = u => u.tf ? "○×" : u.test ? "特訓✏️" : u.fixed ? "見きわめ" : "4択";
+const modeOf = u => u.label ? u.label : u.tf ? "○×" : u.test ? "特訓✏️" : u.fixed ? "見きわめ" : "4択";
 const byId = id => UNITS.find(u => u.id === id);
 function topicCard(t, best){
   const sets = (t.sets || []).map(byId).filter(u => u && u.questions.length);
@@ -824,6 +871,7 @@ function home(){
     <div class="legend">
       <span><b>4択</b>基本チェック</span>
       <span><b>○×</b>正しい？まちがい？</span>
+      <span><b>値⚡</b>三角比の値をひたすら答える（毎回ランダム）</span>
       <span><b class="gold">特訓✏️</b>テスト対策の文章題（ノートと計算用紙を用意）</span>
     </div>
     ${LAYOUT.map(f => `<section class="field">
@@ -875,7 +923,7 @@ function testIntro(u){
 
 /* ---------- ゲーム ---------- */
 function start(unit, onlyList){
-  let qs = onlyList || unit.questions;
+  let qs = onlyList || (unit.gen ? unit.gen() : unit.questions);
   if (settings.shuffleQ) qs = shuffle(qs);
   S = { unit, qs, i: 0, score: 0, streak: 0, bestStreak: 0, log: [], retry: !!onlyList,
         time: unit.test ? settings.testTime : settings.time };
