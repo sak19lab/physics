@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font:14px/1.5 system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Kimi to Lab 科人ドリル</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+/* Layout: one-screen game on a dark lab-blackboard; four big colored answer tiles in a 2x2 grid (1 column on narrow phones). Single dark look by choice. */
+:root{
+  --board:#16241f;        /* blackboard green-black */
+  --board-2:#1f3029;
+  --chalk:#eef3ea;
+  --chalk-dim:#9fb2a7;
+  --line:#2f4339;
+  --a1:#e5484d;           /* answer tile colors */
+  --a2:#2f7fe0;
+  --a3:#e0a31a;
+  --a4:#2fa66a;
+  --good:#3ccf86;
+  --bad:#ff6b6b;
+  --gold:#ffd166;
+  --f-display:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-num:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{
+  background:var(--board);color:var(--chalk);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  background-image:radial-gradient(ellipse at 20% 0%,#22382f 0%,transparent 55%),radial-gradient(ellipse at 100% 100%,#1b2d27 0%,transparent 50%);
+}
+.wrap{max-width:860px;margin:0 auto;padding-block:20px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:20px;min-height:100%;box-sizing:border-box}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+
+/* ---------- home ---------- */
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,6vw,44px);margin:0;letter-spacing:.02em;text-wrap:balance}
+.brand .tag{font-size:13px;color:var(--chalk-dim);letter-spacing:.12em}
+.lead{margin:0;color:var(--chalk-dim);max-width:60ch}
+.section-label{font-size:12px;letter-spacing:.18em;color:var(--chalk-dim);margin:8px 0 0}
+.units{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.unit{
+  text-align:left;background:var(--board-2);border:2px solid var(--line);border-radius:14px;padding:16px;
+  display:flex;flex-direction:column;gap:6px;transition:transform .15s,border-color .15s;
+}
+.unit:hover:not(:disabled){transform:translateY(-2px);border-color:var(--gold)}
+.unit .ch{font-size:12px;color:var(--chalk-dim);letter-spacing:.08em}
+.unit .nm{font-family:var(--f-display);font-weight:800;font-size:20px}
+.unit .meta{font-size:13px;color:var(--chalk-dim)}
+.unit .meta b{color:var(--gold);font-weight:700}
+.unit:disabled{opacity:.45;cursor:not-allowed}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.toggle{display:flex;align-items:center;gap:8px;background:var(--board-2);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px}
+.toggle input{accent-color:var(--a4);width:18px;height:18px}
+.linkbtn{background:none;border:0;padding:0;color:var(--chalk);text-decoration:underline;text-underline-offset:3px;font-size:14px}
+.linkbtn.danger{color:var(--bad);font-weight:700}
+.toggle select{background:var(--board);color:var(--chalk);border:1px solid var(--line);border-radius:8px;padding:2px 6px;font:inherit}
+
+/* ---------- quiz ---------- */
+.hud{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.hud .unitname{font-size:13px;color:var(--chalk-dim)}
+.pill{background:var(--board-2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;display:inline-flex;gap:6px;align-items:center}
+.pill.streak{color:var(--gold)}
+.timer{height:8px;background:var(--board-2);border-radius:99px;overflow:hidden}
+.timer i{display:block;height:100%;background:var(--gold);width:100%;transform-origin:left}
+.timer.off{visibility:hidden}
+.qcard{
+  background:var(--chalk);color:#1a2420;border-radius:18px;padding:clamp(18px,4vw,30px);
+  min-height:120px;display:flex;flex-direction:column;justify-content:center;gap:8px;
+  box-shadow:0 6px 0 #0c1512;
+}
+.qcard .qno{font-family:var(--f-num);font-size:13px;color:#5c6f66}
+.qcard .qt{font-family:var(--f-display);font-weight:800;font-size:clamp(19px,3.6vw,26px);line-height:1.5;margin:0;text-wrap:pretty}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ans{
+  border:0;border-radius:14px;padding:18px 16px;min-height:88px;display:flex;align-items:center;gap:14px;text-align:left;
+  font-size:clamp(16px,2.8vw,20px);font-weight:700;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.35);
+  transition:transform .08s,opacity .2s,filter .2s;min-width:0;
+}
+.ans:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.35)}
+.ans .shape{flex:none;width:34px;height:34px;display:grid;place-items:center}
+.ans .shape svg{width:28px;height:28px;fill:#fff}
+.ans .txt{min-width:0;overflow-wrap:anywhere}
+.ans[data-i="0"]{background:var(--a1)}
+.ans[data-i="1"]{background:var(--a2)}
+.ans[data-i="2"]{background:var(--a3)}
+.ans[data-i="3"]{background:var(--a4)}
+.answers.done .ans{cursor:default}
+.answers.done .ans.dim{opacity:.28;filter:grayscale(.6)}
+.answers.done .ans.right{outline:4px solid #fff;outline-offset:-4px}
+.answers.done .ans .mark{margin-left:auto;font-size:22px}
+
+.feedback{border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;border:2px solid}
+.feedback.ok{border-color:var(--good);background:rgba(60,207,134,.1)}
+.feedback.ng{border-color:var(--bad);background:rgba(255,107,107,.1)}
+.feedback .head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.feedback .verdict{font-family:var(--f-display);font-weight:800;font-size:22px}
+.feedback.ok .verdict{color:var(--good)}
+.feedback.ng .verdict{color:var(--bad)}
+.feedback .gain{font-family:var(--f-num);color:var(--gold)}
+.feedback .exp{margin:0}
+.feedback .correct{margin:0;font-size:14px;color:var(--chalk-dim)}
+.feedback .correct b{color:var(--chalk)}
+
+.btn{
+  background:var(--chalk);color:#14201b;border:0;border-radius:12px;padding:12px 22px;font-weight:700;font-size:16px;
+  box-shadow:0 4px 0 #0c1512;align-self:flex-start;
+}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #0c1512}
+.btn.ghost{background:transparent;color:var(--chalk);border:2px solid var(--line);box-shadow:none}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px}
+
+/* ---------- result ---------- */
+.score-hero{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.score-hero .big{font-family:var(--f-num);font-size:clamp(44px,10vw,72px);color:var(--gold);line-height:1}
+.score-hero .msg{font-family:var(--f-display);font-weight:800;font-size:22px}
+.stats{display:flex;flex-wrap:wrap;gap:10px}
+.review{display:flex;flex-direction:column;gap:10px}
+.rv{background:var(--board-2);border:1px solid var(--line);border-left:5px solid var(--bad);border-radius:10px;padding:12px 14px}
+.rv.ok{border-left-color:var(--good)}
+.rv .rq{font-weight:700;margin:0}
+.rv .ra{font-size:14px;color:var(--chalk-dim);margin:4px 0 0}
+.rv .ra b{color:var(--chalk)}
+.rv .re{font-size:14px;margin:6px 0 0}
+details summary{cursor:pointer;color:var(--chalk-dim);font-size:14px}
+
+.answers.tf .ans{justify-content:center;min-height:150px;font-size:72px;line-height:1;font-weight:800}
+.answers.tf .ans .mark{margin-left:0;font-size:28px}
+/* 一時停止 */
+.pausebtn{background:var(--board-2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px;color:var(--chalk)}
+.pausebtn:hover{border-color:var(--gold)}
+.pause-ov{position:fixed;inset:0;z-index:20;background:var(--board);display:grid;place-items:center;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.pause-box{background:var(--board-2);border:2px solid var(--line);border-radius:18px;padding:24px;width:min(360px,100%);display:flex;flex-direction:column;gap:12px;box-sizing:border-box}
+.pause-box .btn{align-self:stretch;text-align:center}
+.pause-title{margin:0;font-family:var(--f-display);font-weight:800;font-size:24px}
+.pause-sub{margin:0;color:var(--chalk-dim);font-size:14px}
+.pause-note{margin:0;color:var(--chalk-dim);font-size:12px}
+/* テスト対策特訓 */
+.test-zone{border:2px dashed var(--gold);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.test-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.test-head h2{margin:0;font-family:var(--f-display);font-weight:800;font-size:22px;color:var(--gold)}
+.notice{margin:0;font-size:14px;color:var(--chalk);background:rgba(255,209,102,.08);border-radius:10px;padding:10px 12px}
+.notice b{color:var(--gold)}
+.unit.test{border-color:#5a5230}
+/* ていねい解説 */
+.steps{display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.9}
+.steps p{margin:0;overflow-x:auto}
+.steps .lbl{display:inline-block;font-size:12px;letter-spacing:.06em;color:var(--board);background:var(--chalk-dim);border-radius:6px;padding:0 6px;margin-right:8px;line-height:1.7;vertical-align:middle}
+.steps .ans-line{color:var(--gold);font-weight:700;font-size:1.1em}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.25;margin:0 .2em;font-size:.95em}
+.frac>span{padding:0 .25em;white-space:nowrap}
+.frac>span:first-child{border-bottom:1.5px solid currentColor}
+details.re{margin-top:6px}
+details.re .steps{margin-top:8px;font-size:14px}
+@media (max-width:520px){
+  .answers.tf{grid-template-columns:1fr 1fr}
+  .answers.tf .ans{min-height:120px;font-size:60px}
+  .answers{grid-template-columns:1fr}
+  .ans{min-height:64px;padding:14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.pop{animation:pop .35s ease-out}
+@keyframes pop{0%{transform:scale(.96);opacity:.4}100%{transform:none;opacity:1}}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="app"></div>
+
+<script>
+/* =========================================================
+   問題データ（科学と人間生活｜微生物とその利用 ＋ 生物基礎）
+   choices の「先頭」が正解。表示時にシャッフルされる。
+   単元を足すときは UNITS に { id, chapter, title, questions:[...] } を追加するだけ。
+   tf:true → ○×問題（a:true で○）／ fixed:[...] → 選択肢を固定（c[0] が正解）
+   ========================================================= */
+const F = (n, d) => `<span class="frac"><span>${n}</span><span>${d}</span></span>`;
+const A = s => `<span class="ans-line">${s}</span>`;
+const K = s => `<span class="lbl">${s}</span>`;
+
+const CH1 = "科学と人間生活｜生物の多様性と共通性";
+const CH2 = "科学と人間生活｜細胞のつくり";
+const CH3 = "科学と人間生活｜微生物とその利用";
+
+const UNITS = [
+  {
+    id: "diversity",
+    chapter: CH1,
+    title: "生物の多様性と共通性",
+    questions: [
+      { q: "生物を分類するときの基本的な単位は？", c: ["種","属","界","門"],
+        e: "分類の基本単位は「種（しゅ）」。ヒトもイヌもそれぞれ1つの種だよ。" },
+      { q: "現在、発見されて名前がつけられている生物の種数はおよそ？", c: ["約190万種","約1900種","約19万種","約19億種"],
+        e: "名前がついているだけでも約190万種！想像以上に多いよね。" },
+      { q: "地球上に実際に生息していると推定される種の数は？", c: ["数千万種","数百種","数万種","ちょうど190万種"],
+        e: "まだ見つかっていない生物がたくさんいて、数千万種にものぼると考えられているよ。" },
+      { q: "地球上にさまざまな生物が存在する理由は？", c: ["さまざまな環境に適応するように進化してきたから","すべての生物が同じ環境で暮らしてきたから","生物は昔から姿が変わっていないから","人間が品種改良してきたから"],
+        e: "草原・森林・砂漠・海…いろんな環境に「適応」するように「進化」してきた結果が多様性！" },
+      { q: "生物学でいう「進化」とは？", c: ["生物の形質が、世代を重ねて受け継がれる中で変化していくこと","1匹の生物が成長して姿を変えること","生物が強くなること","生物の体が大きくなること"],
+        e: "ポイントは「世代を重ねて」。1匹の中だけで起こる変化は進化じゃないよ。" },
+      { q: "ポケモンの「タマタマがナッシーに進化」。生物学的にいうと？", c: ["進化ではない（1個体の中での変化だから）","進化である（姿が変わったから）","進化である（強くなったから）","進化である（名前が変わったから）"],
+        e: "1匹が姿を変えるのは、生物学では進化とはいわない。世代をこえて形質が変わるのが進化！" },
+      { q: "次のうち、生物学でいう「進化」にあてはまるのは？", c: ["長い年月をかけ、世代を重ねて祖先とちがう形質をもつ生物が現れた","オタマジャクシがカエルになった","筋トレで筋肉が大きくなった","子どもが成長して背が伸びた"],
+        e: "オタマジャクシ→カエル（変態）や成長は、1個体の中での変化。進化は世代をこえた変化だよ。" },
+      { q: "生物がもつ形や性質などの特徴を何という？", c: ["形質","性格","種","遺伝子"],
+        e: "形や性質などの特徴を「形質（けいしつ）」という。" },
+      { q: "砂漠にすむサボテンの葉がトゲになっているのは？", c: ["乾燥した環境に適応した形質だから","人間が品種改良したから","1本のサボテンががんばって変えたから","寒さに適応したから"],
+        e: "水が少ない砂漠で、葉から水が逃げにくい形が受け継がれてきた。環境への適応だね。" },
+      { q: "すべての生物に共通する特徴として正しいのは？", c: ["細胞からできている","光合成をする","肺で呼吸する","目をもつ"],
+        e: "共通性その1：細胞からなる。光合成をしない生物も、肺のない生物もたくさんいるよ。" },
+      { q: "すべての生物が、遺伝物質としてもっているものは？", c: ["DNA","デンプン","葉緑体","骨"],
+        e: "共通性その3：遺伝物質として DNA をもつ。" },
+      { q: "すべての生物に共通する特徴「〇〇を利用して生きている」。〇〇に入るのは？", c: ["エネルギー","酸素","日光","二酸化炭素"],
+        e: "共通性その2：エネルギーを利用する。酸素を使わずに生きる微生物もいるから「酸素」は×。" },
+      { q: "生物の共通性に「ふくまれない」ものは？", c: ["光合成をおこなう","細胞からなる","エネルギーを利用する","DNA をもつ"],
+        e: "共通性は「細胞・エネルギー・DNA」の3つ。光合成は植物などだけだよ。" },
+      { q: "生物の共通性として正しい組み合わせは？", c: ["細胞・エネルギー・DNA","細胞・光合成・DNA","骨・エネルギー・DNA","細胞・エネルギー・肺"],
+        e: "「細胞・エネルギー・DNA」の3点セットで覚えよう！" },
+      { q: "生物に共通性が見られる理由は？", c: ["すべての生物が共通の祖先から進化したから","すべての生物が同じ場所にすんでいるから","偶然似ているだけだから","人間がそう決めたから"],
+        e: "もとをたどると同じ祖先にたどりつく。だから共通の特徴を受け継いでいるんだ。" },
+      { q: "「生物の多様性」の意味として正しいのは？", c: ["生物の種類や形・性質がさまざまであること","すべての生物が同じ特徴をもつこと","生物の個体数が多いこと","生物の体が大きいこと"],
+        e: "多様性＝いろいろあること。「同じ特徴をもつ」のは共通性のほうだよ。" },
+      { q: "生物の進化の道すじを、木の枝分かれのように表した図を何という？", c: ["系統樹","食物連鎖","周期表","年表"],
+        e: "系統樹（けいとうじゅ）。枝分かれをたどると、生物どうしの近さがわかるよ。" },
+      { q: "系統樹で、根元のほうに表されているのは？", c: ["共通の祖先","最も新しく現れた生物","ヒト","いちばん大きな生物"],
+        e: "根元が共通の祖先。そこから枝分かれして、いろいろな生物へ進化していったよ。" },
+      { q: "細胞をもたず、ふつう生物には含めないものは？（生物基礎）", c: ["ウイルス","大腸菌","ゾウリムシ","酵母"],
+        e: "ウイルスは細胞からできていないし、自分だけでは増えられない。だから生物とはふつう考えないよ。" },
+      { q: "生物がエネルギーのやりとりに使っている物質は？（生物基礎）", c: ["ATP","DNA","デンプン","水"],
+        e: "ATP（アデノシン三リン酸）は「エネルギーの通貨」。すべての生物が使っているよ。" },
+    ]
+  },
+  {
+    id: "diversity-tf",
+    chapter: CH1,
+    title: "生物の多様性と共通性 ○×",
+    tf: true,
+    questions: [
+      { q: "生物を分類するときの基本的な単位を「種」という。", a: true,
+        e: "そのとおり！分類の基本単位は種。" },
+      { q: "現在発見されている生物は、約190種である。", a: false,
+        e: "約190「万」種！ケタがぜんぜんちがうよ。" },
+      { q: "地球上には、まだ発見されていない生物がたくさんいると考えられている。", a: true,
+        e: "推定では数千万種。見つかっているのはその一部だけ。" },
+      { q: "生物が多様なのは、さまざまな環境に適応するように進化してきたからである。", a: true,
+        e: "適応と進化が、多様性を生んだんだね。" },
+      { q: "1匹の生物が成長して姿を変えることを、進化という。", a: false,
+        e: "1個体の変化は進化じゃない。進化は世代を重ねて形質が変わること。" },
+      { q: "進化とは、生物の形質が世代を重ねて受け継がれる中で変化していくことである。", a: true,
+        e: "これが生物学の「進化」の定義！" },
+      { q: "タマタマがナッシーになるのは、生物学でいう進化である。", a: false,
+        e: "1匹が姿を変えているだけだから、生物学的には進化じゃないよ。" },
+      { q: "1匹の生物が環境に合わせて姿を変えれば、それは進化である。", a: false,
+        e: "環境に合わせた変化でも、1個体の中だけなら進化とはいわない。" },
+      { q: "すべての生物は、細胞からできている。", a: true,
+        e: "共通性その1！" },
+      { q: "すべての生物は、光合成をおこなう。", a: false,
+        e: "光合成をするのは植物など一部だけ。ヒトはしないよね。" },
+      { q: "すべての生物は、遺伝物質として DNA をもつ。", a: true,
+        e: "共通性その3！" },
+      { q: "生きていくためにエネルギーを利用するのは、動物だけである。", a: false,
+        e: "植物も微生物も、すべての生物がエネルギーを利用しているよ。" },
+      { q: "生物に共通性があるのは、すべての生物が共通の祖先から進化してきたからである。", a: true,
+        e: "同じ祖先から受け継いだ特徴だから共通しているんだ。" },
+      { q: "生物の共通性は、たまたま似ているだけである。", a: false,
+        e: "偶然じゃなく、共通の祖先から受け継いだもの。" },
+      { q: "生物は、大昔から今までまったく同じ姿のままである。", a: false,
+        e: "長い年月をかけて進化し、姿や性質が変わってきたよ。" },
+      { q: "ヒトと大腸菌にも、共通する特徴がある。", a: true,
+        e: "どちらも細胞からなり、エネルギーを利用し、DNA をもつ！" },
+      { q: "酸素を使わずに生きている生物はいない。", a: false,
+        e: "乳酸菌など、酸素を使わずにエネルギーをとり出す微生物もいるよ。" },
+      { q: "進化の道すじを枝分かれの図で表したものを、系統樹という。", a: true,
+        e: "根元が共通の祖先、枝の先が今の生物。" },
+      { q: "ウイルスは細胞からできていないので、ふつう生物には含めない。（生物基礎）", a: true,
+        e: "細胞をもたず、自分だけでは増えられない。だから生物とはふつう考えないよ。" },
+      { q: "生物は、ATP という物質を使ってエネルギーをやりとりしている。（生物基礎）", a: true,
+        e: "ATP は「エネルギーの通貨」。すべての生物に共通だよ。" },
+    ]
+  },
+  {
+    id: "cell-structure",
+    chapter: CH2,
+    title: "細胞のつくり（動物・植物）",
+    questions: [
+      { q: "核のはたらき・特徴として正しいのは？", c: ["内部に DNA をもつ","光合成をおこなう","呼吸をおこなう","細胞の形を保つ"],
+        e: "核の中には遺伝物質の DNA が入っているよ。" },
+      { q: "光合成をおこなう細胞小器官は？", c: ["葉緑体","ミトコンドリア","核","液胞"],
+        e: "光エネルギーを使ってデンプンをつくる場所＝葉緑体。" },
+      { q: "呼吸（細胞呼吸）をおこなう細胞小器官は？", c: ["ミトコンドリア","葉緑体","核","細胞壁"],
+        e: "ミトコンドリアは呼吸の場。栄養分からエネルギーをとり出すよ。" },
+      { q: "核・葉緑体・ミトコンドリアのように、細胞の中にあって特定のはたらきをもつ構造体をまとめて何という？", c: ["細胞小器官","臓器","組織","器官"],
+        e: "細胞の中の「小さな器官」＝細胞小器官。" },
+      { q: "細胞小器官のあいだを満たしている液状の部分は？", c: ["サイトゾル（細胞質基質）","液胞","細胞壁","核"],
+        e: "高校で新しく出てくる用語。サイトゾル＝細胞質基質、どっちの名前でもOK。" },
+      { q: "植物細胞にはあって、動物細胞にはないものの組み合わせは？", c: ["細胞壁・葉緑体","核・細胞膜","ミトコンドリア・核","細胞膜・ミトコンドリア"],
+        e: "細胞壁と葉緑体（それと発達した液胞）は植物細胞の特徴！" },
+      { q: "動物細胞にも植物細胞にもあるものは？", c: ["ミトコンドリア","葉緑体","細胞壁","発達した液胞"],
+        e: "植物も呼吸をするから、ミトコンドリアをもっているよ。" },
+      { q: "細胞小器官の名前とはたらきの組み合わせで、正しいのは？", c: ["ミトコンドリア ― 呼吸","葉緑体 ― 呼吸","核 ― 光合成","細胞壁 ― 呼吸"],
+        e: "核 ― DNA、葉緑体 ― 光合成、ミトコンドリア ― 呼吸。セットで覚えよう！" },
+      { q: "植物細胞のいちばん外側にあるかたい仕切りで、体を支えるのは？", c: ["細胞壁","細胞膜","核膜","液胞"],
+        e: "細胞壁がかたいから、植物は骨がなくても立っていられるんだ。" },
+      { q: "植物の細胞壁のおもな成分は？", c: ["セルロース","デンプン","タンパク質","脂肪"],
+        e: "セルロース。紙や綿の主成分でもあるよ。" },
+      { q: "細胞を包むうすい膜で、すべての細胞がもっているのは？", c: ["細胞膜","細胞壁","葉緑体","液胞"],
+        e: "細胞膜はすべての細胞にある。細胞の中と外を仕切っているよ。" },
+      { q: "植物細胞の、細胞膜と細胞壁の位置関係は？", c: ["細胞膜の外側に細胞壁がある","細胞壁の外側に細胞膜がある","細胞膜と細胞壁は同じもの","細胞壁は核の中にある"],
+        e: "内側から 細胞膜 → 細胞壁 の順。細胞壁がいちばん外側だよ。" },
+      { q: "成長した植物細胞で大きく発達している、細胞液で満たされた袋は？", c: ["液胞","葉緑体","ミトコンドリア","核"],
+        e: "液胞。花びらの色（アントシアン）が入っていることもあるよ。" },
+      { q: "葉緑体が緑色に見えるのは、何という色素をふくむから？", c: ["クロロフィル","ヘモグロビン","メラニン","アントシアン"],
+        e: "クロロフィル（葉緑素）が光を吸収して光合成に使っているよ。" },
+      { q: "核を染めて観察しやすくする染色液は？", c: ["酢酸オルセイン（酢酸カーミン）","ヨウ素液","BTB 溶液","ベネジクト液"],
+        e: "中学の復習！酢酸オルセインや酢酸カーミンで核が赤く染まる。ヨウ素液はデンプンの検出。" },
+      { q: "ミトコンドリアでおこなわれる呼吸は、肺でのガス交換と区別して何とよばれる？", c: ["細胞呼吸（内呼吸）","外呼吸","肺呼吸","光合成"],
+        e: "細胞の中でおこなう呼吸＝細胞呼吸（内呼吸）。" },
+      { q: "肺で酸素をとり入れ、二酸化炭素を出す呼吸を何という？", c: ["外呼吸（肺呼吸）","細胞呼吸","内呼吸","光合成"],
+        e: "肺でのガス交換は外呼吸。細胞の中の呼吸（内呼吸）と区別しよう。" },
+      { q: "葉緑体で、光エネルギーを使ってつくられる物質は？", c: ["デンプン","二酸化炭素","窒素","食塩"],
+        e: "光合成で二酸化炭素と水からデンプンをつくる。二酸化炭素は「材料」のほうだよ。" },
+      { q: "ヒトのほおの内側の細胞に「ない」ものは？", c: ["葉緑体","核","細胞膜","ミトコンドリア"],
+        e: "ヒトは動物だから葉緑体はない。光合成はできないよね。" },
+      { q: "オオカナダモの葉の細胞を観察したら、緑色の粒がたくさん見えた。この粒は？", c: ["葉緑体","核","ミトコンドリア","液胞"],
+        e: "緑色の粒＝葉緑体。光合成の場だよ。" },
+    ]
+  },
+  {
+    id: "organelle-judge",
+    chapter: CH2,
+    title: "細胞小器官の見きわめ",
+    fixed: ["核","葉緑体","ミトコンドリア","細胞壁"],
+    questions: [
+      { q: "内部に DNA をもっている。", c: ["核"], e: "DNA の入れもの＝核。" },
+      { q: "光合成をおこなう。", c: ["葉緑体"], e: "光合成の場＝葉緑体。" },
+      { q: "細胞呼吸（内呼吸）の場である。", c: ["ミトコンドリア"], e: "呼吸の場＝ミトコンドリア。" },
+      { q: "セルロースでできた、かたい仕切り。", c: ["細胞壁"], e: "細胞壁の主成分はセルロース。" },
+      { q: "緑色の色素クロロフィルをふくむ。", c: ["葉緑体"], e: "クロロフィルがあるから緑色に見えるよ。" },
+      { q: "酢酸オルセインで赤く染まる。", c: ["核"], e: "核の染色といえば酢酸オルセイン・酢酸カーミン。" },
+      { q: "植物の体を支え、細胞の形を保つ。", c: ["細胞壁"], e: "かたい細胞壁が植物の体を支えているよ。" },
+      { q: "酸素を使って、栄養分からエネルギーをとり出す。", c: ["ミトコンドリア"], e: "これが細胞呼吸。ミトコンドリアのしごと。" },
+      { q: "光エネルギーを使って、デンプンをつくる。", c: ["葉緑体"], e: "光合成！葉緑体のしごと。" },
+      { q: "ふつう1つの細胞に1個ある球形の構造で、遺伝情報をしまっている。", c: ["核"], e: "遺伝情報（DNA）の保管庫＝核。" },
+      { q: "動物細胞にも植物細胞にもあり、エネルギーをとり出す。", c: ["ミトコンドリア"], e: "植物も呼吸するから、ミトコンドリアは両方にあるよ。" },
+      { q: "植物細胞にはあるが動物細胞にはない。細胞膜の外側にある。", c: ["細胞壁"], e: "細胞膜の外側を囲むのが細胞壁。" },
+      { q: "植物細胞にはあるが動物細胞にはない。緑色の粒。", c: ["葉緑体"], e: "緑色の粒＝葉緑体。" },
+      { q: "原核細胞には「ない」。真核細胞の名前の由来になっている。", c: ["核"], e: "核をもつから「真核」細胞。原核細胞には核がないよ。" },
+      { q: "大腸菌（原核生物）も、これをもっている。", c: ["細胞壁"], e: "ひっかけ注意！大腸菌は核やミトコンドリアはないけど、細胞壁はあるよ。" },
+      { q: "これがあるので、植物細胞は水を吸ってもはれつしにくい。", c: ["細胞壁"], e: "かたい細胞壁が外から支えているからだね。" },
+      { q: "細胞が使うエネルギー（ATP）を、たくさんつくり出す。（生物基礎）", c: ["ミトコンドリア"], e: "ミトコンドリアは細胞の「発電所」とよばれることもあるよ。" },
+      { q: "よく動く筋肉の細胞に、とくに多くふくまれる。", c: ["ミトコンドリア"], e: "たくさんエネルギーを使う細胞ほど、ミトコンドリアが多いよ。" },
+      { q: "細胞が分裂するとき、この中の DNA が複製されて受け継がれる。", c: ["核"], e: "核の中の DNA がコピーされて、新しい細胞に受け継がれるよ。" },
+      { q: "秋に葉が黄色くなるのは、この中の緑色の色素が分解されるから。", c: ["葉緑体"], e: "葉緑体のクロロフィルが分解されて、黄色の色素が目立ってくるんだ。" },
+    ]
+  },
+  {
+    id: "eu-pro",
+    chapter: CH2,
+    title: "真核細胞・原核細胞",
+    questions: [
+      { q: "核をもつ細胞を何という？", c: ["真核細胞","原核細胞","単細胞","体細胞"],
+        e: "核をもつ＝真核細胞。" },
+      { q: "核をもたない細胞を何という？", c: ["原核細胞","真核細胞","生殖細胞","植物細胞"],
+        e: "核をもたない＝原核細胞。" },
+      { q: "真核細胞からなる生物を何という？", c: ["真核生物","原核生物","微生物","単細胞生物"],
+        e: "真核細胞 → 真核生物、原核細胞 → 原核生物。" },
+      { q: "原核生物の例は？", c: ["大腸菌","ヒト","ゾウリムシ","酵母"],
+        e: "大腸菌は核をもたない原核生物。ゾウリムシや酵母は核をもつ真核生物だよ。" },
+      { q: "真核生物の例は？", c: ["酵母","大腸菌","乳酸菌","シアノバクテリア"],
+        e: "酵母はカビやキノコのなかま（菌類）で、核をもつ真核生物！" },
+      { q: "原核細胞の DNA はどこにある？", c: ["細胞の中にむき出しのまま存在する","核の中","葉緑体の中","DNA はもっていない"],
+        e: "核がないから、DNA はサイトゾルの中にむき出し。でも DNA はちゃんともっているよ。" },
+      { q: "原核細胞にも「ある」ものは？", c: ["細胞膜","核","ミトコンドリア","葉緑体"],
+        e: "原核細胞にも細胞膜・細胞壁・サイトゾル・DNA はあるよ。" },
+      { q: "原核細胞に「ない」ものは？", c: ["核","細胞膜","DNA","サイトゾル"],
+        e: "ないのは核（とそのほかの細胞小器官）。DNA はあるから注意！" },
+      { q: "大腸菌がもっていないものは？", c: ["ミトコンドリア","細胞膜","細胞壁","DNA"],
+        e: "原核生物は細胞小器官をほぼもたない。ミトコンドリアもないよ。" },
+      { q: "原核生物の特徴として正しいのは？", c: ["核も、ほかの細胞小器官もほぼない","核はないが、葉緑体とミトコンドリアはある","核はあるが、細胞膜がない","DNA をもたない"],
+        e: "核なし・細胞小器官ほぼなし。でも細胞膜・細胞壁・DNA はある！" },
+      { q: "細菌（バクテリア）は、真核生物・原核生物のどちら？", c: ["原核生物","真核生物","どちらでもない","植物のなかま"],
+        e: "大腸菌・乳酸菌・納豆菌などの細菌は原核生物。" },
+      { q: "動物と植物は、真核生物・原核生物のどちら？", c: ["どちらも真核生物","どちらも原核生物","動物は真核生物、植物は原核生物","動物は原核生物、植物は真核生物"],
+        e: "動物も植物も、細胞に核があるから真核生物。" },
+      { q: "カビやキノコ（菌類）は、真核生物・原核生物のどちら？", c: ["真核生物","原核生物","細菌のなかま","ウイルス"],
+        e: "「菌」という字がついていても、カビ・キノコ・酵母は核をもつ真核生物！細菌とは別物だよ。" },
+      { q: "ゾウリムシは1つの細胞だけでできた生物。真核生物・原核生物のどちら？", c: ["真核生物","原核生物","ウイルス","細菌"],
+        e: "単細胞でも核があれば真核生物。「単細胞＝原核」じゃないよ！" },
+      { q: "乳酸菌は、真核生物・原核生物のどちら？", c: ["原核生物","真核生物","ウイルス","植物"],
+        e: "乳酸菌は細菌のなかま＝原核生物。ヨーグルトづくりで活躍！" },
+      { q: "一般に、原核細胞と真核細胞の大きさをくらべると？（生物基礎）", c: ["原核細胞のほうが小さい","原核細胞のほうが大きい","ほぼ同じ","決まっていない"],
+        e: "原核細胞はふつう数 μm 程度で、真核細胞よりずっと小さいよ。" },
+      { q: "シアノバクテリアは原核生物なのに光合成をする。正しいのは？（生物基礎）", c: ["葉緑体をもたずに光合成をする","葉緑体で光合成をする","ミトコンドリアで光合成をする","実は光合成はしていない"],
+        e: "原核生物だから葉緑体はない。でも光合成のしくみを細胞の中にもっているよ。" },
+      { q: "「微生物」とは？", c: ["肉眼でやっと見える程度か、それより小さい生物の総称","原核生物だけのよび名","細菌だけのよび名","単細胞の動物のこと"],
+        e: "大きさで決まるよび名。原核生物も真核生物（酵母・カビなど）もふくまれるよ。" },
+      { q: "微生物とよばれる生物について正しいのは？", c: ["原核生物が多くふくまれる","すべて真核生物である","すべて植物のなかまである","すべてウイルスである"],
+        e: "微生物には原核生物が多い。でも酵母やカビなど真核生物もいるよ。" },
+      { q: "微生物と人間生活のかかわりとして「まちがっている」ものは？", c: ["すべての微生物は人間に害をあたえる","発酵食品づくりに使われる","医薬品をつくり出す","汚水をきれいにする（環境浄化）"],
+        e: "病原菌のように害をあたえるものもいるけど、発酵食品・医薬品・環境浄化など、恩恵もたくさん！" },
+    ]
+  },
+  {
+    id: "eu-pro-judge",
+    chapter: CH2,
+    title: "原核生物？真核生物？見きわめ",
+    fixed: ["原核生物","真核生物"],
+    questions: [
+      { q: "「大腸菌」は原核生物？真核生物？", c: ["原核生物"], e: "細菌のなかま＝原核生物。授業の顕微鏡写真の子だね。" },
+      { q: "「ヒト」は原核生物？真核生物？", c: ["真核生物"], e: "動物は真核生物。" },
+      { q: "「乳酸菌（ヨーグルト）」は原核生物？真核生物？", c: ["原核生物"], e: "細菌のなかま＝原核生物。" },
+      { q: "「酵母（パン・お酒づくり）」は原核生物？真核生物？", c: ["真核生物"], e: "酵母は菌類（カビ・キノコのなかま）。核をもつ真核生物だよ！" },
+      { q: "「納豆菌」は原核生物？真核生物？", c: ["原核生物"], e: "細菌のなかま＝原核生物。" },
+      { q: "「アオカビ」は原核生物？真核生物？", c: ["真核生物"], e: "カビは菌類＝真核生物。" },
+      { q: "「シイタケ」は原核生物？真核生物？", c: ["真核生物"], e: "キノコも菌類＝真核生物。" },
+      { q: "「ゾウリムシ」は原核生物？真核生物？", c: ["真核生物"], e: "単細胞だけど核がある＝真核生物。" },
+      { q: "「ミドリムシ」は原核生物？真核生物？", c: ["真核生物"], e: "単細胞で葉緑体ももつ真核生物。" },
+      { q: "「シアノバクテリア（ユレモ・ネンジュモ）」は原核生物？真核生物？", c: ["原核生物"], e: "光合成をするけど、細菌のなかま＝原核生物。" },
+      { q: "「コウジカビ（みそ・しょうゆづくり）」は原核生物？真核生物？", c: ["真核生物"], e: "カビは菌類＝真核生物。" },
+      { q: "「ビフィズス菌」は原核生物？真核生物？", c: ["原核生物"], e: "細菌のなかま＝原核生物。" },
+      { q: "「アメーバ」は原核生物？真核生物？", c: ["真核生物"], e: "単細胞だけど核がある＝真核生物。" },
+      { q: "「タマネギ」は原核生物？真核生物？", c: ["真核生物"], e: "植物は真核生物。" },
+      { q: "「結核菌」は原核生物？真核生物？", c: ["原核生物"], e: "病原菌の多くは細菌＝原核生物。" },
+      { q: "「ミジンコ」は原核生物？真核生物？", c: ["真核生物"], e: "小さいけど多細胞の動物＝真核生物。" },
+      { q: "細胞の中に、核がある。", c: ["真核生物"], e: "核がある＝真核。" },
+      { q: "DNA が、細胞の中にむき出しで存在している。", c: ["原核生物"], e: "核がないから DNA がむき出し＝原核。" },
+      { q: "ミトコンドリアなどの細胞小器官をもつ。", c: ["真核生物"], e: "細胞小器官をもつのは真核生物。" },
+      { q: "細胞膜と細胞壁はあるが、核も細胞小器官もほぼない。", c: ["原核生物"], e: "原核生物の特徴そのもの！" },
+    ]
+  },
+  { id:"microbe-kinds", chapter: CH3, title:"微生物の種類",          questions:[] },
+  { id:"metabolism",    chapter: CH3, title:"代謝（呼吸・光合成）", questions:[] },
+  { id:"ecosystem",     chapter: CH3, title:"生態系と微生物",        questions:[] },
+];
+
+const TIME_OPTIONS = [20, 40, 0]; // 秒（0 = なし）
+const TEST_TIME_OPTIONS = [180, 300, 0]; // テスト対策特訓用
+const SHAPES = [
+  '<svg viewBox="0 0 24 24"><path d="M12 3 22 20H2z"/></svg>',
+  '<svg viewBox="0 0 24 24"><path d="M12 2 22 12 12 22 2 12z"/></svg>',
+  '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>',
+  '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>',
+];
+const app = document.getElementById("app");
+const esc = s => String(s).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v==null ? d : JSON.parse(v); }catch(_){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){} }
+};
+let settings = Object.assign({ time: 20, shuffleQ: false }, store.get("kajin-drill-settings", {}));
+if (!TIME_OPTIONS.includes(settings.time)) settings.time = 20;
+if (!TEST_TIME_OPTIONS.includes(settings.testTime)) settings.testTime = 300;
+const fmtTime = t => t ? (t >= 60 ? t/60 + "分" : t + "秒") : "なし";
+function unitCard(u, best){
+  const ready = u.questions.length > 0;
+  const b = best[u.id];
+  const kind = u.tf ? "○×・" : u.test ? "文章題・" : "";
+  return `<button class="unit ${u.test ? "test" : ""}" data-id="${u.id}" ${ready?"":"disabled"}>
+    <span class="ch">${esc(u.chapter)}</span>
+    <span class="nm">${esc(u.title)}</span>
+    <span class="meta">${ready ? `${kind}${u.questions.length}問${b ? `　ベスト <b class="num">${b}</b> 点` : ""}` : "準備中"}</span>
+  </button>`;
+}
+
+let S = null;     // 現在のゲーム状態
+let tick = null;  // タイマー
+
+/* ---------- ホーム ---------- */
+function home(){
+  clearInterval(tick);
+  const best = store.get("kajin-drill-best", {});
+  app.innerHTML = `
+    <header class="brand"><h1>Kimi to Lab 科人ドリル</h1><span class="tag">科学と人間生活｜4択・○×・20問</span></header>
+    <p class="lead">単元を選んでスタート。早く答えるほど高得点、連続正解でボーナス。1〜4キーでも答えられるよ。</p>
+    <p class="section-label">単元</p>
+    <div class="units">
+      ${UNITS.filter(u => !u.test).map(u => unitCard(u, best)).join("")}
+    </div>
+    <section class="test-zone" ${UNITS.some(u => u.test) ? "" : "hidden"}>
+      <div class="test-head">
+        <h2>テスト対策特訓</h2>
+        <label class="toggle">制限時間 <select id="opt-testtimer">${TEST_TIME_OPTIONS.map(t => `<option value="${t}" ${settings.testTime===t?"selected":""}>${fmtTime(t)}</option>`).join("")}</select></label>
+      </div>
+      <p class="notice">✏️ 暗算では解けない問題ばかりです。<b>ノートや計算用紙を用意して</b>、式を書いてから答えよう。答えたあとは、ていねいな解説で自分の式といっしょか確かめてね。</p>
+      <div class="units">
+        ${UNITS.filter(u => u.test).map(u => unitCard(u, best)).join("")}
+      </div>
+    </section>
+    <p class="section-label">設定</p>
+    <div class="opts">
+      <label class="toggle">制限時間 <select id="opt-timer">${TIME_OPTIONS.map(t => `<option value="${t}" ${settings.time===t?"selected":""}>${t ? t+"秒" : "なし"}</option>`).join("")}</select></label>
+      <label class="toggle"><input type="checkbox" id="opt-shuffle" ${settings.shuffleQ?"checked":""}> 問題の順番をシャッフル</label>
+      <span class="toggle" id="reset-box">
+        <button class="linkbtn" id="reset">ベストスコアをリセット</button>
+      </span>
+    </div>`;
+  app.querySelectorAll(".unit:not(:disabled)").forEach(b => b.onclick = () => start(UNITS.find(u => u.id === b.dataset.id)));
+  app.querySelector("#opt-timer").onchange = e => { settings.time = +e.target.value; store.set("kajin-drill-settings", settings); };
+  app.querySelector("#opt-testtimer").onchange = e => { settings.testTime = +e.target.value; store.set("kajin-drill-settings", settings); };
+  app.querySelector("#opt-shuffle").onchange = e => { settings.shuffleQ = e.target.checked; store.set("kajin-drill-settings", settings); };
+  const box = app.querySelector("#reset-box");
+  app.querySelector("#reset").onclick = () => {
+    box.innerHTML = `全部の単元のベストを消す？
+      <button class="linkbtn danger" id="reset-yes">消す</button>
+      <button class="linkbtn" id="reset-no">やめる</button>`;
+    box.querySelector("#reset-yes").onclick = () => { store.set("kajin-drill-best", {}); home(); };
+    box.querySelector("#reset-no").onclick = home;
+    box.querySelector("#reset-no").focus();
+  };
+}
+
+/* ---------- ゲーム ---------- */
+function start(unit, onlyList){
+  let qs = onlyList || unit.questions;
+  if (settings.shuffleQ) qs = shuffle(qs);
+  S = { unit, qs, i: 0, score: 0, streak: 0, bestStreak: 0, log: [], retry: !!onlyList,
+        time: unit.test ? settings.testTime : settings.time };
+  showQ();
+}
+
+function showQ(){
+  const q = S.qs[S.i];
+  if (S.unit.tf && !q.c) q.c = [q.a ? "○" : "×"];
+  const order = S.unit.tf
+    ? ["○","×"].map(t => ({ t, right: t === q.c[0] }))
+    : S.unit.fixed
+    ? S.unit.fixed.map(t => ({ t, right: t === q.c[0] }))
+    : shuffle(q.c.map((t, k) => ({ t, right: k === 0 })));
+  S.cur = { q, order, answered: false, t0: performance.now() };
+  app.innerHTML = `
+    <div class="hud">
+      <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+        <span class="unitname">${esc(S.unit.title)}${S.retry ? "（復習）" : ""}</span>
+        <span class="num">${S.i+1} / ${S.qs.length}</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="pill streak" id="streak" ${S.streak>=2?"":"hidden"}>🔥 <span class="num">${S.streak}</span>連続</span>
+        <span class="pill"><span class="num" id="score">${S.score}</span>点</span>
+        <button class="pausebtn" id="pause" aria-label="一時停止">⏸ 一時停止</button>
+      </div>
+    </div>
+    <div class="timer ${S.time?"":"off"}"><i id="bar"></i></div>
+    <div class="qcard pop">
+      <span class="qno">Q${S.i+1}</span>
+      <p class="qt">${esc(q.q)}</p>
+    </div>
+    <div class="answers ${S.unit.tf ? "tf" : ""}" id="answers">
+      ${order.map((o, k) => S.unit.tf
+        ? `<button class="ans" data-i="${k}"><span class="txt">${esc(o.t)}</span></button>`
+        : `<button class="ans" data-i="${k}"><span class="shape">${SHAPES[k]}</span><span class="txt">${esc(o.t)}</span></button>`).join("")}
+    </div>
+    <div id="fb"></div>`;
+  app.querySelectorAll(".ans").forEach(b => b.onclick = () => answer(+b.dataset.i));
+  document.getElementById("pause").onclick = pause;
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(tick);
+  if (S.time && !S.cur.answered){
+    const bar = document.getElementById("bar");
+    tick = setInterval(() => {
+      const left = 1 - (performance.now() - S.cur.t0) / (S.time*1000);
+      bar.style.transform = `scaleX(${Math.max(0,left)})`;
+      bar.style.background = left < .25 ? "var(--bad)" : "var(--gold)";
+      if (left <= 0) answer(-1);
+    }, 50);
+  }
+}
+
+function answer(k){
+  if (!S.cur || S.cur.answered) return;
+  S.cur.answered = true;
+  clearInterval(tick);
+  const { q, order, t0 } = S.cur;
+  const sec = (performance.now() - t0) / 1000;
+  const ok = k >= 0 && order[k].right;
+  let gain = 0;
+  if (ok){
+    S.streak++; S.bestStreak = Math.max(S.bestStreak, S.streak);
+    const speed = S.time ? Math.max(0, 1 - sec / S.time) : 1;
+    gain = Math.round(500 + 500 * speed) + Math.min(S.streak - 1, 5) * 100;
+    S.score += gain;
+  } else {
+    S.streak = 0;
+  }
+  S.log.push({ q, ok, picked: k >= 0 ? order[k].t : null });
+
+  const box = document.getElementById("answers");
+  box.classList.add("done");
+  box.querySelectorAll(".ans").forEach((b, i) => {
+    b.disabled = true;
+    if (order[i].right){ b.classList.add("right"); b.insertAdjacentHTML("beforeend", '<span class="mark">✔</span>'); }
+    else if (i === k){ b.insertAdjacentHTML("beforeend", '<span class="mark">✖</span>'); }
+    else b.classList.add("dim");
+  });
+  document.getElementById("score").textContent = S.score;
+  const st = document.getElementById("streak");
+  st.hidden = S.streak < 2; st.querySelector(".num").textContent = S.streak;
+
+  const last = S.i === S.qs.length - 1;
+  const verdict = ok ? (S.streak >= 3 ? `正解！ ${S.streak}連続🔥` : "正解！") : (k < 0 ? "時間切れ…" : "ざんねん！");
+  document.getElementById("fb").innerHTML = `
+    <div class="feedback ${ok?"ok":"ng"} pop">
+      <div class="head"><span class="verdict">${verdict}</span>${ok?`<span class="gain">+${gain}</span>`:""}</div>
+      ${ok ? "" : `<p class="correct">正解：<b>${esc(q.c[0])}</b></p>`}
+      ${q.steps ? `<div class="steps">${q.steps.map(s => `<p>${s}</p>`).join("")}</div>` : `<p class="exp">${esc(q.e)}</p>`}
+      <button class="btn" id="next">${last ? "結果を見る" : "次の問題へ"}</button>
+    </div>`;
+  const nx = document.getElementById("next");
+  nx.onclick = () => { if (last) result(); else { S.i++; showQ(); } };
+  nx.focus({ preventScroll: true });
+  document.getElementById("fb").scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+/* ---------- 結果 ---------- */
+function result(){
+  const right = S.log.filter(l => l.ok).length;
+  const n = S.log.length;
+  const rate = right / n;
+  const msg = rate === 1 ? "パーフェクト！完璧だね👑" : rate >= .8 ? "すごい！あと少しで満点✨" : rate >= .5 ? "いい感じ！間違えた所を復習しよう💪" : "まずはプリントを見直してみよう📘";
+  let newBest = false;
+  if (!S.retry){
+    const best = store.get("kajin-drill-best", {});
+    if (!best[S.unit.id] || S.score > best[S.unit.id]){ best[S.unit.id] = S.score; store.set("kajin-drill-best", best); newBest = true; }
+  }
+  const wrong = S.log.filter(l => !l.ok);
+  app.innerHTML = `
+    <div class="score-hero pop">
+      <span class="unitname" style="color:var(--chalk-dim);font-size:13px">${esc(S.unit.title)}${S.retry?"（復習）":""}　結果</span>
+      <span class="big">${S.score}</span>
+      <span class="msg">${msg}</span>
+    </div>
+    <div class="stats">
+      <span class="pill">正解 <span class="num">${right} / ${n}</span></span>
+      <span class="pill">最大連続 <span class="num">${S.bestStreak}</span></span>
+      ${newBest ? '<span class="pill streak">ベスト更新！</span>' : ""}
+    </div>
+    <div class="btn-row">
+      ${wrong.length ? '<button class="btn" id="retry-wrong">間違えた問題だけもう一度</button>' : ""}
+      <button class="btn ${wrong.length?"ghost":""}" id="again">最初からもう一度</button>
+      <button class="btn ghost" id="back">単元を選ぶ</button>
+    </div>
+    <p class="section-label">ふりかえり</p>
+    <div class="review">
+      ${wrong.length ? wrong.map(rv).join("") : '<p style="margin:0">全問正解！言うことなし🎉</p>'}
+      ${right ? `<details><summary>正解した問題も見る（${right}問）</summary><div class="review" style="margin-top:10px">${S.log.filter(l=>l.ok).map(rv).join("")}</div></details>` : ""}
+    </div>`;
+  const retry = document.getElementById("retry-wrong");
+  if (retry) retry.onclick = () => start(S.unit, wrong.map(w => w.q));
+  document.getElementById("again").onclick = () => start(S.unit);
+  document.getElementById("back").onclick = home;
+  window.scrollTo({ top: 0 });
+}
+function rv(l){
+  return `<div class="rv ${l.ok?"ok":""}">
+    <p class="rq">${esc(l.q.q)}</p>
+    <p class="ra">正解：<b>${esc(l.q.c[0])}</b>${l.ok ? "" : `　あなた：${l.picked ? esc(l.picked) : "時間切れ"}`}</p>
+    ${l.q.steps ? `<details class="re"><summary>解説を見る</summary><div class="steps">${l.q.steps.map(s => `<p>${s}</p>`).join("")}</div></details>` : `<p class="re">${esc(l.q.e)}</p>`}
+  </div>`;
+}
+
+/* キーボード 1〜4 / Enter */
+/* ---------- 一時停止 ---------- */
+function pause(){
+  if (!S || !S.cur || S.paused || !document.getElementById("answers")) return;
+  S.paused = performance.now();
+  clearInterval(tick);
+  const ov = document.createElement("div");
+  ov.className = "pause-ov"; ov.id = "pause-ov";
+  ov.innerHTML = `<div class="pause-box pop" role="dialog" aria-label="一時停止中">
+      <p class="pause-title">一時停止中</p>
+      <p class="pause-sub">${esc(S.unit.title)}　<span class="num">${S.i+1} / ${S.qs.length}</span>問目　<span class="num">${S.score}</span>点</p>
+      <button class="btn" id="resume">▶ 再開する</button>
+      <button class="btn ghost" id="quit">トップに戻る</button>
+      <p class="pause-note">トップに戻ると、この回の点数は記録されないよ。</p>
+    </div>`;
+  document.body.appendChild(ov);
+  ov.querySelector("#resume").onclick = resume;
+  ov.querySelector("#quit").onclick = () => { ov.remove(); S = null; home(); window.scrollTo({ top: 0 }); };
+  ov.querySelector("#resume").focus();
+}
+function resume(){
+  if (!S || !S.paused) return;
+  S.cur.t0 += performance.now() - S.paused;
+  S.paused = 0;
+  const ov = document.getElementById("pause-ov");
+  if (ov) ov.remove();
+  startTimer();
+}
+
+document.addEventListener("keydown", e => {
+  if (S && S.cur && e.key === "Escape" && document.getElementById("answers")){ S.paused ? resume() : pause(); return; }
+  if (!S || !S.cur || S.paused || !document.getElementById("answers")) return;
+  if (!S.cur.answered && ["1","2","3","4"].includes(e.key) && +e.key <= S.cur.order.length) answer(+e.key - 1);
+});
+
+home();
+</script>
+</body>
+</html>
