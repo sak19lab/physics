@@ -138,7 +138,11 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .rv .re{font-size:14px;margin:6px 0 0}
 details summary{cursor:pointer;color:var(--chalk-dim);font-size:14px}
 
+.answers.tf .ans{justify-content:center;min-height:150px;font-size:72px;line-height:1;font-weight:800}
+.answers.tf .ans .mark{margin-left:0;font-size:28px}
 @media (max-width:520px){
+  .answers.tf{grid-template-columns:1fr 1fr}
+  .answers.tf .ans{min-height:120px;font-size:60px}
   .answers{grid-template-columns:1fr}
   .ans{min-height:64px;padding:14px}
 }
@@ -203,6 +207,54 @@ const UNITS = [
         e: "静止から → v₀ = 0。v² − v₀² = 2ax に v = 8.0、a = 4.0 を代入。64 = 8x で x = 8.0 m。" },
       { q: "v-t グラフが「右上がりの直線」。この運動はどれ？", c: ["正の向きに加速する等加速度直線運動","等速直線運動","静止","加速度がだんだん大きくなる運動"],
         e: "直線＝傾き（加速度）が一定。右上がり＝正の加速度。" },
+    ]
+  },
+  {
+    id: "uniform-accel-tf",
+    chapter: "物理基礎｜運動の表し方",
+    title: "等加速度直線運動 ○×",
+    tf: true, // ○×問題。a: true なら○、false なら×
+    questions: [
+      { q: "加速度とは、1秒あたりの速度の変化のことである。", a: true,
+        e: "そのとおり！「1秒で速度がどれだけ変わるか」が加速度。" },
+      { q: "加速度の単位は m/s である。", a: false,
+        e: "m/s は速度の単位。加速度は m/s²（速度 m/s ÷ 時間 s）。" },
+      { q: "v = v₀ + at の v₀ は初速度を表す。", a: true,
+        e: "0 は「時刻 0」のこと。スタートの瞬間の速度＝初速度。" },
+      { q: "x = v₀t + at² は、等加速度直線運動の変位の式である。", a: false,
+        e: "½ が抜けてる！正しくは x = v₀t + ½at²。" },
+      { q: "v² − v₀² = 2ax は、時間 t を含まない式である。", a: true,
+        e: "t がないから、問題文に時間が出てこないときに便利。" },
+      { q: "v-t グラフの傾きは、変位を表す。", a: false,
+        e: "傾きは加速度。変位を表すのは「面積」のほうだよ。" },
+      { q: "v-t グラフと t 軸で囲まれた面積は、変位を表す。", a: true,
+        e: "面積＝速度 × 時間＝進んだ距離（変位）。" },
+      { q: "等速直線運動では、加速度は 0 である。", a: true,
+        e: "速度が変わらない → 加速度 0。" },
+      { q: "加速度が負のとき、物体は必ず減速している。", a: false,
+        e: "負の向きに進んでいる物体なら、負の加速度で速くなる。符号は「向き」だよ。" },
+      { q: "速度が 0 の瞬間は、加速度も必ず 0 である。", a: false,
+        e: "ボールを真上に投げたときの最高点は、速度 0 だけど加速度は下向きにはたらいてるよ。" },
+      { q: "等加速度直線運動の x-t グラフは放物線になる。", a: true,
+        e: "x = v₀t + ½at² は t の2次式 → 放物線。" },
+      { q: "等加速度直線運動の v-t グラフは直線になる。", a: true,
+        e: "v = v₀ + at は t の1次式 → 直線。傾きが加速度。" },
+      { q: "72 km/h は 20 m/s である。", a: true,
+        e: "72 ÷ 3.6 = 20 m/s。" },
+      { q: "36 km/h を m/s に直すには、36 × 3.6 を計算すればよい。", a: false,
+        e: "km/h → m/s は ÷3.6。36 ÷ 3.6 = 10 m/s。" },
+      { q: "静止から 2.0 m/s² で加速すると、3.0 秒後の速さは 6.0 m/s である。", a: true,
+        e: "v = 0 + 2.0 × 3.0 = 6.0 m/s。" },
+      { q: "静止から 2.0 m/s² で加速すると、3.0 秒間に進む距離は 18 m である。", a: false,
+        e: "x = ½ × 2.0 × 3.0² = 9.0 m。½ を忘れると 18 m になっちゃう。" },
+      { q: "5.0 m/s から 4.0 秒で 13 m/s になったとき、加速度は 2.0 m/s² である。", a: true,
+        e: "(13 − 5.0) ÷ 4.0 = 2.0 m/s²。" },
+      { q: "10 m/s で走る車が −2.0 m/s² で減速すると、5.0 秒後に止まる。", a: true,
+        e: "0 = 10 + (−2.0)t より t = 5.0 s。" },
+      { q: "「静止から動き出した」とあれば、v₀ = 0 として計算できる。", a: true,
+        e: "「静止から」「はじめ止まっていた」は v₀ = 0 の合言葉！" },
+      { q: "加速度が一定なら、速度も一定である。", a: false,
+        e: "加速度が一定＝速度が一定のペースで変わり続ける。速度が一定なのは加速度 0 のときだけ。" },
     ]
   },
   { id:"relative",   chapter:"物理基礎｜運動の表し方", title:"速度の合成・相対速度", questions:[] },
@@ -345,7 +397,7 @@ function home(){
         return `<button class="unit" data-id="${u.id}" ${ready?"":"disabled"}>
           <span class="ch">${esc(u.chapter)}</span>
           <span class="nm">${esc(u.title)}</span>
-          <span class="meta">${ready ? `${u.questions.length}問${b ? `　ベスト <b class="num">${b}</b> 点` : ""}` : "準備中"}</span>
+          <span class="meta">${ready ? `${u.tf ? "○×・" : ""}${u.questions.length}問${b ? `　ベスト <b class="num">${b}</b> 点` : ""}` : "準備中"}</span>
         </button>`;
       }).join("")}
     </div>
@@ -381,7 +433,10 @@ function start(unit, onlyList){
 
 function showQ(){
   const q = S.qs[S.i];
-  const order = S.unit.fixed
+  if (S.unit.tf && !q.c) q.c = [q.a ? "○" : "×"];
+  const order = S.unit.tf
+    ? ["○","×"].map(t => ({ t, right: t === q.c[0] }))
+    : S.unit.fixed
     ? S.unit.fixed.map(t => ({ t, right: t === q.c[0] }))
     : shuffle(q.c.map((t, k) => ({ t, right: k === 0 })));
   S.cur = { q, order, answered: false, t0: performance.now() };
@@ -401,8 +456,10 @@ function showQ(){
       <span class="qno">Q${S.i+1}</span>
       <p class="qt">${esc(q.q)}</p>
     </div>
-    <div class="answers" id="answers">
-      ${order.map((o, k) => `<button class="ans" data-i="${k}"><span class="shape">${SHAPES[k]}</span><span class="txt">${esc(o.t)}</span></button>`).join("")}
+    <div class="answers ${S.unit.tf ? "tf" : ""}" id="answers">
+      ${order.map((o, k) => S.unit.tf
+        ? `<button class="ans" data-i="${k}"><span class="txt">${esc(o.t)}</span></button>`
+        : `<button class="ans" data-i="${k}"><span class="shape">${SHAPES[k]}</span><span class="txt">${esc(o.t)}</span></button>`).join("")}
     </div>
     <div id="fb"></div>`;
   app.querySelectorAll(".ans").forEach(b => b.onclick = () => answer(+b.dataset.i));
@@ -513,7 +570,7 @@ function rv(l){
 /* キーボード 1〜4 / Enter */
 document.addEventListener("keydown", e => {
   if (!S || !S.cur || !document.getElementById("answers")) return;
-  if (!S.cur.answered && ["1","2","3","4"].includes(e.key)) answer(+e.key - 1);
+  if (!S.cur.answered && ["1","2","3","4"].includes(e.key) && +e.key <= S.cur.order.length) answer(+e.key - 1);
 });
 
 home();
